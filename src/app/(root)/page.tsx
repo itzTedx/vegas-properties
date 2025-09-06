@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import { FeaturedProperties } from "@/modules/properties/sections/featured-properties";
 import { LatestProperties } from "@/modules/properties/sections/latest-properties";
 import { SearchFilter } from "@/modules/search/components/search-filter";
+import Testimonials from "@/modules/sections/home/testimonials";
 
 export default function Home() {
   const MAX_WIDTH = "max-w-4xl";
@@ -73,7 +74,7 @@ export default function Home() {
               </h2>
             </li>
             {DEVELOPERS.map((dev) => (
-              <li className="relative flex aspect-video bg-card" key={dev.src}>
+              <li className="relative flex aspect-video bg-card rounded-md overflow-hidden" key={dev.src}>
                 <Image alt={dev.alt} className="m-auto" height={80} src={dev.src} width={80} />
               </li>
             ))}
@@ -86,6 +87,7 @@ export default function Home() {
           </ul>
         </div>
       </section>
+      <Testimonials />
     </main>
   );
 }
