@@ -8,7 +8,7 @@ import type { Media } from "@/payload-types";
 type Props = Media & { className?: string; priority?: boolean; fill?: boolean };
 
 export async function ImageObject(props: Props) {
-  const { filename, height, width, alt, className, priority, blurDataUrl, fill } = props;
+  const { filename, height, width, alt, className, priority, blurDataUrl, fill = false } = props;
 
   return (
     <>
@@ -21,7 +21,7 @@ export async function ImageObject(props: Props) {
         height={!fill ? (height ?? undefined) : undefined}
         placeholder={blurDataUrl ? "blur" : "empty"}
         priority={priority}
-        src={`${env.CLOUDFLARE_BUCKET}/${filename}`}
+        src={`${env.AWS_BUCKET}/${filename}`}
         width={!fill ? (width ?? undefined) : undefined}
       />
     </>

@@ -17,7 +17,7 @@ export const env = createEnv({
 
       return {
         ...val,
-        CLOUDFLARE_BUCKET: `https://${AWS_BUCKET_NAME}.s3.${AWS_BUCKET_REGION}.amazonaws.com`,
+        AWS_BUCKET: `https://${AWS_BUCKET_NAME}.s3.${AWS_BUCKET_REGION}.amazonaws.com`,
       };
     });
   },

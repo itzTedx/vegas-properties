@@ -24,7 +24,6 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
 
   const developer = typeof property.propertyDetails.developer === "object" ? property.propertyDetails.developer : null;
   const developerLogo = typeof developer?.logo === "object" ? developer.logo : "";
-  const developerLogoUrl = typeof developerLogo === "object" ? developerLogo.url || "" : "";
   const developerTitle = typeof developer?.title === "string" ? developer.title : "";
 
   return (
