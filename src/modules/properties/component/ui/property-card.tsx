@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContainer, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Currency } from "@/components/ui/currency";
@@ -8,18 +9,20 @@ import { SeparatorDashed } from "@/components/ui/separator";
 import { IconBathtub, IconBedroom, IconBookmark, IconLocationPin } from "@/assets/icons";
 import { IconArrowRight } from "@/assets/icons/arrows";
 
+import { ImageObject } from "@/lib/payload/components/media";
 import { formatPrice } from "@/lib/utils";
 import { Property } from "@/payload-types";
 
 interface Props {
   property: Property;
+  showBadges?: boolean;
 }
 
-export const PropertyCard = ({ property }: Props) => {
-  const primaryImage = property.images?.find((img) => img.isPrimary);
-  const fallbackImage = property.images?.[0];
+export const PropertyCard = ({ property, showBadges = true }: Props) => {
+  const primaryImage = property.images?.find((img) => img.isPrimary)?.image;
+  const fallbackImage = property.images?.[0].image;
   const selectedImage = primaryImage || fallbackImage;
-  const image = typeof selectedImage?.image === "object" ? selectedImage.image.url : undefined;
+  const image = typeof selectedImage === "object" ? selectedImage : undefined;
 
   const developer = typeof property.propertyDetails.developer === "object" ? property.propertyDetails.developer : null;
   const developerLogo = typeof developer?.logo === "object" ? developer.logo : "";
@@ -28,10 +31,18 @@ export const PropertyCard = ({ property }: Props) => {
 
   return (
     <Card>
-      <CardContent className="space-y-4">
+      <CardContent className="relative space-y-4">
+        {showBadges && (
+          <div className="absolute top-2 left-4 z-50 flex items-center gap-2">
+            {property.isFeatured && <Badge>Featured</Badge>}
+            {property.pricing.priceType === "rent" && <Badge>For Rent</Badge>}
+            {property.pricing.priceType === "sale" && <Badge>For Sale</Badge>}
+          </div>
+        )}
         {image && (
           <div className="relative aspect-4/3">
-            <Image alt="Property" className="rounded-md object-cover" fill src={image} />
+            {typeof selectedImage !== "string" && image && <ImageObject {...image} />}
+            {/* <Image alt="Property" className="rounded-md object-cover" fill src={image} /> */}
           </div>
         )}
         <div className="flex items-center justify-between gap-2 pr-2">
@@ -94,3 +105,5 @@ export const PropertyCard = ({ property }: Props) => {
     </Card>
   );
 };
+
+// https://zm-deals-local.s3.us-east-1.amazonaws.com/products/c9c6f2f912d64e9985748e4433790b81-goods-9bf74001132c1df184aa28ec910daea9.webp

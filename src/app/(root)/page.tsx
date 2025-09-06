@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { DEVELOPERS } from "@/data/constants";
 import { cn } from "@/lib/utils";
 import { FeaturedProperties } from "@/modules/properties/sections/featured-properties";
+import { LatestProperties } from "@/modules/properties/sections/latest-properties";
 import { SearchFilter } from "@/modules/search/components/search-filter";
 
 export default function Home() {
@@ -59,12 +60,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-          <PropertyCard />
-        </div> */}
+        <LatestProperties />
       </section>
       <section className="container py-14">
         <div className="space-y-4">
@@ -78,7 +74,7 @@ export default function Home() {
             </li>
             {DEVELOPERS.map((dev) => (
               <li className="relative flex aspect-video bg-card" key={dev.src}>
-                <Image alt={dev.alt} className="m-auto" height={120} src={dev.src} width={120} />
+                <Image alt={dev.alt} className="m-auto" height={80} src={dev.src} width={80} />
               </li>
             ))}
 

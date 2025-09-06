@@ -11,5 +11,17 @@ export const env = createEnv({
     AWS_SECRET_ACCESS_KEY: z.string(),
   },
 
+  createFinalSchema: (env) => {
+    return z.object(env).transform((val) => {
+      const { AWS_BUCKET_NAME, AWS_BUCKET_REGION } = val;
+
+      return {
+        ...val,
+        CLOUDFLARE_BUCKET: `https://${AWS_BUCKET_NAME}.s3.${AWS_BUCKET_REGION}.amazonaws.com`,
+      };
+    });
+  },
+
+  emptyStringAsUndefined: true,
   experimental__runtimeEnv: process.env,
 });

@@ -1,24 +1,28 @@
-import React, { Fragment, JSX } from "react";
+import Image from "next/image";
 
-import { ImageMedia } from "./image";
-import type { MediaProps } from "./types";
-import { VideoMedia } from "./video";
+import { env } from "@/lib/env/server";
+import { addImage } from "@/modules/seo";
+import { Schema } from "@/modules/seo/schema";
+import type { Media } from "@/payload-types";
 
-export const Media: React.FC<MediaProps> = (props) => {
-  const { className, htmlElement = "div", resource } = props;
+type Props = Media & { className?: string; priority?: boolean };
 
-  const isVideo = typeof resource === "object" && resource?.mimeType?.includes("video");
-  const Tag = (htmlElement as keyof JSX.IntrinsicElements) || Fragment;
+export async function ImageObject(props: Props) {
+  const { filename, height, width, alt, className, priority, blurDataUrl } = props;
 
   return (
-    <Tag
-      {...(htmlElement !== null
-        ? {
-            className,
-          }
-        : {})}
-    >
-      {isVideo ? <VideoMedia {...props} /> : <ImageMedia {...props} />}
-    </Tag>
+    <>
+      <Schema schema={addImage(props)} />
+      <Image
+        alt={alt || ""}
+        blurDataURL={blurDataUrl ?? undefined}
+        className={className}
+        height={height || 360}
+        placeholder={blurDataUrl ? "blur" : "empty"}
+        priority={priority}
+        src={`${env.CLOUDFLARE_BUCKET}/${filename}`}
+        width={width || 640}
+      />
+    </>
   );
-};
+}
