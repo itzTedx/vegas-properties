@@ -26,7 +26,6 @@
 // });
 
 import { getServerSideURL } from "@/lib/payload/utils/get-url";
-import { Media } from "@/payload-types";
 
 type BreadcrumbProps = {
   link?: string;
@@ -37,7 +36,7 @@ export const addBreadcrumbs = (breadcrumbs: BreadcrumbProps) => {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: breadcrumbs.map((breadcrumb, index, arr) => ({
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: breadcrumb.name,
@@ -46,11 +45,11 @@ export const addBreadcrumbs = (breadcrumbs: BreadcrumbProps) => {
   };
 };
 
-export const addImage = (image: Media) => {
+export const addImage = (image: string) => {
   return {
     "@context": "https://schema.org/",
     "@type": "ImageObject",
-    contentUrl: `${process.env.CLOUDFLARE_BUCKET}/${image.filename}`,
+    contentUrl: image,
   };
 };
 

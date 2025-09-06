@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContainer, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +13,7 @@ import { IconArrowRight } from "@/assets/icons/arrows";
 import { ImageObject } from "@/lib/payload/components/media";
 import { formatPrice } from "@/lib/utils";
 import { Property } from "@/payload-types";
+import { CardImage } from "./card-image";
 
 interface Props {
   property: Property;
@@ -17,18 +21,17 @@ interface Props {
 }
 
 export const PropertyCard = ({ property, showBadges = true }: Props) => {
-  const primaryImage = property.images?.find((img) => img.isPrimary)?.image;
-  const fallbackImage = property.images?.[0].image;
-  const selectedImage = primaryImage || fallbackImage;
-  const image = typeof selectedImage === "object" ? selectedImage : undefined;
+
 
   const developer = typeof property.propertyDetails.developer === "object" ? property.propertyDetails.developer : null;
   const developerLogo = typeof developer?.logo === "object" ? developer.logo : "";
+  const developerLogoUrl = typeof developerLogo === "object" ? developerLogo.url || "" : "";
   const developerTitle = typeof developer?.title === "string" ? developer.title : "";
 
   return (
     <Card>
-      <CardContent className="relative space-y-4">
+      <CardContent className="group relative space-y-3">
+        <Link className="absolute inset-0" href={`/properties/${property.slug}`} title="View Details" />
         {showBadges && (
           <div className="absolute top-2 left-4 z-50 flex items-center gap-2">
             {property.isFeatured && <Badge>Featured</Badge>}
@@ -36,14 +39,7 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
             {property.pricing.priceType === "sale" && <Badge>For Sale</Badge>}
           </div>
         )}
-        {image && (
-          <div className="relative aspect-4/3">
-            {typeof selectedImage !== "string" && image && (
-              <ImageObject {...image} className="rounded-md object-cover" />
-            )}
-            {/* <Image alt="Property" className="rounded-md object-cover" fill src={image} /> */}
-          </div>
-        )}
+        <CardImage images={property.images} />
         <div className="flex items-center justify-between gap-2 pr-2">
           <CardHeader className="flex-1">
             <CardTitle>
@@ -56,14 +52,12 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
               </p>
             </CardDescription>
           </CardHeader>
-          {property.propertyDetails.developer &&
-            typeof property.propertyDetails.developer === "object" &&
-            typeof developerLogo === "object" && (
-              <ImageObject alt={developerTitle} className="rounded-md" height={50} width={50} {...developerLogo} />
-            )}
+          {property.propertyDetails.developer && typeof property.propertyDetails.developer === "object" && (
+            <Image alt={developerTitle} height={50} src={developerLogoUrl} width={50} />
+          )}
         </div>
         <SeparatorDashed />
-        <CardContainer className="space-y-4">
+        <CardContainer className="space-y-3">
           <div className="flex items-center justify-between">
             <ul className="flex items-center gap-3">
               <li className="flex items-center gap-1.5">
@@ -83,8 +77,8 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
           </div>
           <div className="inline-flex items-center gap-2">
             {property.pricing.salePrice && (
-              <p className="font-sans font-semibold text-brand-700 text-lg">
-                <Currency /> {formatPrice(property.pricing.salePrice)}
+              <p className="font-semibold text-brand-800">
+                From <Currency /> {formatPrice(property.pricing.salePrice)}
               </p>
             )}
             {property.pricing.rentalPrice && (
@@ -95,7 +89,11 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
           </div>
         </CardContainer>
         <div className="flex items-center gap-2">
-          <Button className="w-full flex-1">View Details</Button>
+          <Button asChild className="z-50 w-full flex-1">
+            <Link href={`/properties/${property.slug}`} title="View Details">
+              View Details
+            </Link>
+          </Button>
           <Button size="icon" variant="outline">
             <IconBookmark className="text-secondary" />
           </Button>
@@ -104,5 +102,3 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
     </Card>
   );
 };
-
-// https://zm-deals-local.s3.us-east-1.amazonaws.com/products/c9c6f2f912d64e9985748e4433790b81-goods-9bf74001132c1df184aa28ec910daea9.webp

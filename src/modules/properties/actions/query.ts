@@ -4,6 +4,7 @@ export async function getFeaturedProperties() {
   const properties = await payload.find({
     collection: "properties",
     draft: false,
+
     where: {
       isFeatured: {
         equals: true,
@@ -24,3 +25,24 @@ export async function getLatestProperties() {
 
   return properties.docs;
 }
+
+export async function getProperties() {
+  return await payload.find({
+    collection: "properties",
+    draft: false,
+    sort: ["-createdAt"],
+  });
+}
+
+export const getPropertyBySlug = async (slug: string) => {
+  return await payload
+    .find({
+      collection: "properties",
+      draft: false,
+      limit: 1,
+      where: {
+        slug: { equals: slug },
+      },
+    })
+    .then((res) => res.docs[0]);
+};

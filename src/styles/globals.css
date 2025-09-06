@@ -175,6 +175,10 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  p {
+    @apply text-balance leading-relaxed tracking-[-0.48px];
+  }
 }
 
 @utility container {

@@ -8,7 +8,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <NuqsAdapter>
-      <ProgressProvider color="#ffc0c5" height="2px" memo options={{ showSpinner: false }} shallowRouting>
+      <ProgressProvider color="#463CEF" height="2px" memo options={{ showSpinner: false }} shallowRouting>
         {children}
       </ProgressProvider>
     </NuqsAdapter>

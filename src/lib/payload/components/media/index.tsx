@@ -10,9 +10,11 @@ type Props = Media & { className?: string; priority?: boolean; fill?: boolean };
 export async function ImageObject(props: Props) {
   const { filename, height, width, alt, className, priority, blurDataUrl, fill = false } = props;
 
+  const image = `${env.AWS_BUCKET}/${filename}`;
+
   return (
     <>
-      <Schema schema={addImage(props)} />
+      <Schema schema={addImage(image)} />
       <Image
         alt={alt || ""}
         blurDataURL={blurDataUrl ?? undefined}
@@ -21,7 +23,7 @@ export async function ImageObject(props: Props) {
         height={!fill ? (height ?? undefined) : undefined}
         placeholder={blurDataUrl ? "blur" : "empty"}
         priority={priority}
-        src={`${env.AWS_BUCKET}/${filename}`}
+        src={image}
         width={!fill ? (width ?? undefined) : undefined}
       />
     </>

@@ -13,7 +13,9 @@ export function Navbar() {
     <header className="sticky top-0 z-999 bg-background/90 py-2.5 backdrop-blur-2xl">
       <nav className="container flex items-center justify-between gap-8">
         <div className="flex items-center gap-8">
-          <Logo className="h-7 w-auto sm:h-8" />
+          <Link href="/">
+            <Logo className="h-7 w-auto sm:h-8" />
+          </Link>
 
           <DesktopNavbar />
         </div>
