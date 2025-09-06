@@ -29,7 +29,7 @@ export function Navbar() {
           </li>
           <li>
             <Button asChild variant="secondary">
-              <Link href="/">Get in touch</Link>
+              <Link href="/contact">Get in touch</Link>
             </Button>
           </li>
           <li>

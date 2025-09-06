@@ -9,8 +9,7 @@ import { cn } from "@/lib/utils";
 
 export function DesktopNavbar() {
   const pathname = usePathname();
-
-  const isActive = (href: string) => pathname.includes(href);
+  const isActive = (href: string) => pathname.endsWith(href) || (href.includes(pathname) && pathname !== "/");
 
   return (
     <ul className="hidden items-center gap-3 md:flex">
@@ -21,6 +20,7 @@ export function DesktopNavbar() {
               "rounded-lg px-3 py-2 font-medium leading-none tracking-tight",
               isActive(href) && "bg-card shadow-md"
             )}
+            data-active={isActive(href)}
             href={href as Route}
           >
             {label}
