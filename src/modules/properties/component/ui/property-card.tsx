@@ -15,12 +15,19 @@ interface Props {
 }
 
 export const PropertyCard = ({ property }: Props) => {
+  const primaryImage = property.images?.find((img) => img.isPrimary);
+  const fallbackImage = property.images?.[0];
+  const selectedImage = primaryImage || fallbackImage;
+  const image = typeof selectedImage?.image === "object" ? selectedImage.image.url : undefined;
+
   return (
     <Card>
       <CardContent className="space-y-4">
-        <div className="relative aspect-4/3">
-          <Image alt="Property" className="rounded-md object-cover" fill src="/images/property-1.jpg" />
-        </div>
+        {image && (
+          <div className="relative aspect-4/3">
+            <Image alt="Property" className="rounded-md object-cover" fill src={image} />
+          </div>
+        )}
         <div className="flex items-center justify-between">
           <CardHeader className="flex-1">
             <CardTitle>

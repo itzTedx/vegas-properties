@@ -11,7 +11,7 @@ import { Media } from "@/collections/Media";
 import { env } from "../env/server";
 import { beforeSyncWithSearch } from "./search/before-sync";
 import { searchFields } from "./search/field-overrides";
-import { getServerSideURL } from "./utils";
+import { getServerSideURL } from "./utils/get-url";
 
 const generateTitle: GenerateTitle = ({ doc }) => {
   return doc?.title ? `${doc.title} | Vegas Properties` : "Vegas Properties";
