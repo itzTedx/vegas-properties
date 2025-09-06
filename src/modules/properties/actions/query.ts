@@ -1,10 +1,10 @@
 import { payload } from "@/lib/payload";
 
-export async function getFeaturedProperties() {
+export async function getFeaturedProperties(limit?: number) {
   const properties = await payload.find({
     collection: "properties",
     draft: false,
-
+    limit: limit,
     where: {
       isFeatured: {
         equals: true,

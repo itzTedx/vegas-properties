@@ -5,3 +5,4 @@ export * from "./chevrons";
 export * from "./developer";
 export * from "./layout";
 export * from "./pin";
+export * from "./socials";
