@@ -63,15 +63,12 @@ export const Property: CollectionConfig = {
       name: "title",
       type: "text",
       required: true,
-      admin: {
-        description: "Property title or name",
-      },
     },
     {
       name: "description",
       type: "textarea",
       admin: {
-        description: "Detailed property description",
+        description: "Short property overview",
       },
     },
     {
@@ -95,6 +92,12 @@ export const Property: CollectionConfig = {
               name: "propertyDetails",
               type: "group",
               fields: [
+                {
+                  name: "developer",
+                  type: "relationship",
+                  relationTo: "developers",
+                  hasMany: false,
+                },
                 {
                   name: "bedrooms",
                   type: "number",

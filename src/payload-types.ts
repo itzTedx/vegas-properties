@@ -68,8 +68,9 @@ export interface Config {
   blocks: {};
   collections: {
     properties: Property;
-    users: User;
     media: Media;
+    developers: Developer;
+    users: User;
     search: Search;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,8 +79,9 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     properties: PropertiesSelect<false> | PropertiesSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    developers: DevelopersSelect<false> | DevelopersSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -127,18 +129,16 @@ export interface Property {
    * URL-friendly version of the title
    */
   slug?: string | null;
-  /**
-   * Property title or name
-   */
   title: string;
   /**
-   * Detailed property description
+   * Short property overview
    */
   description?: string | null;
   location: {
     address: string;
   };
   propertyDetails: {
+    developer?: (number | null) | Developer;
     /**
      * Number of bedrooms
      */
@@ -216,6 +216,21 @@ export interface Property {
    * Feature this property prominently
    */
   isFeatured?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "developers".
+ */
+export interface Developer {
+  id: number;
+  title: string;
+  logo: number | Media;
+  description?: string | null;
+  website?: string | null;
+  contactEmail?: string | null;
+  contactPhone?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -330,12 +345,16 @@ export interface PayloadLockedDocument {
         value: number | Property;
       } | null)
     | ({
-        relationTo: 'users';
-        value: number | User;
-      } | null)
-    | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'developers';
+        value: number | Developer;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
         relationTo: 'search';
@@ -399,6 +418,7 @@ export interface PropertiesSelect<T extends boolean = true> {
   propertyDetails?:
     | T
     | {
+        developer?: T;
         bedrooms?: T;
         bathrooms?: T;
         area?: T;
@@ -438,28 +458,6 @@ export interface PropertiesSelect<T extends boolean = true> {
   isFeatured?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
- */
-export interface UsersSelect<T extends boolean = true> {
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -503,6 +501,42 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "developers_select".
+ */
+export interface DevelopersSelect<T extends boolean = true> {
+  title?: T;
+  logo?: T;
+  description?: T;
+  website?: T;
+  contactEmail?: T;
+  contactPhone?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
       };
 }
 /**

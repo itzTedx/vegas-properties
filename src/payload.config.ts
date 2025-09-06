@@ -1,17 +1,17 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from "@payloadcms/db-postgres";
-import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { Developers } from "./collections/Developers";
 import { Media } from "./collections/Media";
-import { Users } from "./collections/Users";
-import { plugins } from "./lib/payload/plugins";
-import { env } from "./lib/env/server";
 import { Property } from "./collections/Property";
+import { Users } from "./collections/Users";
+import { env } from "./lib/env/server";
+import { plugins } from "./lib/payload/plugins";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Property,  Users, Media],
+  collections: [Property, Media, Developers, Users],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
   typescript: {
@@ -36,7 +36,7 @@ export default buildConfig({
   }),
   sharp,
   plugins: [
-   ...plugins,
+    ...plugins,
     // storage-adapter-placeholder
   ],
 });
