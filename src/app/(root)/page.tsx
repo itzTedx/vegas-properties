@@ -9,6 +9,9 @@ import { FeaturedProperties } from "@/modules/properties/sections/featured-prope
 import { LatestProperties } from "@/modules/properties/sections/latest-properties";
 import { SearchFilter } from "@/modules/search/components/search-filter";
 import Testimonials from "@/modules/sections/home/testimonials";
+import { Cta } from "@/components/layout/cta";
+import FeaturesSection from "@/modules/sections/home/features";
+import Features from "@/modules/sections/home/why-choose-us";
 
 export default function Home() {
   const MAX_WIDTH = "max-w-4xl";
@@ -34,7 +37,7 @@ export default function Home() {
         <div className="space-y-4">
           <Badge>Featured</Badge>
           <div className="grid gap-3 md:grid-cols-2">
-            <h2 className="text-balance font-serif text-2xl md:text-4xl">
+            <h2 className="text-balance font-sans font-medium text-2xl md:text-4xl">
               <span className="text-brand-600">Handpicked</span> Properties for You
             </h2>
             <p className="text-balance font-light text-sm leading-relaxed tracking-[-0.32px]">
@@ -50,7 +53,7 @@ export default function Home() {
         <div className="space-y-4">
           <Badge>Properties</Badge>
           <div className="grid gap-3 md:grid-cols-2">
-            <h2 className="text-balance font-serif text-2xl md:text-4xl">
+            <h2 className="text-balance font-sans font-medium text-2xl md:text-4xl">
               Premium Properties in the <br />
               <span className="text-brand-600">best locations</span>
             </h2>
@@ -63,13 +66,13 @@ export default function Home() {
 
         <LatestProperties />
       </section>
-      <section className="container py-14">
+      <section className="container py-14 max-w-7xl">
         <div className="space-y-4">
           <Badge>Backed by Top Property Developers</Badge>
 
           <ul className="mt-2 grid grid-cols-6 gap-4">
             <li className="col-span-3">
-              <h2 className="text-balance font-serif text-2xl md:text-4xl">
+              <h2 className="text-balance font-sans font-medium text-2xl md:text-4xl">
                 Exclusive projects from <span className="text-brand-600">world-class developers</span> including:
               </h2>
             </li>
@@ -87,7 +90,10 @@ export default function Home() {
           </ul>
         </div>
       </section>
+      {/* <FeaturesSection /> */}
+      <Features />
       <Testimonials />
+      <Cta />
     </main>
   );
 }

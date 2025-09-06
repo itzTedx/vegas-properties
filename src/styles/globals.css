@@ -177,7 +177,7 @@
   }
 
   p {
-    @apply text-balance leading-relaxed tracking-[-0.48px];
+    @apply leading-relaxed tracking-[-0.48px];
   }
 }
 

@@ -7,7 +7,7 @@ export default function Testimonials() {
     <section className="py-16 md:py-20">
       <div className="mx-auto max-w-6xl space-y-8 px-6 md:space-y-16">
         <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center ">
-          <h2 className="font-medium text-4xl lg:text-5xl tracking-tight font-serif">Trusted by thousands of Vegas property owners</h2>
+          <h2 className="font-medium text-4xl lg:text-5xl tracking-tight font-sans">Trusted by thousands of Vegas property owners</h2>
           <p>
             Vegas Properties has revolutionized the way people buy, sell, and invest in Las Vegas real estate. 
             Our comprehensive platform connects property owners with the right opportunities in the entertainment capital of the world.
