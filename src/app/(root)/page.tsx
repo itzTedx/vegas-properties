@@ -66,6 +66,9 @@ export default function Home() {
 
         <LatestProperties />
       </section>
+      
+      {/* <FeaturesSection /> */}
+      <Features />
       <section className="container py-14 max-w-7xl">
         <div className="space-y-4">
           <Badge>Backed by Top Property Developers</Badge>
@@ -90,8 +93,6 @@ export default function Home() {
           </ul>
         </div>
       </section>
-      {/* <FeaturesSection /> */}
-      <Features />
       <Testimonials />
       <Cta />
     </main>
