@@ -5,10 +5,10 @@ import { addImage } from "@/modules/seo";
 import { Schema } from "@/modules/seo/schema";
 import type { Media } from "@/payload-types";
 
-type Props = Media & { className?: string; priority?: boolean };
+type Props = Media & { className?: string; priority?: boolean; fill?: boolean };
 
 export async function ImageObject(props: Props) {
-  const { filename, height, width, alt, className, priority, blurDataUrl } = props;
+  const { filename, height, width, alt, className, priority, blurDataUrl, fill } = props;
 
   return (
     <>
@@ -17,11 +17,12 @@ export async function ImageObject(props: Props) {
         alt={alt || ""}
         blurDataURL={blurDataUrl ?? undefined}
         className={className}
-        height={height || 360}
+        fill={fill}
+        height={!fill ? (height ?? undefined) : undefined}
         placeholder={blurDataUrl ? "blur" : "empty"}
         priority={priority}
         src={`${env.CLOUDFLARE_BUCKET}/${filename}`}
-        width={width || 640}
+        width={!fill ? (width ?? undefined) : undefined}
       />
     </>
   );

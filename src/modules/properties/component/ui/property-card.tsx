@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContainer, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -41,7 +39,9 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
         )}
         {image && (
           <div className="relative aspect-4/3">
-            {typeof selectedImage !== "string" && image && <ImageObject {...image} />}
+            {typeof selectedImage !== "string" && image && (
+              <ImageObject {...image} className="rounded-md object-cover" />
+            )}
             {/* <Image alt="Property" className="rounded-md object-cover" fill src={image} /> */}
           </div>
         )}
@@ -57,11 +57,11 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
               </p>
             </CardDescription>
           </CardHeader>
-          {property.propertyDetails.developer && typeof property.propertyDetails.developer === "object" && (
-            <div className="flex items-center gap-2">
-              <Image alt={developerTitle} height={50} src={developerLogoUrl} width={50} />
-            </div>
-          )}
+          {property.propertyDetails.developer &&
+            typeof property.propertyDetails.developer === "object" &&
+            typeof developerLogo === "object" && (
+              <ImageObject alt={developerTitle} className="rounded-md" height={50} width={50} {...developerLogo} />
+            )}
         </div>
         <SeparatorDashed />
         <CardContainer className="space-y-4">

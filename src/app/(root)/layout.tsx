@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 
 import { Navbar } from "@/components/layout/navbar";
+import { Providers } from "@/components/providers";
 
 import { dmSerif, inter, nohemi } from "@/assets/fonts";
 
@@ -21,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, dmSerif.variable, nohemi.variable, "antialiased")}>
-        <Navbar />
-        {children}
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

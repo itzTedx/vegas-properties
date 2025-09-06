@@ -17,8 +17,7 @@ export function DesktopNavbar() {
         <li key={href}>
           <Link
             className={cn(
-              "rounded-lg px-3 py-2 font-medium leading-none tracking-tight",
-              isActive(href) && "bg-card shadow-md"
+              "rounded-lg px-3 py-2 font-medium leading-none tracking-tight data-[active=true]:bg-card data-[active=true]:shadow-md"
             )}
             data-active={isActive(href)}
             href={href as Route}
