@@ -63,14 +63,14 @@ export default async function PropertyPage({ params }: Props) {
       <PropertyNavbar />
 
       <header className="container">
-        <div className="relative grid grid-cols-5 grid-rows-2 gap-2">
-          <div className="relative col-span-2 row-span-2 overflow-hidden rounded-md">
+        <div className="relative grid grid-cols-1 gap-2 md:grid-cols-5 md:grid-rows-2">
+          <div className="relative aspect-video overflow-hidden rounded-md md:col-span-2 md:row-span-2 md:aspect-auto">
             {typeof image !== "number" && image && (
               <ImageObject {...image} className="object-cover transition-transform ease-out hover:scale-105" fill />
             )}
           </div>
           {gallery?.splice(0, 6).map((img, i) => (
-            <div className="relative aspect-4/3 overflow-hidden rounded-md" key={i}>
+            <div className="relative hidden aspect-4/3 overflow-hidden rounded-md md:block" key={i}>
               {typeof img !== "number" && img && (
                 <ImageObject {...img} className="object-cover transition-transform duration-300 hover:scale-105" fill />
               )}
@@ -81,8 +81,8 @@ export default async function PropertyPage({ params }: Props) {
           </Button>
         </div>
       </header>
-      <div className="container mt-9 grid max-w-7xl grid-cols-3 gap-4">
-        <div className="col-span-2 space-y-6">
+      <div className="container mt-9 grid max-w-7xl grid-cols-1 gap-4 lg:grid-cols-3">
+        <div className="space-y-6 lg:col-span-2">
           <section className="scroll-mt-20" id="overview">
             <Card className="py-0">
               <CardContent className="group relative space-y-3 p-6">
@@ -119,7 +119,7 @@ export default async function PropertyPage({ params }: Props) {
                       )}
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                     <div>
                       <h3 className="text-muted-foreground">Bedrooms</h3>
                       <p className="font-medium text-3xl">{propertyDetails.bedrooms}</p>
@@ -160,7 +160,7 @@ export default async function PropertyPage({ params }: Props) {
 
                 {overview && <RichText data={overview} enableGutter={false} />}
 
-                <ul className="grid grid-cols-3 gap-4">
+                <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
                   <li className="flex items-center gap-2 rounded-md bg-accent p-3">
                     <IconBuilding className="size-7" />
                     <div>
@@ -199,7 +199,7 @@ export default async function PropertyPage({ params }: Props) {
             <Card className="py-0">
               <CardContent className="p-6">
                 <h2 className="font-light font-sans text-muted-foreground text-xl">Key Features</h2>
-                <ul className="mt-2 grid grid-cols-2 gap-x-6">
+                <ul className="mt-2 grid grid-cols-1 gap-x-6 md:grid-cols-2">
                   {features?.map((feature) => (
                     <li className="border-b py-2" key={feature.id}>
                       <h3 className="font-medium">{feature.feature}</h3>
@@ -213,7 +213,7 @@ export default async function PropertyPage({ params }: Props) {
             <Card className="py-0">
               <CardContent className="p-6">
                 <h2 className="font-light font-sans text-muted-foreground text-xl">Amenities That Redefine Living</h2>
-                <div className="mt-4 grid grid-cols-3 gap-6">
+                <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                   {amenities?.map((amenity) => (
                     <div
                       className="relative flex aspect-square items-end overflow-hidden rounded-md border bg-accent p-3"
@@ -246,7 +246,7 @@ export default async function PropertyPage({ params }: Props) {
             </section>
           )}
         </div>
-        <aside className="sticky top-20 flex h-fit flex-col gap-2 rounded-md border bg-card p-6">
+        <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-4 sm:p-6 lg:sticky lg:top-20">
           <Button asChild className="w-full font-semibold text-lg" size="lg">
             <Link href="/contact">Get Consultation</Link>
           </Button>
