@@ -23,19 +23,6 @@ function toNumber(value: unknown): number | null {
   return Number.isFinite(num) ? num : null;
 }
 
-function normalizeIdsAsNumbers(values: unknown): number[] {
-  if (!Array.isArray(values)) return [];
-  return values
-    .map((val) => {
-      if (val && typeof val === "object" && "id" in (val as any)) {
-        const raw = (val as any).id as unknown;
-        return toNumber(raw);
-      }
-      return toNumber(val);
-    })
-    .filter((v): v is number => typeof v === "number");
-}
-
 export async function GET(request: Request) {
   const cookieHeader = request.headers.get("cookie");
   const jar = parseCookie(cookieHeader);
@@ -43,48 +30,48 @@ export async function GET(request: Request) {
   if (!sessionId) return NextResponse.json({ favorites: [] });
 
   const { docs } = await payload.find({
-    collection: "guest-sessions",
+    collection: "bookmarks",
     where: { sessionId: { equals: sessionId } },
     depth: 2,
-    limit: 1,
+    limit: 100,
   });
-  const session = docs[0] as any;
-  if (!session) return NextResponse.json({ favorites: [] });
 
-  return NextResponse.json({ favorites: session.favorites ?? [] });
+  const properties = docs.map((b: any) => b.property).filter(Boolean);
+  return NextResponse.json({ favorites: properties });
 }
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => ({}));
-  const propertyIdNum = toNumber(body?.propertyId);
-  if (propertyIdNum == null) {
-    return NextResponse.json({ error: "propertyId is required" }, { status: 400 });
-  }
+  const body = await request.json().catch(() => ({}) as Record<string, unknown>);
+  const propertyId = toNumber(body?.propertyId);
+  if (propertyId == null) return NextResponse.json({ error: "propertyId is required" }, { status: 400 });
 
   const cookieHeader = request.headers.get("cookie");
   const jar = parseCookie(cookieHeader);
   const sessionId = jar[COOKIE_NAME] ?? "";
   if (!sessionId) return NextResponse.json({ error: "No guest session" }, { status: 400 });
 
-  const { docs } = await payload.find({
-    collection: "guest-sessions",
-    where: { sessionId: { equals: sessionId } },
+  const existing = await payload.find({
+    collection: "bookmarks",
+    where: {
+      and: [{ sessionId: { equals: sessionId } }, { property: { equals: propertyId } }],
+    },
     depth: 0,
     limit: 1,
   });
-  const session = docs[0] as any;
-  if (!session) return NextResponse.json({ error: "No guest session" }, { status: 400 });
 
-  const currentIds = normalizeIdsAsNumbers(session.favorites);
-  const exists = currentIds.includes(propertyIdNum);
-  const updatedFavorites = exists ? currentIds.filter((id) => id !== propertyIdNum) : [...currentIds, propertyIdNum];
+  if (existing.docs[0]) {
+    await payload.delete({ collection: "bookmarks", id: existing.docs[0].id as number });
+  } else {
+    await payload.create({ collection: "bookmarks", data: { sessionId, property: propertyId } });
+  }
 
-  const updated = await payload.update({
-    collection: "guest-sessions",
-    id: session.id,
-    data: { favorites: updatedFavorites },
+  const all = await payload.find({
+    collection: "bookmarks",
+    where: { sessionId: { equals: sessionId } },
     depth: 0,
+    limit: 100,
   });
 
-  return NextResponse.json({ favorites: updated.favorites ?? updatedFavorites, toggled: !exists });
+  const ids = all.docs.map((d: any) => d.property).filter((v: unknown): v is number => typeof v === "number");
+  return NextResponse.json({ favorites: ids });
 }

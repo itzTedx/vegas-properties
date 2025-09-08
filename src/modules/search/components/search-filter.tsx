@@ -1,5 +1,8 @@
 "use client";
 
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -32,6 +35,8 @@ interface Props {
 }
 
 export function SearchFilter({ width, className }: Props) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const form = useForm<SearchFormType>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
@@ -58,7 +63,22 @@ export function SearchFilter({ width, className }: Props) {
   };
 
   function onSubmit(data: SearchFormType) {
-    console.log(data);
+    startTransition(() => {
+      const searchParams = new URLSearchParams();
+      if (data.location) {
+        searchParams.set("location", data.location?.trim() ?? "");
+      }
+      if (data.type) {
+        searchParams.set("type", data.type?.trim() ?? "");
+      }
+      if (data.bedrooms) {
+        searchParams.set("bedrooms", data.bedrooms?.trim() ?? "");
+      }
+      if (data.priceRange) {
+        searchParams.set("priceRange", data.priceRange?.trim() ?? "");
+      }
+      router.push(`/search?${searchParams.toString()}`);
+    });
   }
 
   return (

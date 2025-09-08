@@ -72,6 +72,7 @@ export interface Config {
     developers: Developer;
     users: User;
     'guest-sessions': GuestSession;
+    bookmarks: Bookmark;
     search: Search;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     developers: DevelopersSelect<false> | DevelopersSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'guest-sessions': GuestSessionsSelect<false> | GuestSessionsSelect<true>;
+    bookmarks: BookmarksSelect<false> | BookmarksSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -318,6 +320,17 @@ export interface GuestSession {
   createdAt: string;
 }
 /**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookmarks".
+ */
+export interface Bookmark {
+  id: number;
+  sessionId: string;
+  property: number | Property;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This is a collection of automatically created search results. These results are used by the global site search and will be updated automatically as documents in the CMS are created or updated.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -373,6 +386,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'guest-sessions';
         value: number | GuestSession;
+      } | null)
+    | ({
+        relationTo: 'bookmarks';
+        value: number | Bookmark;
       } | null)
     | ({
         relationTo: 'search';
@@ -566,6 +583,16 @@ export interface UsersSelect<T extends boolean = true> {
 export interface GuestSessionsSelect<T extends boolean = true> {
   sessionId?: T;
   favorites?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookmarks_select".
+ */
+export interface BookmarksSelect<T extends boolean = true> {
+  sessionId?: T;
+  property?: T;
   updatedAt?: T;
   createdAt?: T;
 }
