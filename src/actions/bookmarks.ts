@@ -52,13 +52,7 @@ export async function getBookmarkedProperties(): Promise<MinimalProperty[]> {
     limit: 100,
   });
 
-  const properties: MinimalProperty[] = (docs as unknown[])
-    .map((b) =>
-      typeof b === "object" && b && "property" in (b as Record<string, unknown>) ? (b as any).property : undefined
-    )
-    .filter((p): p is MinimalProperty => typeof p === "object" && p !== null);
-
-  return properties;
+  return docs;
 }
 
 export async function toggleBookmark(propertyId: number): Promise<number[]> {

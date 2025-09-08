@@ -7,20 +7,13 @@ import { Card, CardContainer, CardContent, CardDescription, CardHeader, CardTitl
 import { Currency } from "@/components/ui/currency";
 import { SeparatorDashed } from "@/components/ui/separator";
 
-import {
-  IconBathtub,
-  IconBedroom,
-  IconBookmark,
-  IconKey,
-  IconLocationPin,
-  IconSaleBuilding,
-  IconStar,
-} from "@/assets/icons";
+import { IconBathtub, IconBedroom, IconKey, IconLocationPin, IconSaleBuilding, IconStar } from "@/assets/icons";
 import { IconArrowRight } from "@/assets/icons/arrows";
 
 import { formatPrice } from "@/lib/utils";
 import { Property } from "@/payload-types";
 
+import { BookmarkButton } from "./bookmark-button";
 import { CardImage } from "./card-image";
 
 interface Props {
@@ -112,9 +105,7 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
               View Details
             </Link>
           </Button>
-          <Button size="icon" variant="outline">
-            <IconBookmark className="text-secondary" />
-          </Button>
+          <BookmarkButton id={property.id} />
         </div>
       </CardContent>
     </Card>
