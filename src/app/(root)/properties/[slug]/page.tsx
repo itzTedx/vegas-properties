@@ -7,8 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContainer, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Separator, SeparatorDashed } from "@/components/ui/separator";
-import Autoplay from "embla-carousel-autoplay"
-import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
+import Autoplay from "embla-carousel-autoplay";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import { IconBuilding, IconKey, IconSaleBuilding, IconStar } from "@/assets/icons";
 
@@ -85,7 +85,7 @@ export default async function PropertyPage({ params }: Props) {
         </div>
       </header>
       <div className="container mt-9 grid max-w-7xl grid-cols-3 gap-4">
-        <div className="col-span-2 space-y-12">
+        <div className="col-span-2 space-y-6">
           <section className="scroll-mt-20" id="overview">
             <Card className="py-0">
               <CardContent className="group relative space-y-3 p-6">
@@ -199,29 +199,37 @@ export default async function PropertyPage({ params }: Props) {
           </section>
 
           <section className="scroll-mt-20" id="features">
-            <h2>Key Features</h2>
-            <ul className="grid grid-cols-2 gap-6">
-              {features?.map((feature) => (
-                <li key={feature.id}>
-                  <h3 className="font-medium text-xl">{feature.feature}</h3>
-                </li>
-              ))}
-            </ul>
+            <Card className="py-0">
+              <CardContent className="p-6">
+                <h2>Key Features</h2>
+                <ul className="grid gap-6">
+                  {features?.map((feature) => (
+                    <li key={feature.id}>
+                      <h3 className="font-medium text-lg">{feature.feature}</h3>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           </section>
           <section className="scroll-mt-20" id="amenities">
-            <h2>Amenities That Redefine Living</h2>
-            <div className="grid grid-cols-4 gap-6">
-              {amenities?.map((amenity) => (
-                <div key={amenity.id}>
-                  {typeof amenity.image !== "number" && amenity.image && (
-                    <div className="relative aspect-square overflow-hidden rounded-md">
-                      <ImageObject {...amenity.image} className="object-cover" fill />
+            <Card className="py-0">
+              <CardContent className="p-6">
+                <h2>Amenities That Redefine Living</h2>
+                <div className="grid grid-cols-4 gap-6">
+                  {amenities?.map((amenity) => (
+                    <div key={amenity.id}>
+                      {typeof amenity.image !== "number" && amenity.image && (
+                        <div className="relative aspect-square overflow-hidden rounded-md">
+                          <ImageObject {...amenity.image} className="object-cover" fill />
+                        </div>
+                      )}
+                      <h3 className="font-medium text-xl">{amenity.amenity}</h3>
                     </div>
-                  )}
-                  <h3 className="font-medium text-xl">{amenity.amenity}</h3>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </CardContent>
+            </Card>
           </section>
         </div>
         <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-6">
