@@ -14,7 +14,8 @@ interface Props {
 
 export default async function PropertyPage({ params }: Props) {
   const { slug } = await params;
-  const { title, image, gallery, propertyDetails, pricing, overview, features, amenities } = await getPropertyBySlug(slug);
+  const { title, image, gallery, propertyDetails, pricing, overview, features, amenities } =
+    await getPropertyBySlug(slug);
 
   return (
     <main className="container pt-6 pb-12">

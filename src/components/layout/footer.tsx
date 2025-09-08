@@ -18,39 +18,36 @@ export const Footer = async () => {
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <div>
-              <h3 className="mb-3 font-semibold text-muted-foreground text-xs">Navigation</h3>
+              <h3 className="mb-3 text-muted-foreground text-xs">Navigation</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link className="text-sm transition-colors hover:text-foreground" href="/">
+                  <Link className="transition-colors hover:text-foreground" href="/">
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm transition-colors hover:text-foreground" href="/">
+                  <Link className="transition-colors hover:text-foreground" href="/">
                     Properties
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm transition-colors hover:text-foreground" href="/">
+                  <Link className="transition-colors hover:text-foreground" href="/">
                     Who we are
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm transition-colors hover:text-foreground" href="/">
+                  <Link className="transition-colors hover:text-foreground" href="/">
                     Contact us
                   </Link>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="mb-3 font-semibold text-muted-foreground text-xs">Featured Properties</h3>
+              <h3 className="mb-3 text-muted-foreground text-xs">Featured Properties</h3>
               <ul className="space-y-2">
                 {featuredProperties.map((property) => (
                   <li key={property.id}>
-                    <Link
-                      className="text-sm transition-colors hover:text-foreground"
-                      href={`/properties/${property.slug}`}
-                    >
+                    <Link className="transition-colors hover:text-foreground" href={`/properties/${property.slug}`}>
                       {property.title}
                     </Link>
                   </li>
@@ -58,14 +55,11 @@ export const Footer = async () => {
               </ul>
             </div>
             <div className="sm:col-span-2 lg:col-span-1">
-              <h3 className="mb-3 font-semibold text-muted-foreground text-xs">Popular Searches</h3>
+              <h3 className="mb-3 text-muted-foreground text-xs">Popular Searches</h3>
               <ul className="space-y-2">
                 {featuredProperties.map((property) => (
                   <li key={property.id}>
-                    <Link
-                      className="text-sm transition-colors hover:text-foreground"
-                      href={`/properties/${property.slug}`}
-                    >
+                    <Link className="transition-colors hover:text-foreground" href={`/properties/${property.slug}`}>
                       {property.title}
                     </Link>
                   </li>
@@ -77,7 +71,7 @@ export const Footer = async () => {
       </nav>
 
       <div className="container flex flex-col items-center gap-4 py-4 sm:flex-row sm:justify-between">
-        <p className="text-center text-xs sm:text-left sm:text-sm">
+        <p className="sm: text-center text-xs sm:text-left">
           ALL RIGHTS RESERVED.
           <br />© {new Date().getFullYear()} Vegas Properties LLC
         </p>

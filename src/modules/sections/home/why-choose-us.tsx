@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import { Shield, MapPin, Users, Smartphone } from "lucide-react";
+import { MapPin, Shield, Smartphone, Users } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -35,11 +35,13 @@ export default function Features() {
     <section className="py-12 md:py-20 lg:py-32">
       <div className="-z-10 absolute inset-0 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
       <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16 lg:space-y-20 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)]">
-        <div className="relative z-10 mx-auto max-w-2xl space-y-4 text-center">
+        <div className="relative z-10 mx-auto max-w-2xl space-y-2 text-center">
           <h2 className="text-balance font-medium font-sans text-4xl lg:text-5xl">
-            Why Dubai Investors Choose Vegas Properties
+            Why Dubai Investors <span className="text-brand-600">Choose Vegas Properties</span>
           </h2>
-          <p>We don't just sell properties—we create long-term value for homeowners and investors alike.</p>
+          <p className="text-muted-foreground">
+            We don't just sell properties; we create long-term value for homeowners and investors alike.
+          </p>
         </div>
 
         <div className="grid gap-12 sm:px-12 md:grid-cols-2 lg:gap-20 lg:px-0">
@@ -51,41 +53,47 @@ export default function Features() {
           >
             <AccordionItem value="item-1">
               <AccordionTrigger>
-                <div className="flex items-center gap-2 text-base">
-                  <Shield className="size-4" />
+                <div className="flex items-center gap-2 text-xl">
+                  <Shield className="size-6" />
                   Transparent Deals
                 </div>
               </AccordionTrigger>
-              <AccordionContent>100% verified listings and clear, honest communication.</AccordionContent>
+              <AccordionContent className="text-lg">
+                100% verified listings and clear, honest communication.
+              </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger>
-                <div className="flex items-center gap-2 text-base">
-                  <MapPin className="size-4" />
+                <div className="flex items-center gap-2 text-xl">
+                  <MapPin className="size-6" />
                   Prime Locations
                 </div>
               </AccordionTrigger>
-              <AccordionContent>Access to Dubai's most desirable communities and iconic developments.</AccordionContent>
+              <AccordionContent className="text-lg">
+                Access to Dubai's most desirable communities and iconic developments.
+              </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>
-                <div className="flex items-center gap-2 text-base">
-                  <Users className="size-4" />
+                <div className="flex items-center gap-2 text-xl">
+                  <Users className="size-6" />
                   Expert Guidance
                 </div>
               </AccordionTrigger>
-              <AccordionContent>
+              <AccordionContent className="text-lg">
                 Our team brings years of experience to simplify every step of your journey.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
               <AccordionTrigger>
-                <div className="flex items-center gap-2 text-base">
-                  <Smartphone className="size-4" />
+                <div className="flex items-center gap-2 text-xl">
+                  <Smartphone className="size-6" />
                   Digital Experience
                 </div>
               </AccordionTrigger>
-              <AccordionContent>From virtual tours to online payments, manage everything seamlessly.</AccordionContent>
+              <AccordionContent className="text-lg">
+                From virtual tours to online payments, manage everything seamlessly.
+              </AccordionContent>
             </AccordionItem>
           </Accordion>
 
@@ -111,11 +119,7 @@ export default function Features() {
                 </motion.div>
               </AnimatePresence>
             </div>
-            <BorderBeam
-              className="from-transparent via-yellow-700 to-transparent dark:via-white/50"
-              duration={6}
-              size={200}
-            />
+            <BorderBeam className="from-transparent via-brand-500 to-transparent" duration={6} size={200} />
           </div>
         </div>
       </div>
