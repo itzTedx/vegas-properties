@@ -3,6 +3,7 @@ export * from "./brands";
 export * from "./buildings";
 export * from "./chevrons";
 export * from "./developer";
+export * from "./fire";
 export * from "./layout";
 export * from "./pin";
 export * from "./socials";

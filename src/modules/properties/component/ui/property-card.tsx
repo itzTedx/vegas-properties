@@ -7,11 +7,20 @@ import { Card, CardContainer, CardContent, CardDescription, CardHeader, CardTitl
 import { Currency } from "@/components/ui/currency";
 import { SeparatorDashed } from "@/components/ui/separator";
 
-import { IconBathtub, IconBedroom, IconBookmark, IconLocationPin } from "@/assets/icons";
+import {
+  IconBathtub,
+  IconBedroom,
+  IconBookmark,
+  IconKey,
+  IconLocationPin,
+  IconSaleBuilding,
+  IconStar,
+} from "@/assets/icons";
 import { IconArrowRight } from "@/assets/icons/arrows";
 
 import { formatPrice } from "@/lib/utils";
 import { Property } from "@/payload-types";
+
 import { CardImage } from "./card-image";
 
 interface Props {
@@ -31,9 +40,21 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
         <Link className="absolute inset-0" href={`/properties/${property.slug}`} title="View Details" />
         {showBadges && (
           <div className="absolute top-2 left-4 z-50 flex items-center gap-2">
-            {property.isFeatured && <Badge>Featured</Badge>}
-            {property.pricing.priceType === "rent" && <Badge>For Rent</Badge>}
-            {property.pricing.priceType === "sale" && <Badge>For Sale</Badge>}
+            {property.isFeatured && (
+              <Badge className="border-[#C99A2C]/15 shadow-xl shadow-yellow-700/10">
+                <IconStar className="text-[#F6B51E]" /> Featured
+              </Badge>
+            )}
+            {property.pricing.priceType === "rent" && (
+              <Badge className="border-brand-600/15 shadow-brand-700/10 shadow-xl">
+                <IconKey className="text-[#2547D0]" /> For Rent
+              </Badge>
+            )}
+            {property.pricing.priceType === "sale" && (
+              <Badge className="border-secondary-600/15 shadow-secondary-700/10 shadow-xl">
+                <IconSaleBuilding className="text-secondary" /> For Sale
+              </Badge>
+            )}
           </div>
         )}
         <CardImage images={property.images} />

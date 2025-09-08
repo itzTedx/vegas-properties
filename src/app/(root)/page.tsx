@@ -1,7 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Cta } from "@/components/layout/cta";
 import { Badge } from "@/components/ui/badge";
+
+import { IconBuilding } from "@/assets/icons";
+import { IconFire } from "@/assets/icons/fire";
 
 import { DEVELOPERS } from "@/data/constants";
 import { cn } from "@/lib/utils";
@@ -9,7 +13,6 @@ import { FeaturedProperties } from "@/modules/properties/sections/featured-prope
 import { LatestProperties } from "@/modules/properties/sections/latest-properties";
 import { SearchFilter } from "@/modules/search/components/search-filter";
 import Testimonials from "@/modules/sections/home/testimonials";
-import { Cta } from "@/components/layout/cta";
 import Features from "@/modules/sections/home/why-choose-us";
 
 export default function Home() {
@@ -34,7 +37,10 @@ export default function Home() {
       </section>
       <section className="container py-14">
         <div className="space-y-4">
-          <Badge>Featured</Badge>
+          <Badge>
+            <IconFire />
+            Featured
+          </Badge>
           <div className="grid gap-3 md:grid-cols-2">
             <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
               <span className="text-brand-600">Handpicked</span> Properties for You
@@ -50,7 +56,10 @@ export default function Home() {
       </section>
       <section className="container py-14">
         <div className="space-y-4">
-          <Badge>Properties</Badge>
+          <Badge>
+            <IconBuilding />
+            Properties
+          </Badge>
           <div className="grid gap-3 md:grid-cols-2">
             <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
               Premium Properties in the <br />
@@ -70,7 +79,7 @@ export default function Home() {
       <Features />
       <section className="container max-w-7xl py-14">
         <div className="space-y-4">
-          <Badge>Backed by Top Property Developers</Badge>
+          <Badge variant="outline">Backed by Top Property Developers</Badge>
 
           <ul className="mt-2 grid grid-cols-6 gap-4">
             <li className="col-span-3">
