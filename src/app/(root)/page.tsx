@@ -66,7 +66,7 @@ export default function Home() {
 
         <LatestProperties />
       </section>
-      
+
       {/* <FeaturesSection /> */}
       <Features />
       <section className="container py-14 max-w-7xl">

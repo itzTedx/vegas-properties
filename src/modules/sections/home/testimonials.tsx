@@ -7,24 +7,27 @@ export default function Testimonials() {
     <section className="py-16 md:py-20">
       <div className="mx-auto max-w-6xl space-y-8 px-6 md:space-y-16">
         <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center ">
-          <h2 className="font-medium text-4xl lg:text-5xl tracking-tight font-sans">Trusted by thousands of Vegas property owners</h2>
+          <h2 className="font-medium text-4xl lg:text-5xl tracking-tight font-sans">
+            Trusted by thousands of Vegas property owners
+          </h2>
           <p>
-            Vegas Properties has revolutionized the way people buy, sell, and invest in Las Vegas real estate. 
-            Our comprehensive platform connects property owners with the right opportunities in the entertainment capital of the world.
+            Vegas Properties has revolutionized the way people buy, sell, and invest in Las Vegas real estate. Our
+            comprehensive platform connects property owners with the right opportunities in the entertainment capital of
+            the world.
           </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-rows-2">
           <Card className="grid grid-rows-[auto_1fr] gap-8 sm:col-span-2 sm:p-6 lg:row-span-2">
             <CardHeader>
-             <LogoMono className="h-5 w-auto" />
+              <LogoMono className="h-5 w-auto" />
             </CardHeader>
             <CardContent>
-              <blockquote  className="grid h-full grid-rows-[1fr_auto] gap-6">
+              <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                 <p className=" text-lg">
-                  Vegas Properties made my dream of owning a luxury condo on the Strip a reality. Their team's 
-                  expertise in the Vegas market is unmatched. From finding the perfect property to closing the deal, 
-                  everything was seamless. I couldn't be happier with my investment in this vibrant city.
+                  Vegas Properties made my dream of owning a luxury condo on the Strip a reality. Their team's expertise
+                  in the Vegas market is unmatched. From finding the perfect property to closing the deal, everything
+                  was seamless. I couldn't be happier with my investment in this vibrant city.
                 </p>
 
                 <div className="grid grid-cols-[auto_1fr] items-center gap-3">
@@ -51,8 +54,8 @@ export default function Testimonials() {
             <CardContent className="p-4 h-full">
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                 <p className="text-lg">
-                  As a real estate investor, Vegas Properties has been my go-to platform. The market insights 
-                  and property analytics they provide are incredibly valuable for making smart investment decisions.
+                  As a real estate investor, Vegas Properties has been my go-to platform. The market insights and
+                  property analytics they provide are incredibly valuable for making smart investment decisions.
                 </p>
 
                 <div className="grid grid-cols-[auto_1fr] items-center gap-3">
@@ -78,8 +81,8 @@ export default function Testimonials() {
             <CardContent className="p-4 h-full">
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                 <p className="text-sm">
-                  Found my perfect home in Summerlin through Vegas Properties. The process was smooth and 
-                  the team was incredibly helpful throughout the entire journey.
+                  Found my perfect home in Summerlin through Vegas Properties. The process was smooth and the team was
+                  incredibly helpful throughout the entire journey.
                 </p>
 
                 <div className="grid items-center gap-3 [grid-template-columns:auto_1fr]">
@@ -101,12 +104,12 @@ export default function Testimonials() {
               </blockquote>
             </CardContent>
           </Card>
-          <Card >
+          <Card>
             <CardContent className="p-4 h-full">
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                 <p className="text-sm">
-                  Vegas Properties helped me sell my Henderson property for above asking price. Their 
-                  marketing strategy and local expertise made all the difference.
+                  Vegas Properties helped me sell my Henderson property for above asking price. Their marketing strategy
+                  and local expertise made all the difference.
                 </p>
 
                 <div className="grid grid-cols-[auto_1fr] gap-3">

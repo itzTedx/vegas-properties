@@ -8,7 +8,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BorderBeam } from "@/components/ui/border-beam";
 
-
 export default function Features() {
   type ImageKey = "item-1" | "item-2" | "item-3" | "item-4";
   const [activeItem, setActiveItem] = useState<ImageKey>("item-1");
@@ -37,10 +36,10 @@ export default function Features() {
       <div className="-z-10 absolute inset-0 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
       <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16 lg:space-y-20 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)]">
         <div className="relative z-10 mx-auto max-w-2xl space-y-4 text-center">
-          <h2 className="text-balance font-medium text-4xl lg:text-5xl font-sans">Why Dubai Investors Choose Vegas Properties</h2>
-          <p>
-            We don't just sell properties—we create long-term value for homeowners and investors alike.
-          </p>
+          <h2 className="text-balance font-medium text-4xl lg:text-5xl font-sans">
+            Why Dubai Investors Choose Vegas Properties
+          </h2>
+          <p>We don't just sell properties—we create long-term value for homeowners and investors alike.</p>
         </div>
 
         <div className="grid gap-12 sm:px-12 md:grid-cols-2 lg:gap-20 lg:px-0">
@@ -57,9 +56,7 @@ export default function Features() {
                   Transparent Deals
                 </div>
               </AccordionTrigger>
-              <AccordionContent>
-                100% verified listings and clear, honest communication.
-              </AccordionContent>
+              <AccordionContent>100% verified listings and clear, honest communication.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
               <AccordionTrigger>
@@ -68,9 +65,7 @@ export default function Features() {
                   Prime Locations
                 </div>
               </AccordionTrigger>
-              <AccordionContent>
-                Access to Dubai's most desirable communities and iconic developments.
-              </AccordionContent>
+              <AccordionContent>Access to Dubai's most desirable communities and iconic developments.</AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
               <AccordionTrigger>
@@ -90,9 +85,7 @@ export default function Features() {
                   Digital Experience
                 </div>
               </AccordionTrigger>
-              <AccordionContent>
-                From virtual tours to online payments, manage everything seamlessly.
-              </AccordionContent>
+              <AccordionContent>From virtual tours to online payments, manage everything seamlessly.</AccordionContent>
             </AccordionItem>
           </Accordion>
 
