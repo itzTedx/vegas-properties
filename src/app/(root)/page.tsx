@@ -36,6 +36,35 @@ export default function Home() {
         <SearchFilter className="md:-mt-12 mt-6" width={MAX_WIDTH} />
       </section>
       <section className="container py-14">
+        <div className="space-y-4 grid grid-cols-2 gap-4">
+          <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
+            Your dream property in Dubai might be closer than you think.
+          </h2>
+          <p className="text-balance text-sm leading-relaxed">
+          Each Vegas Properties listing offers world-class architecture, unmatched quality, and prime locations across Dubai’s most prestigious communities.
+          </p>
+        </div>
+        <div className="grid grid-cols-4 gap-3 grid-rows-3">
+          <div className="col-span-2 row-span-3 bg-card">
+            <h3>Discover a lifestyle upgrade</h3>
+            <p>From waterfront villas to skyline-view apartments, our properties redefine modern luxury. Designed for elegance, comfort, and long-term value.</p>
+          </div>
+          <div className="bg-card row-span-2">
+            <h3>Big opportunities in every space.</h3>
+            <p>With curated layouts and premium finishes, every property maximizes functionality and style—whether for investment or personal living.</p>
+          </div>
+          <div className="bg-card row-span-2">
+            <h3>Pricing starts at AED 950K</h3>
+            <p>Your entry into Dubai’s property market begins here. Explore handpicked listings with flexible payment options.</p>
+          </div>
+          
+          <div className="col-span-2 row-span-1 bg-card">
+            <h3>Discover a lifestyle upgrade</h3>
+            <p>From waterfront villas to skyline-view apartments, our properties redefine modern luxury. Designed for elegance, comfort, and long-term value.</p>
+          </div>
+        </div>
+      </section>
+      <section className="container py-14">
         <div className="space-y-4">
           <Badge>
             <IconFire />

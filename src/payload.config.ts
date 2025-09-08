@@ -7,6 +7,7 @@ import sharp from "sharp";
 import { fileURLToPath } from "url";
 
 import { Developers } from "./collections/Developers";
+import { GuestSessions } from "./collections/GuestSessions";
 import { Media } from "./collections/Media";
 import { Property } from "./collections/Property";
 import { Users } from "./collections/Users";
@@ -23,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Property, Media, Developers, Users],
+  collections: [Property, Media, Developers, Users, GuestSessions],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
   typescript: {

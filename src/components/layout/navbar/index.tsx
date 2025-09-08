@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-import { IconBookmark, IconBrandWhatsapp } from "@/assets/icons";
+import { IconBrandWhatsapp } from "@/assets/icons";
 import { Logo } from "@/assets/logo";
 
 import { DesktopNavbar } from "./desktop";
@@ -36,7 +36,7 @@ export function Navbar() {
             </Button>
           </li>
           <li>
-            <Button
+            {/* <Button
               asChild
               className="bg-brand-500/10 text-brand-600 hover:text-brand-500"
               size="icon"
@@ -45,7 +45,7 @@ export function Navbar() {
               <Link href="/contact">
                 <IconBookmark />
               </Link>
-            </Button>
+            </Button> */}
           </li>
           <li>
             <MobileNavbar />

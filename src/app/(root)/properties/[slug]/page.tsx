@@ -238,19 +238,19 @@ export default async function PropertyPage({ params }: Props) {
             <section className="scroll-mt-20" id="developer">
               <Card className="py-0">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-sans font-light text-muted-foreground">Developer</h2>
-                  <div className="grid grid-cols-3 gap-6 mt-4">
-                    <div>
-                      <h3 className="text-muted-foreground">Developer</h3>
-                      <p className="font-medium text-xl">{propertyDetails.developer?.title}</p>
-                    </div>
+                  <h2 className="text-xl font-sans font-light text-muted-foreground">More about the Developer</h2>
+                 
+                    <div className="mt-4">
+                      <h3 className="text-muted-foreground">{propertyDetails.developer?.title}</h3>
+                      <p className="font-medium text-lg">{propertyDetails.developer?.description}</p>
+              
                   </div>
                 </CardContent>
               </Card>
             </section>
           )}
         </div>
-        <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-6">
+        <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-6 sticky top-20">
           <Button asChild className="w-full font-semibold text-lg" size="lg">
             <Link href="/contact">Get Consultation</Link>
           </Button>

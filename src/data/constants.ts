@@ -8,6 +8,10 @@ export const NAV_LINKS = [
     href: "/properties",
   },
   {
+    label: "Saved Properties",
+    href: "/saved-properties",
+  },
+  {
     label: "About us",
     href: "/about",
   },
