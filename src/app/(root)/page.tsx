@@ -45,7 +45,7 @@ export default function Home() {
             <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
               <span className="text-brand-600">Handpicked</span> Properties for You
             </h2>
-            <p className="text-balance font-light text-sm leading-relaxed tracking-[-0.32px]">
+            <p className="text-balance font-light text-sm leading-relaxed">
               Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas. Explore
               premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
             </p>
@@ -65,7 +65,7 @@ export default function Home() {
               Premium Properties in the <br />
               <span className="text-brand-600">best locations</span>
             </h2>
-            <p className="text-balance font-light text-sm leading-relaxed tracking-[-0.32px]">
+            <p className="text-balance font-light text-sm leading-relaxed">
               Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas. Explore
               premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
             </p>

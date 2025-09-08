@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 import { Providers } from "@/components/providers";
 
-import { dmSerif, inter, nohemi } from "@/assets/fonts";
+import { dmSerif, neueMontreal, nohemi } from "@/assets/fonts";
 
 import { cn } from "@/lib/utils";
 
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, dmSerif.variable, nohemi.variable, "antialiased")}>
+      <body className={cn(neueMontreal.className, dmSerif.variable, nohemi.variable, "antialiased")}>
         <Providers>
           <Navbar />
           {children}

@@ -57,7 +57,7 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
             )}
           </div>
         )}
-        <CardImage images={property.images} />
+        <CardImage image={property.image} />
         <div className="flex items-center justify-between gap-2 pr-2">
           <CardHeader className="flex-1">
             <CardTitle>

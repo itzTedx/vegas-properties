@@ -11,7 +11,7 @@ export async function ImageObject(props: Props) {
   const { filename, height, width, alt, className, priority, blurDataUrl, fill = false } = props;
 
   const image = `${env.AWS_BUCKET}/${filename}`;
-
+// console.log("image: ",image)
   return (
     <>
       <Schema schema={addImage(image)} />

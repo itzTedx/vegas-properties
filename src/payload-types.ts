@@ -134,6 +134,7 @@ export interface Property {
    * Short property overview
    */
   description?: string | null;
+  image: number | Media;
   location: {
     address: string;
   };
@@ -161,17 +162,13 @@ export interface Property {
   /**
    * Property images
    */
-  images?:
+  gallery?:
     | {
         image: number | Media;
         /**
          * Alt text for accessibility
          */
         alt?: string | null;
-        /**
-         * Set as primary image for the property
-         */
-        isPrimary?: boolean | null;
         id?: string | null;
       }[]
     | null;
@@ -221,21 +218,6 @@ export interface Property {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "developers".
- */
-export interface Developer {
-  id: number;
-  title: string;
-  logo: number | Media;
-  description?: string | null;
-  website?: string | null;
-  contactEmail?: string | null;
-  contactPhone?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -278,6 +260,21 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "developers".
+ */
+export interface Developer {
+  id: number;
+  title: string;
+  logo: number | Media;
+  description?: string | null;
+  website?: string | null;
+  contactEmail?: string | null;
+  contactPhone?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -410,6 +407,7 @@ export interface PropertiesSelect<T extends boolean = true> {
   slug?: T;
   title?: T;
   description?: T;
+  image?: T;
   location?:
     | T
     | {
@@ -431,12 +429,11 @@ export interface PropertiesSelect<T extends boolean = true> {
         rentalPrice?: T;
         priceType?: T;
       };
-  images?:
+  gallery?:
     | T
     | {
         image?: T;
         alt?: T;
-        isPrimary?: T;
         id?: T;
       };
   overview?: T;

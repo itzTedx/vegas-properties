@@ -37,3 +37,28 @@ export const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
   weight: ["400"],
 });
+
+export const neueMontreal = localFont({
+  src: [
+    {
+      path: "./neue-montreal/ppneuemontreal-thin.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./neue-montreal/ppneuemontreal-book.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./neue-montreal/ppneuemontreal-medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./neue-montreal/ppneuemontreal-bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+});

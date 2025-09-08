@@ -71,6 +71,8 @@ export const Property: CollectionConfig = {
         description: "Short property overview",
       },
     },
+    { name: "image", type: "upload", relationTo: "media", required: true },
+
     {
       type: "tabs",
       tabs: [
@@ -188,7 +190,7 @@ export const Property: CollectionConfig = {
           label: "Content",
           fields: [
             {
-              name: "images",
+              name: "gallery",
               type: "array",
               fields: [
                 {
@@ -202,14 +204,6 @@ export const Property: CollectionConfig = {
                   type: "text",
                   admin: {
                     description: "Alt text for accessibility",
-                  },
-                },
-                {
-                  name: "isPrimary",
-                  type: "checkbox",
-                  defaultValue: false,
-                  admin: {
-                    description: "Set as primary image for the property",
                   },
                 },
               ],
