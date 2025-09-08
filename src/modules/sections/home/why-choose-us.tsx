@@ -36,7 +36,7 @@ export default function Features() {
       <div className="-z-10 absolute inset-0 bg-linear-to-b sm:inset-6 sm:rounded-b-3xl dark:block dark:to-[color-mix(in_oklab,var(--color-zinc-900)_75%,var(--color-background))]" />
       <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16 lg:space-y-20 dark:[--color-border:color-mix(in_oklab,var(--color-white)_10%,transparent)]">
         <div className="relative z-10 mx-auto max-w-2xl space-y-4 text-center">
-          <h2 className="text-balance font-medium text-4xl lg:text-5xl font-sans">
+          <h2 className="text-balance font-medium font-sans text-4xl lg:text-5xl">
             Why Dubai Investors Choose Vegas Properties
           </h2>
           <p>We don't just sell properties—we create long-term value for homeowners and investors alike.</p>

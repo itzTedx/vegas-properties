@@ -6,8 +6,8 @@ export default function Testimonials() {
   return (
     <section className="py-16 md:py-20">
       <div className="mx-auto max-w-6xl space-y-8 px-6 md:space-y-16">
-        <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center ">
-          <h2 className="font-medium text-4xl lg:text-5xl tracking-tight font-sans">
+        <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
+          <h2 className="font-medium font-sans text-4xl tracking-tight lg:text-5xl">
             Trusted by thousands of Vegas property owners
           </h2>
           <p>
@@ -24,7 +24,7 @@ export default function Testimonials() {
             </CardHeader>
             <CardContent>
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
-                <p className=" text-lg">
+                <p className="text-lg">
                   Vegas Properties made my dream of owning a luxury condo on the Strip a reality. Their team's expertise
                   in the Vegas market is unmatched. From finding the perfect property to closing the deal, everything
                   was seamless. I couldn't be happier with my investment in this vibrant city.
@@ -51,7 +51,7 @@ export default function Testimonials() {
             </CardContent>
           </Card>
           <Card className="md:col-span-2">
-            <CardContent className="p-4 h-full">
+            <CardContent className="h-full p-4">
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                 <p className="text-lg">
                   As a real estate investor, Vegas Properties has been my go-to platform. The market insights and
@@ -78,7 +78,7 @@ export default function Testimonials() {
             </CardContent>
           </Card>
           <Card>
-            <CardContent className="p-4 h-full">
+            <CardContent className="h-full p-4">
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                 <p className="text-sm">
                   Found my perfect home in Summerlin through Vegas Properties. The process was smooth and the team was
@@ -105,7 +105,7 @@ export default function Testimonials() {
             </CardContent>
           </Card>
           <Card>
-            <CardContent className="p-4 h-full">
+            <CardContent className="h-full p-4">
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
                 <p className="text-sm">
                   Vegas Properties helped me sell my Henderson property for above asking price. Their marketing strategy

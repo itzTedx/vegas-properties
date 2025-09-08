@@ -10,7 +10,6 @@ import { SeparatorDashed } from "@/components/ui/separator";
 import { IconBathtub, IconBedroom, IconBookmark, IconLocationPin } from "@/assets/icons";
 import { IconArrowRight } from "@/assets/icons/arrows";
 
-import { ImageObject } from "@/lib/payload/components/media";
 import { formatPrice } from "@/lib/utils";
 import { Property } from "@/payload-types";
 import { CardImage } from "./card-image";
