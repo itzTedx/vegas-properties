@@ -10,7 +10,7 @@ import { MobileNavbar } from "./mobile";
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-999 bg-background/80 py-2.5 backdrop-blur-2xl">
+    <header className="border-b bg-card py-2.5">
       <nav className="container flex items-center justify-between gap-8">
         <div className="flex items-center gap-8">
           <Link href="/">

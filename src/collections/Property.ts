@@ -208,7 +208,7 @@ export const Property: CollectionConfig = {
             {
               name: "overview",
               type: "richText",
-            
+
               editor: lexicalEditor({
                 features: ({ rootFeatures }) => {
                   return [
@@ -250,11 +250,10 @@ export const Property: CollectionConfig = {
                   required: true,
                 },
                 {
-                  name: 'image',
-                  type: 'upload',
-                  relationTo: 'media',
-                }
-               
+                  name: "image",
+                  type: "upload",
+                  relationTo: "media",
+                },
               ],
               admin: {
                 description: "Key amenities of the property",
@@ -264,27 +263,15 @@ export const Property: CollectionConfig = {
         },
 
         {
-        
           label: "Gallery",
           fields: [
             {
               name: "gallery",
-              type: "array",
-              fields: [
-                {
-                  name: "image",
-                  type: "upload",
-                  relationTo: "media",
-                  required: true,
-                },
-                {
-                  name: "alt",
-                  type: "text",
-                  admin: {
-                    description: "Alt text for accessibility",
-                  },
-                },
-              ],
+              type: "upload",
+              relationTo: "media",
+              required: true,
+              hasMany: true,
+
               admin: {
                 description: "Property images",
               },

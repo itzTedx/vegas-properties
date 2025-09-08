@@ -1,12 +1,15 @@
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
+import { IconBookmark, IconShare } from "@/assets/icons";
 
 import { ImageObject } from "@/lib/payload/components/media";
 import RichText from "@/lib/payload/components/rich-text";
 import { formatPrice } from "@/lib/utils";
 import { getPropertyBySlug } from "@/modules/properties/actions/query";
+import { BackButton } from "@/modules/properties/component/ui/back-button";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -18,16 +21,77 @@ export default async function PropertyPage({ params }: Props) {
     await getPropertyBySlug(slug);
 
   return (
-    <main className="container pt-6 pb-12">
-      <header>
-        <div className="relative mb-12 aspect-6/3 overflow-hidden rounded-md">
-          {typeof image !== "number" && image && (
-            <ImageObject {...image} className="object-cover transition-transform ease-out group-hover:scale-105" fill />
-          )}
+    <main className="pb-12">
+      <nav className="sticky top-0 z-999 mb-6 border-b bg-card py-2">
+        <div className="container flex items-center justify-between">
+          <ul className="flex items-center gap-2">
+            <li>
+              <BackButton />
+            </li>
+            <li>
+              <Link className={buttonVariants({ variant: "ghost" })} href="/">
+                Overview
+              </Link>
+            </li>
+            <li>
+              <Link className={buttonVariants({ variant: "ghost" })} href="/">
+                Property Details
+              </Link>
+            </li>
+            <li>
+              <Link className={buttonVariants({ variant: "ghost" })} href="/">
+                Gallery
+              </Link>
+            </li>
+            <li>
+              <Link className={buttonVariants({ variant: "ghost" })} href="/">
+                Features
+              </Link>
+            </li>
+            <li>
+              <Link className={buttonVariants({ variant: "ghost" })} href="/">
+                Amenities
+              </Link>
+            </li>
+          </ul>
+          <ul className="flex items-center gap-2">
+            <li>
+              <Button variant="ghost">
+                <IconBookmark />
+                Bookmark
+              </Button>
+            </li>
+            <li>
+              <Button variant="ghost">
+                <IconShare />
+                Share
+              </Button>
+            </li>
+          </ul>
         </div>
-        <h1 className="font-serif text-5xl">{title}</h1>
+      </nav>
+
+      <header className="container">
+        <div className="relative grid grid-cols-5 grid-rows-2 gap-3">
+          <div className="relative col-span-2 row-span-2 overflow-hidden rounded-md">
+            {typeof image !== "number" && image && (
+              <ImageObject {...image} className="object-cover transition-transform ease-out hover:scale-105" fill />
+            )}
+          </div>
+          {gallery?.splice(0, 6).map((img, i) => (
+            <div className="relative aspect-4/3 overflow-hidden rounded-md" key={i}>
+              {typeof img !== "number" && img && (
+                <ImageObject {...img} className="object-cover transition-transform duration-300 hover:scale-105" fill />
+              )}
+            </div>
+          ))}
+          <Button className="absolute right-3 bottom-3" variant="outline">
+            {gallery.length} Photos
+          </Button>
+        </div>
       </header>
-      <section className="mt-9 space-y-16">
+      <section className="container mt-9 max-w-7xl space-y-16">
+        <h1 className="font-serif text-5xl">{title}</h1>
         <div className="flex items-center justify-between gap-4">
           <div className="flex gap-12">
             <div>
@@ -83,7 +147,7 @@ export default async function PropertyPage({ params }: Props) {
         </div>
       </section>
 
-      <section aria-label="Project Gallery" className="pt-20">
+      <section aria-label="Project Gallery" className="container max-w-7xl pt-20">
         <Carousel
           className="w-full"
           opts={{
@@ -99,13 +163,13 @@ export default async function PropertyPage({ params }: Props) {
             </div>
           </div>
           <CarouselContent className="-ml-1">
-            {gallery?.map((img, index) => (
-              <CarouselItem className="3xl:basis-1/3 pl-1 md:basis-1/2" key={img.id}>
+            {gallery?.map((img, i) => (
+              <CarouselItem className="3xl:basis-1/3 pl-1 md:basis-1/2" key={i}>
                 <div className="h-full p-1">
                   <div className="relative aspect-4/3 overflow-hidden rounded-md xl:aspect-5/4">
-                    {typeof img.image !== "number" && img.image && (
+                    {typeof img !== "number" && img && (
                       <ImageObject
-                        {...img.image}
+                        {...img}
                         className="object-cover transition-transform duration-500 hover:scale-105"
                         fill
                       />
@@ -118,7 +182,7 @@ export default async function PropertyPage({ params }: Props) {
         </Carousel>
       </section>
 
-      <section className="space-y-4 py-16">
+      <section className="container max-w-7xl space-y-4 py-16">
         <h2>Key Features</h2>
         <ul className="grid grid-cols-2 gap-6">
           {features?.map((feature) => (
@@ -128,7 +192,7 @@ export default async function PropertyPage({ params }: Props) {
           ))}
         </ul>
       </section>
-      <section>
+      <section className="container max-w-7xl">
         <h2>Amenities That Redefine Living</h2>
         <div className="grid grid-cols-4 gap-6">
           {amenities?.map((amenity) => (

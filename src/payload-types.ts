@@ -201,16 +201,7 @@ export interface Property {
   /**
    * Property images
    */
-  gallery?:
-    | {
-        image: number | Media;
-        /**
-         * Alt text for accessibility
-         */
-        alt?: string | null;
-        id?: string | null;
-      }[]
-    | null;
+  gallery: (number | Media)[];
   meta?: {
     title?: string | null;
     /**
@@ -458,13 +449,7 @@ export interface PropertiesSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
-  gallery?:
-    | T
-    | {
-        image?: T;
-        alt?: T;
-        id?: T;
-      };
+  gallery?: T;
   meta?:
     | T
     | {
