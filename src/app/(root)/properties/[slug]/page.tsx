@@ -5,10 +5,7 @@ import { Building2, Calendar, Car, Layers, Ruler } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContainer, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Separator, SeparatorDashed } from "@/components/ui/separator";
-import Autoplay from "embla-carousel-autoplay";
-import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import { IconBuilding, IconKey, IconSaleBuilding, IconStar } from "@/assets/icons";
 
@@ -159,7 +156,7 @@ export default async function PropertyPage({ params }: Props) {
           <section className="scroll-mt-20" id="about">
             <Card className="py-0">
               <CardContent className="space-y-4 p-6">
-                <h3 className="text-xl font-sans font-light text-muted-foreground">About the property</h3>
+                <h3 className="font-light font-sans text-muted-foreground text-xl">About the property</h3>
 
                 {overview && <RichText data={overview} enableGutter={false} />}
 
@@ -201,11 +198,11 @@ export default async function PropertyPage({ params }: Props) {
           <section className="scroll-mt-20" id="features">
             <Card className="py-0">
               <CardContent className="p-6">
-                <h2 className="text-xl font-sans font-light text-muted-foreground">Key Features</h2>
-                <ul className="grid grid-cols-2 gap-x-6 mt-2">
+                <h2 className="font-light font-sans text-muted-foreground text-xl">Key Features</h2>
+                <ul className="mt-2 grid grid-cols-2 gap-x-6">
                   {features?.map((feature) => (
-                    <li key={feature.id} className="border-b py-2">
-                      <h3 className="font-medium ">{feature.feature}</h3>
+                    <li className="border-b py-2" key={feature.id}>
+                      <h3 className="font-medium">{feature.feature}</h3>
                     </li>
                   ))}
                 </ul>
@@ -215,18 +212,18 @@ export default async function PropertyPage({ params }: Props) {
           <section className="scroll-mt-20" id="amenities">
             <Card className="py-0">
               <CardContent className="p-6">
-                <h2 className="text-xl font-sans font-light text-muted-foreground">Amenities That Redefine Living</h2>
-                <div className="grid grid-cols-3 gap-6 mt-4">
+                <h2 className="font-light font-sans text-muted-foreground text-xl">Amenities That Redefine Living</h2>
+                <div className="mt-4 grid grid-cols-3 gap-6">
                   {amenities?.map((amenity) => (
                     <div
+                      className="relative flex aspect-square items-end overflow-hidden rounded-md border bg-accent p-3"
                       key={amenity.id}
-                      className="relative aspect-square overflow-hidden rounded-md bg-accent flex items-end p-3 border"
                     >
                       {typeof amenity.image !== "number" && amenity.image && (
                         <ImageObject {...amenity.image} className="object-cover" fill />
                       )}
 
-                      <h3 className="font-medium text-lg relative z-20">{amenity.amenity}</h3>
+                      <h3 className="relative z-20 font-medium text-lg">{amenity.amenity}</h3>
                       <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent" />
                     </div>
                   ))}
@@ -238,19 +235,18 @@ export default async function PropertyPage({ params }: Props) {
             <section className="scroll-mt-20" id="developer">
               <Card className="py-0">
                 <CardContent className="p-6">
-                  <h2 className="text-xl font-sans font-light text-muted-foreground">More about the Developer</h2>
-                 
-                    <div className="mt-4">
-                      <h3 className="text-muted-foreground">{propertyDetails.developer?.title}</h3>
-                      <p className="font-medium text-lg">{propertyDetails.developer?.description}</p>
-              
+                  <h2 className="font-light font-sans text-muted-foreground text-xl">More about the Developer</h2>
+
+                  <div className="mt-4">
+                    <h3 className="text-muted-foreground">{propertyDetails.developer?.title}</h3>
+                    <p className="font-medium text-lg">{propertyDetails.developer?.description}</p>
                   </div>
                 </CardContent>
               </Card>
             </section>
           )}
         </div>
-        <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-6 sticky top-20">
+        <aside className="sticky top-20 flex h-fit flex-col gap-2 rounded-md border bg-card p-6">
           <Button asChild className="w-full font-semibold text-lg" size="lg">
             <Link href="/contact">Get Consultation</Link>
           </Button>
