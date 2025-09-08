@@ -14,8 +14,7 @@ interface Props {
 
 export default async function PropertyPage({ params }: Props) {
   const { slug } = await params;
-  const { title, image, gallery, location, propertyDetails, pricing, overview, features } =
-    await getPropertyBySlug(slug);
+  const { title, image, gallery, propertyDetails, pricing, overview, features, amenities } = await getPropertyBySlug(slug);
 
   return (
     <main className="container pt-6 pb-12">
@@ -32,7 +31,7 @@ export default async function PropertyPage({ params }: Props) {
           <div className="flex gap-12">
             <div>
               <h2 className="flex items-center gap-2 text-muted-foreground">Location</h2>
-              <p className="font-medium text-xl">{location.address}</p>
+              <p className="font-medium text-xl">{propertyDetails.location}</p>
             </div>
             {propertyDetails.developer && typeof propertyDetails.developer === "object" && (
               <div>
@@ -67,6 +66,13 @@ export default async function PropertyPage({ params }: Props) {
               <h3 className="text-muted-foreground">Property Type</h3>
               <p className="font-medium text-3xl capitalize">{propertyDetails.propertyType}</p>
             </div>
+            {propertyDetails.other &&
+              propertyDetails.other.map((item) => (
+                <div key={item.id}>
+                  <h3 className="text-muted-foreground">{item.label}</h3>
+                  <p className="font-medium text-3xl capitalize">{item.value}</p>
+                </div>
+              ))}
           </div>
           {overview && (
             <section>
@@ -93,7 +99,7 @@ export default async function PropertyPage({ params }: Props) {
           </div>
           <CarouselContent className="-ml-1">
             {gallery?.map((img, index) => (
-              <CarouselItem className="3xl:basis-1/3 pl-1 md:basis-1/2" key={index}>
+              <CarouselItem className="3xl:basis-1/3 pl-1 md:basis-1/2" key={img.id}>
                 <div className="h-full p-1">
                   <div className="relative aspect-4/3 overflow-hidden rounded-md xl:aspect-5/4">
                     {typeof img.image !== "number" && img.image && (
@@ -122,9 +128,19 @@ export default async function PropertyPage({ params }: Props) {
         </ul>
       </section>
       <section>
-        <ul>
-          <li />
-        </ul>
+        <h2>Amenities That Redefine Living</h2>
+        <div className="grid grid-cols-4 gap-6">
+          {amenities?.map((amenity) => (
+            <div key={amenity.id}>
+              {typeof amenity.image !== "number" && amenity.image && (
+                <div className="relative aspect-square overflow-hidden rounded-md">
+                  <ImageObject {...amenity.image} className="object-cover" fill />
+                </div>
+              )}
+              <h3 className="font-medium text-xl">{amenity.amenity}</h3>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );

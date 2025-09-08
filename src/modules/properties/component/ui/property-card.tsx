@@ -66,7 +66,7 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
             <CardDescription>
               <p className="flex items-center gap-1.5">
                 <IconLocationPin className="size-5 text-muted-foreground" />
-                <span className="leading-none [text-box-trim:trim-both]">{property.location.address}</span>
+                <span className="leading-none [text-box-trim:trim-both]">{property.propertyDetails.location}</span>
               </p>
             </CardDescription>
           </CardHeader>

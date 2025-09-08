@@ -135,10 +135,8 @@ export interface Property {
    */
   description?: string | null;
   image: number | Media;
-  location: {
-    address: string;
-  };
   propertyDetails: {
+    location: string;
     developer?: (number | null) | Developer;
     /**
      * Number of bedrooms
@@ -153,28 +151,19 @@ export interface Property {
      */
     area?: number | null;
     propertyType: 'apartment' | 'house' | 'villa' | 'townhouse';
+    other?:
+      | {
+          label: string;
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
   };
   pricing: {
     salePrice?: number | null;
     rentalPrice?: number | null;
     priceType: 'sale' | 'rent' | 'both';
   };
-  /**
-   * Property images
-   */
-  gallery?:
-    | {
-        image: number | Media;
-        /**
-         * Alt text for accessibility
-         */
-        alt?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Rich text overview of the property
-   */
   overview?: {
     root: {
       type: string;
@@ -191,11 +180,34 @@ export interface Property {
     [k: string]: unknown;
   } | null;
   /**
-   * Property features and amenities
+   * Key features of the property
    */
   features?:
     | {
         feature: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Key amenities of the property
+   */
+  amenities?:
+    | {
+        amenity: string;
+        image?: (number | null) | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Property images
+   */
+  gallery?:
+    | {
+        image: number | Media;
+        /**
+         * Alt text for accessibility
+         */
+        alt?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -408,19 +420,22 @@ export interface PropertiesSelect<T extends boolean = true> {
   title?: T;
   description?: T;
   image?: T;
-  location?:
-    | T
-    | {
-        address?: T;
-      };
   propertyDetails?:
     | T
     | {
+        location?: T;
         developer?: T;
         bedrooms?: T;
         bathrooms?: T;
         area?: T;
         propertyType?: T;
+        other?:
+          | T
+          | {
+              label?: T;
+              value?: T;
+              id?: T;
+            };
       };
   pricing?:
     | T
@@ -429,18 +444,25 @@ export interface PropertiesSelect<T extends boolean = true> {
         rentalPrice?: T;
         priceType?: T;
       };
-  gallery?:
-    | T
-    | {
-        image?: T;
-        alt?: T;
-        id?: T;
-      };
   overview?: T;
   features?:
     | T
     | {
         feature?: T;
+        id?: T;
+      };
+  amenities?:
+    | T
+    | {
+        amenity?: T;
+        image?: T;
+        id?: T;
+      };
+  gallery?:
+    | T
+    | {
+        image?: T;
+        alt?: T;
         id?: T;
       };
   meta?:

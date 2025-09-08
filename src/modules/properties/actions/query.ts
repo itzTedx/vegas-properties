@@ -43,6 +43,8 @@ export const getPropertyBySlug = async (slug: string) => {
       where: {
         slug: { equals: slug },
       },
+
+      depth: 3,
     })
     .then((res) => res.docs[0]);
 };

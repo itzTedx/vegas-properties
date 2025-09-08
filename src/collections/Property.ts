@@ -80,20 +80,14 @@ export const Property: CollectionConfig = {
           label: "Property Details",
           fields: [
             {
-              name: "location",
-              type: "group",
-              fields: [
-                {
-                  name: "address",
-                  type: "text",
-                  required: true,
-                },
-              ],
-            },
-            {
               name: "propertyDetails",
               type: "group",
               fields: [
+                {
+                  name: "location",
+                  type: "text",
+                  required: true,
+                },
                 {
                   name: "developer",
                   type: "relationship",
@@ -148,6 +142,28 @@ export const Property: CollectionConfig = {
                   ],
                   required: true,
                 },
+                {
+                  name: "other",
+                  label: "Other Details",
+                  type: "array",
+                  admin: {
+                    components: {
+                      RowLabel: "@/collections/array-row-label#ArrayRowLabel",
+                    },
+                  },
+                  fields: [
+                    {
+                      name: "label",
+                      type: "text",
+                      required: true,
+                    },
+                    {
+                      name: "value",
+                      type: "text",
+                      required: true,
+                    },
+                  ],
+                },
               ],
             },
             {
@@ -190,6 +206,68 @@ export const Property: CollectionConfig = {
           label: "Content",
           fields: [
             {
+              name: "overview",
+              type: "richText",
+            
+              editor: lexicalEditor({
+                features: ({ rootFeatures }) => {
+                  return [
+                    ...rootFeatures,
+                    HeadingFeature({
+                      enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
+                    }),
+
+                    FixedToolbarFeature(),
+                    InlineToolbarFeature(),
+                    HorizontalRuleFeature(),
+                  ];
+                },
+              }),
+            },
+
+            {
+              name: "features",
+              type: "array",
+              fields: [
+                {
+                  name: "feature",
+                  type: "text",
+                  required: true,
+                },
+              ],
+              admin: {
+                description: "Key features of the property",
+              },
+            },
+
+            {
+              name: "amenities",
+              type: "array",
+              fields: [
+                {
+                  name: "amenity",
+                  type: "text",
+                  required: true,
+                },
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                }
+               
+              ],
+              admin: {
+                description: "Key amenities of the property",
+              },
+            },
+          ],
+        },
+
+        {
+        
+          label: "Gallery",
+          fields: [
+            {
               name: "gallery",
               type: "array",
               fields: [
@@ -209,41 +287,6 @@ export const Property: CollectionConfig = {
               ],
               admin: {
                 description: "Property images",
-              },
-            },
-            {
-              name: "overview",
-              type: "richText",
-              admin: {
-                description: "Rich text overview of the property",
-              },
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({
-                      enabledHeadingSizes: ["h1", "h2", "h3", "h4"],
-                    }),
-
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ];
-                },
-              }),
-            },
-            {
-              name: "features",
-              type: "array",
-              fields: [
-                {
-                  name: "feature",
-                  type: "text",
-                  required: true,
-                },
-              ],
-              admin: {
-                description: "Property features and amenities",
               },
             },
           ],
