@@ -28,7 +28,7 @@ export const Gallery = ({ gallery }: Props) => {
       plugins={[plugin.current, WheelGesturesPlugin()]}
     >
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="w-full text-4xl">Project Gallery</h2>
+        <h2 className="w-full font-light font-sans text-muted-foreground text-xl">Project Gallery</h2>
         <div className="relative flex gap-2">
           <CarouselPrevious aria-label="Previous image" className="static translate-y-0" />
           <CarouselNext aria-label="Next image" className="static translate-y-0" />

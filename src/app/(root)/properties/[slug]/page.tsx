@@ -159,7 +159,7 @@ export default async function PropertyPage({ params }: Props) {
           <section className="scroll-mt-20" id="about">
             <Card className="py-0">
               <CardContent className="space-y-4 p-6">
-                <h3 className="font-medium text-muted-foreground text-xl">About the property</h3>
+                <h3 className="text-xl font-sans font-light text-muted-foreground">About the property</h3>
 
                 {overview && <RichText data={overview} enableGutter={false} />}
 
@@ -201,11 +201,11 @@ export default async function PropertyPage({ params }: Props) {
           <section className="scroll-mt-20" id="features">
             <Card className="py-0">
               <CardContent className="p-6">
-                <h2>Key Features</h2>
-                <ul className="grid gap-6">
+                <h2 className="text-xl font-sans font-light text-muted-foreground">Key Features</h2>
+                <ul className="grid grid-cols-2 gap-x-6 mt-2">
                   {features?.map((feature) => (
-                    <li key={feature.id}>
-                      <h3 className="font-medium text-lg">{feature.feature}</h3>
+                    <li key={feature.id} className="border-b py-2">
+                      <h3 className="font-medium ">{feature.feature}</h3>
                     </li>
                   ))}
                 </ul>
@@ -215,22 +215,40 @@ export default async function PropertyPage({ params }: Props) {
           <section className="scroll-mt-20" id="amenities">
             <Card className="py-0">
               <CardContent className="p-6">
-                <h2>Amenities That Redefine Living</h2>
-                <div className="grid grid-cols-4 gap-6">
+                <h2 className="text-xl font-sans font-light text-muted-foreground">Amenities That Redefine Living</h2>
+                <div className="grid grid-cols-3 gap-6 mt-4">
                   {amenities?.map((amenity) => (
-                    <div key={amenity.id}>
+                    <div
+                      key={amenity.id}
+                      className="relative aspect-square overflow-hidden rounded-md bg-accent flex items-end p-3 border"
+                    >
                       {typeof amenity.image !== "number" && amenity.image && (
-                        <div className="relative aspect-square overflow-hidden rounded-md">
-                          <ImageObject {...amenity.image} className="object-cover" fill />
-                        </div>
+                        <ImageObject {...amenity.image} className="object-cover" fill />
                       )}
-                      <h3 className="font-medium text-xl">{amenity.amenity}</h3>
+
+                      <h3 className="font-medium text-lg relative z-20">{amenity.amenity}</h3>
+                      <div className="absolute inset-0 bg-gradient-to-t from-card/90 via-transparent to-transparent" />
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
           </section>
+          {propertyDetails.developer && typeof propertyDetails.developer === "object" && (
+            <section className="scroll-mt-20" id="developer">
+              <Card className="py-0">
+                <CardContent className="p-6">
+                  <h2 className="text-xl font-sans font-light text-muted-foreground">Developer</h2>
+                  <div className="grid grid-cols-3 gap-6 mt-4">
+                    <div>
+                      <h3 className="text-muted-foreground">Developer</h3>
+                      <p className="font-medium text-xl">{propertyDetails.developer?.title}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+          )}
         </div>
         <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-6">
           <Button asChild className="w-full font-semibold text-lg" size="lg">

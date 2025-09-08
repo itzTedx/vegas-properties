@@ -25,13 +25,5 @@ export const Developers: CollectionConfig = {
       name: "website",
       type: "text",
     },
-    {
-      name: "contactEmail",
-      type: "email",
-    },
-    {
-      name: "contactPhone",
-      type: "text",
-    },
   ],
 };
