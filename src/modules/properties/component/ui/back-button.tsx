@@ -13,7 +13,7 @@ export const BackButton = () => {
     router.back();
   }
   return (
-    <Button onClick={handleBack} variant="ghost">
+    <Button className="max-md:px-2" onClick={handleBack} variant="ghost">
       <IconArrowRight className="rotate-180" />
       Properties
     </Button>
