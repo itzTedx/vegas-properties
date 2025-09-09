@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { CheckIcon, CopyIcon, SendIcon } from "lucide-react";
+import { CheckIcon, } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,20 +18,18 @@ import {
 } from "@/components/ui/sheet";
 
 import { IconBrandFacebook, IconBrandInstagram, IconBrandX, IconEmail, IconShare } from "@/assets/icons";
-import { LogoIcon, LogoIconMono } from "@/assets/logo";
+import { LogoIconMono } from "@/assets/logo";
 
 import { env } from "@/lib/env/client";
 
 import { PropertyNavType } from "../../types";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { IconCopy, IconLink } from "@/assets/icons/copy";
+import { IconCopy, } from "@/assets/icons/copy";
 import {
-  copyToClipboard,
   shareViaEmail,
   shareViaFacebook,
   shareViaInstagram,
-  shareViaNativeAPI,
   shareViaTwitter,
 } from "../../utils";
 
@@ -77,10 +75,10 @@ export const ShareButton = ({ data }: Props) => {
           <span className="hidden md:block">Share</span>
         </Button>
       </SheetTrigger>
-      <SheetContent className="top-2 bottom-auto bg-accent overflow-hidden">
-        <div className="bg-card pb-6 rounded-b-xl border-b">
+      <SheetContent className="top-2 bottom-auto overflow-hidden bg-accent">
+        <div className="rounded-b-xl border-b bg-card pb-6">
           <SheetHeader className="items-center">
-            <div className="size-11 rounded-lg flex items-center justify-center bg-gradient-to-b from-brand-500 to-brand-600 border shadow-brand-lg border-brand-400">
+            <div className="flex size-11 items-center justify-center rounded-lg border border-brand-400 bg-gradient-to-b from-brand-500 to-brand-600 shadow-brand-lg">
               <LogoIconMono className="size-7 text-brand-50" />
             </div>
             <SheetTitle>Share {data.title}</SheetTitle>
@@ -90,7 +88,7 @@ export const ShareButton = ({ data }: Props) => {
           </SheetHeader>
           <SheetContainer>
             <div>
-              <h3 className="text-sm font-medium text-muted-foreground mb-1">Share link</h3>
+              <h3 className="mb-1 font-medium text-muted-foreground text-sm">Share link</h3>
               <div className="relative">
                 <Input
                   ref={inputRef}
@@ -104,7 +102,7 @@ export const ShareButton = ({ data }: Props) => {
                     <TooltipTrigger asChild>
                       <button
                         onClick={handleCopy}
-                        className="text-muted-foreground hover:text-brand-500 focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed"
+                        className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md text-muted-foreground outline-none transition-[color,box-shadow] hover:text-brand-500 focus:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed"
                         aria-label={copied ? "Copied" : "Copy to clipboard"}
                         disabled={copied}
                       >
@@ -127,12 +125,12 @@ export const ShareButton = ({ data }: Props) => {
               </div>
             </div>
             <div>
-              <h4 className="text-sm font-medium text-muted-foreground mb-1">Share to</h4>
+              <h4 className="mb-1 font-medium text-muted-foreground text-sm">Share to</h4>
               <ul className="grid grid-cols-4 gap-2" role="list">
                 <li role="listitem">
                   <Button
                     aria-label="Share via email"
-                    className="flex size-full aspect-square items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color]  hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                    className="flex aspect-square size-full items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color] hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     onClick={handleEmailShare}
                     title="Share via email"
                     variant="ghost"
@@ -143,7 +141,7 @@ export const ShareButton = ({ data }: Props) => {
                 <li role="listitem">
                   <Button
                     aria-label="Share on Facebook"
-                    className="flex size-full aspect-square items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color]  hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                    className="flex aspect-square size-full items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color] hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     onClick={handleFacebookShare}
                     title="Share on Facebook"
                     variant="ghost"
@@ -154,7 +152,7 @@ export const ShareButton = ({ data }: Props) => {
                 <li role="listitem">
                   <Button
                     aria-label="Share on Twitter/X"
-                    className="flex size-full aspect-square items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color]  hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                    className="flex aspect-square size-full items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color] hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     onClick={handleTwitterShare}
                     title="Share on Twitter/X"
                     variant="ghost"
@@ -165,7 +163,7 @@ export const ShareButton = ({ data }: Props) => {
                 <li role="listitem">
                   <Button
                     aria-label="Copy link for Instagram"
-                    className="flex size-full aspect-square items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color]  hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 "
+                    className="flex aspect-square size-full items-center justify-center rounded-lg bg-card text-gray-400 shadow-lg transition-[background-color_box-shadow_color] hover:text-gray-700 hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     onClick={handleInstagramShare}
                     title="Copy link for Instagram"
                     variant="ghost"

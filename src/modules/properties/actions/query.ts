@@ -1,7 +1,12 @@
 import { unstable_cache as cache } from "next/cache";
 
 import { payload } from "@/lib/payload";
-import { DEVELOPERS_TAG, PROPERTIES_TAG, PROPERTY_BY_ID_TAG, PROPERTY_BY_SLUG, PROPERTY_BY_SLUG_TAG } from "@/lib/payload/cache-keys";
+import {
+  DEVELOPERS_TAG,
+  PROPERTIES_TAG,
+  PROPERTY_BY_ID_TAG,
+  PROPERTY_BY_SLUG_TAG,
+} from "@/lib/payload/cache-keys";
 
 export const getFeaturedProperties = cache(
   async (limit?: number) => {
@@ -47,8 +52,6 @@ export const getProperties = cache(
   [PROPERTIES_TAG()],
   { tags: [PROPERTIES_TAG()], revalidate: false }
 );
-
-
 
 export const getPropertyBySlug = async (slug: string) =>
   cache(
