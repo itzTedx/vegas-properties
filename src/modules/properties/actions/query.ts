@@ -1,19 +1,29 @@
+import { unstable_cache as cache } from "next/cache";
+
 import { payload } from "@/lib/payload";
+import { PROPERTIES_TAG } from "@/lib/payload/cache-keys";
 
-export async function getFeaturedProperties(limit?: number) {
-  const properties = await payload.find({
-    collection: "properties",
-    draft: false,
-    limit: limit,
-    where: {
-      isFeatured: {
-        equals: true,
+export const getFeaturedProperties = cache(
+  async (limit?: number) => {
+    const properties = await payload.find({
+      collection: "properties",
+      draft: false,
+      limit: limit,
+      where: {
+        isFeatured: {
+          equals: true,
+        },
       },
-    },
-  });
+    });
 
-  return properties.docs;
-}
+    return properties.docs;
+  },
+  [PROPERTIES_TAG()],
+  {
+    tags: [PROPERTIES_TAG()],
+    revalidate: false,
+  }
+);
 
 export async function getLatestProperties() {
   const properties = await payload.find({

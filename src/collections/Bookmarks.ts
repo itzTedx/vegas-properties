@@ -1,5 +1,10 @@
 import type { CollectionConfig } from "payload";
 
+import {
+  revalidateBookmarksCacheAfterChange,
+  revalidateBookmarksCacheAfterDelete,
+} from "./hooks/revalidate-bookmarks-cache";
+
 export const Bookmarks: CollectionConfig = {
   slug: "bookmarks",
   labels: {
@@ -13,6 +18,10 @@ export const Bookmarks: CollectionConfig = {
     delete: () => true,
   },
   admin: { hidden: true },
+  hooks: {
+    afterChange: [revalidateBookmarksCacheAfterChange],
+    afterDelete: [revalidateBookmarksCacheAfterDelete],
+  },
   fields: [
     {
       name: "sessionId",

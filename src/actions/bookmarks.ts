@@ -1,8 +1,10 @@
 "use server";
 
+import { unstable_cache as cache } from "next/cache";
 import { cookies } from "next/headers";
 
 import { payload } from "@/lib/payload";
+import { BOOKMARKS_BY_SESSION_TAG } from "@/lib/payload/cache-keys";
 
 import crypto from "node:crypto";
 
@@ -49,32 +51,40 @@ function hasPropertyId(doc: unknown): doc is { property: number } {
   );
 }
 
-export async function getBookmarkedProperties() {
+export async function getBookmarkedPropertiesBySession() {
   const jar = await cookies();
   const sessionId = jar.get(COOKIE_NAME)?.value ?? "";
   if (!sessionId) return [];
 
-  const bookmarks = await payload.find({
-    collection: "bookmarks",
-    where: { sessionId: { equals: sessionId } },
-    depth: 2,
-    limit: 100,
-  });
+  const fetcher = cache(
+    async () => {
+      const bookmarks = await payload.find({
+        collection: "bookmarks",
+        where: { sessionId: { equals: sessionId } },
+        depth: 2,
+        limit: 100,
+      });
 
-  const propertyIds = bookmarks.docs
-    .map((doc) => (typeof doc.property === "object" && doc.property !== null ? doc.property.id : doc.property))
-    .filter((v: unknown): v is number => typeof v === "number");
+      const propertyIds = bookmarks.docs
+        .map((doc) => (typeof doc.property === "object" && doc.property !== null ? doc.property.id : doc.property))
+        .filter((v: unknown): v is number => typeof v === "number");
 
-  const { docs } = await payload.find({
-    collection: "properties",
-    where: {
-      id: {
-        in: propertyIds,
-      },
+      const { docs } = await payload.find({
+        collection: "properties",
+        where: {
+          id: {
+            in: propertyIds,
+          },
+        },
+      });
+
+      return docs;
     },
-  });
+    [BOOKMARKS_BY_SESSION_TAG(sessionId)],
+    { tags: [BOOKMARKS_BY_SESSION_TAG(sessionId)], revalidate: false }
+  );
 
-  return docs;
+  return await fetcher();
 }
 
 export async function getBookmarkByPropertyId(propertyId: number): Promise<boolean> {

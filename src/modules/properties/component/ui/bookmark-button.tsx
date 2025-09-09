@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 
 import { IconBookmark } from "@/assets/icons";
 
@@ -29,7 +30,9 @@ export const BookmarkButton = ({ id, isBookmarked = false }: Props) => {
       size="icon"
       variant={isBookmarked ? "destructive" : "outline"}
     >
-      <IconBookmark className={isBookmarked ? "text-secondary-50" : "text-secondary"} />
+      <LoadingSwap isLoading={isPending}>
+        <IconBookmark className={isBookmarked ? "text-secondary-50" : "text-secondary"} />
+      </LoadingSwap>
     </Button>
   );
 };

@@ -345,18 +345,24 @@ export interface Search {
     value: number | Property;
   };
   slug?: string | null;
+  target?: {
+    collection?: ('properties' | 'developers' | 'media') | null;
+    id?: string | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
     image?: (number | null) | Media;
   };
-  categories?:
-    | {
-        relationTo?: string | null;
-        id?: string | null;
-        title?: string | null;
-      }[]
-    | null;
+  property?: {
+    location?: string | null;
+    propertyType?: string | null;
+    priceType?: string | null;
+    developerTitle?: string | null;
+  };
+  developer?: {
+    website?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -605,6 +611,12 @@ export interface SearchSelect<T extends boolean = true> {
   priority?: T;
   doc?: T;
   slug?: T;
+  target?:
+    | T
+    | {
+        collection?: T;
+        id?: T;
+      };
   meta?:
     | T
     | {
@@ -612,12 +624,18 @@ export interface SearchSelect<T extends boolean = true> {
         description?: T;
         image?: T;
       };
-  categories?:
+  property?:
     | T
     | {
-        relationTo?: T;
-        id?: T;
-        title?: T;
+        location?: T;
+        propertyType?: T;
+        priceType?: T;
+        developerTitle?: T;
+      };
+  developer?:
+    | T
+    | {
+        website?: T;
       };
   updatedAt?: T;
   createdAt?: T;

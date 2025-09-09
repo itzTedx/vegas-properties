@@ -16,6 +16,8 @@ import type { CollectionConfig } from "payload";
 
 import { slugify } from "@/lib/functions/slugify";
 
+import { revalidatePropertiesCache, revalidatePropertiesCacheAfterDelete } from "./hooks/revalidate-property-cache";
+
 export const Property: CollectionConfig = {
   slug: "properties",
   labels: {
@@ -38,6 +40,10 @@ export const Property: CollectionConfig = {
       image: true,
       description: true,
     },
+  },
+  hooks: {
+    afterChange: [revalidatePropertiesCache],
+    afterDelete: [revalidatePropertiesCacheAfterDelete],
   },
   fields: [
     {

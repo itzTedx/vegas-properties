@@ -2,12 +2,12 @@ import { Badge } from "@/components/ui/badge";
 
 import { IconBookmark } from "@/assets/icons";
 
-import { ensureGuestSession, getBookmarkedProperties } from "@/actions/bookmarks";
+import { ensureGuestSession, getBookmarkedPropertiesBySession } from "@/actions/bookmarks";
 import { PropertyCard } from "@/modules/properties/component";
 
 export default async function SavedProperties() {
   await ensureGuestSession();
-  const favorites = await getBookmarkedProperties();
+  const favorites = await getBookmarkedPropertiesBySession();
 
   if (!favorites.length) return <div className="py-12 text-center font-bold text-2xl">No saved properties yet.</div>;
 

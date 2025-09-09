@@ -10,6 +10,31 @@ export const searchFields: Field[] = [
     },
   },
   {
+    name: "target",
+    label: "Target Document",
+    type: "group",
+    admin: {
+      readOnly: true,
+    },
+    fields: [
+      {
+        name: "collection",
+        label: "Collection",
+        type: "select",
+        options: [
+          { label: "Properties", value: "properties" },
+          { label: "Developers", value: "developers" },
+          { label: "Media", value: "media" },
+        ],
+      },
+      {
+        name: "id",
+        label: "Document ID",
+        type: "text",
+      },
+    ],
+  },
+  {
     name: "meta",
     label: "Meta",
     type: "group",
@@ -37,25 +62,26 @@ export const searchFields: Field[] = [
     ],
   },
   {
-    label: "Categories",
-    name: "categories",
-    type: "array",
+    name: "property",
+    label: "Property Facets",
+    type: "group",
     admin: {
       readOnly: true,
     },
     fields: [
-      {
-        name: "relationTo",
-        type: "text",
-      },
-      {
-        name: "id",
-        type: "text",
-      },
-      {
-        name: "title",
-        type: "text",
-      },
+      { name: "location", type: "text", label: "Location" },
+      { name: "propertyType", type: "text", label: "Property Type" },
+      { name: "priceType", type: "text", label: "Price Type" },
+      { name: "developerTitle", type: "text", label: "Developer" },
     ],
+  },
+  {
+    name: "developer",
+    label: "Developer Facets",
+    type: "group",
+    admin: {
+      readOnly: true,
+    },
+    fields: [{ name: "website", type: "text", label: "Website" }],
   },
 ];

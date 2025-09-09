@@ -16,6 +16,7 @@ import { formatPrice } from "@/lib/utils";
 import { getPropertyBySlug } from "@/modules/properties/actions/query";
 import { PropertyNavbar } from "@/modules/properties/component";
 import { Gallery } from "@/modules/properties/component/gallery";
+import { PropertyHeaderImages } from "@/modules/properties/component/property-header-images";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -63,23 +64,7 @@ export default async function PropertyPage({ params }: Props) {
       <PropertyNavbar />
 
       <header className="container">
-        <div className="relative grid grid-cols-1 gap-2 md:grid-cols-5 md:grid-rows-2">
-          <div className="relative aspect-video overflow-hidden rounded-md md:col-span-2 md:row-span-2 md:aspect-auto">
-            {typeof image !== "number" && image && (
-              <ImageObject {...image} className="object-cover transition-transform ease-out hover:scale-105" fill />
-            )}
-          </div>
-          {gallery?.splice(0, 6).map((img, i) => (
-            <div className="relative hidden aspect-4/3 overflow-hidden rounded-md md:block" key={i}>
-              {typeof img !== "number" && img && (
-                <ImageObject {...img} className="object-cover transition-transform duration-300 hover:scale-105" fill />
-              )}
-            </div>
-          ))}
-          <Button asChild className="absolute right-3 bottom-3" size="sm" variant="outline">
-            <Link href="#gallery">{gallery.length} Photos</Link>
-          </Button>
-        </div>
+        <PropertyHeaderImages gallery={gallery} image={image} />
       </header>
       <div className="container mt-9 grid max-w-7xl grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
