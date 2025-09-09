@@ -28,7 +28,13 @@ export const Property: CollectionConfig = {
     read: () => true,
   },
   admin: {
-    defaultColumns: ["title", "location.city", "pricing.priceType", "status", "updatedAt"],
+    defaultColumns: [
+      "title",
+      "propertyDetails.location",
+      "pricing.priceType",
+      "propertyDetails.propertyType",
+      "status",
+    ],
     useAsTitle: "title",
   },
   defaultPopulate: {

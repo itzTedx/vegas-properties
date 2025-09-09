@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { IconBookmark, IconShare } from "@/assets/icons";
 
 import { BackButton } from "./ui/back-button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 
 export const PropertyNavbar = () => {
   return (
@@ -43,14 +43,11 @@ export const PropertyNavbar = () => {
             </li>
           </ul>
         </ScrollArea>
-        <ul className="flex items-center gap-2 shrink-0">
+        <ul className="flex shrink-0 items-center gap-2">
           <li>
             <Button variant="ghost">
               <IconBookmark />
-              <span className="hidden md:block">
-
-              Bookmark
-              </span>
+              <span className="hidden md:block">Bookmark</span>
             </Button>
           </li>
           <li>

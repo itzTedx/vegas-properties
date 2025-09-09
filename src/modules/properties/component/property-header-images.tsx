@@ -11,14 +11,30 @@ interface Props {
 }
 
 export const PropertyHeaderImages = ({ gallery, image }: Props) => {
+  const totalGalleryCount = gallery?.length ?? 0;
+  const displayCount = Math.min(totalGalleryCount, 6);
+  const displayedImages = gallery?.slice(0, displayCount) ?? [];
+
+  const getGridClasses = (count: number) => {
+    if (count === 0) return "md:grid-cols-1 md:grid-rows-1";
+    if (count <= 2) return "md:grid-cols-3 md:grid-rows-2";
+    return "md:grid-cols-5 md:grid-rows-2"; // 3+ images
+  };
+
+  const showSpans = displayCount > 0; // Only span if we actually have side images
+
   return (
-    <div className="relative grid grid-cols-1 gap-2 md:grid-cols-5 md:grid-rows-2">
-      <div className="relative aspect-video overflow-hidden rounded-md md:col-span-2 md:row-span-2 md:aspect-auto">
+    <div className={`relative grid grid-cols-1 gap-2 ${getGridClasses(displayCount)}`}>
+      <div
+        className={`relative aspect-video overflow-hidden rounded-md ${
+          showSpans ? "md:col-span-2 md:row-span-2 md:aspect-auto" : "md:col-span-1 md:row-span-1"
+        }`}
+      >
         {typeof image !== "number" && image && (
           <ImageObject {...image} className="object-cover transition-transform ease-out hover:scale-105" fill />
         )}
       </div>
-      {gallery?.splice(0, 6).map((img, i) => (
+      {displayedImages.map((img, i) => (
         <div className="relative hidden aspect-4/3 overflow-hidden rounded-md md:block" key={i}>
           {typeof img !== "number" && img && (
             <ImageObject {...img} className="object-cover transition-transform duration-300 hover:scale-105" fill />
@@ -26,7 +42,7 @@ export const PropertyHeaderImages = ({ gallery, image }: Props) => {
         </div>
       ))}
       <Button asChild className="absolute right-3 bottom-3" size="sm" variant="outline">
-        <Link href="#gallery">{gallery.length} Photos</Link>
+        <Link href="#gallery">{totalGalleryCount} Photos</Link>
       </Button>
     </div>
   );
