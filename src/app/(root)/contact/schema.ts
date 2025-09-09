@@ -5,10 +5,7 @@ export const contactSchema = z.object({
     .string()
     .min(2, "Name must be at least 2 characters")
     .max(100, "Name must be less than 100 characters")
-    .regex(
-      /^[a-zA-Z\s-']+$/,
-      "Name can only contain letters, spaces, hyphens, and apostrophes"
-    )
+    .regex(/^[a-zA-Z\s-']+$/, "Name can only contain letters, spaces, hyphens, and apostrophes")
     .trim()
     .refine((val) => val.length > 0, {
       message: "Name is required",

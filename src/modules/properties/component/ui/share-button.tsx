@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef, useState } from "react";
 import { SendIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -26,6 +29,16 @@ interface Props {
 }
 
 export const ShareButton = ({ data }: Props) => {
+  const [copied, setCopied] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleCopy = () => {
+    if (inputRef.current) {
+      navigator.clipboard.writeText(inputRef.current.value);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }
+  };
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -46,9 +59,11 @@ export const ShareButton = ({ data }: Props) => {
           <h3>Share link</h3>
           <div className="relative">
             <Input
+              ref={inputRef}
               className="pe-9"
               readOnly
-              value={`${env.NEXT_PUBLIC_BASE_URL}/properties/hello-long-test/${data.slug}`}
+              type="text"
+              defaultValue={`${env.NEXT_PUBLIC_BASE_URL}/properties/hello-long-test/${data.slug}`}
             />
             <button
               aria-label="Copy Link"
