@@ -56,8 +56,20 @@ function getDetailIcon(label: string) {
 
 export default async function PropertyPage({ params }: Props) {
   const { slug } = await params;
-  const { id, title, image, gallery, propertyDetails, pricing, overview, features, amenities, isFeatured, updatedAt } =
-    await getPropertyBySlug(slug);
+  const {
+    id,
+    title,
+    description,
+    image,
+    gallery,
+    propertyDetails,
+    pricing,
+    overview,
+    features,
+    amenities,
+    isFeatured,
+    updatedAt,
+  } = await getPropertyBySlug(slug);
 
   return (
     <main className="pb-12">
@@ -65,6 +77,7 @@ export default async function PropertyPage({ params }: Props) {
         data={{
           slug,
           title,
+          description,
         }}
         id={id}
       />
