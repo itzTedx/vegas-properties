@@ -1,13 +1,22 @@
 import Link from "next/link";
 
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { IconBookmark, IconShare } from "@/assets/icons";
+import { getBookmarkByPropertyId } from "@/actions/bookmarks";
 
+import { PropertyNavType } from "../types";
 import { BackButton } from "./ui/back-button";
+import { BookmarkButton } from "./ui/bookmark-button";
+import { ShareButton } from "./ui/share-button";
 
-export const PropertyNavbar = () => {
+interface Props {
+  id: number;
+  data: PropertyNavType;
+}
+
+export const PropertyNavbar = async ({ id, data }: Props) => {
+  const isBookmarked = await getBookmarkByPropertyId(id);
   return (
     <nav className="sticky top-0 z-999 mb-6 border-b bg-card py-2">
       <div className="container flex items-center justify-between gap-2">
@@ -45,16 +54,10 @@ export const PropertyNavbar = () => {
         </ScrollArea>
         <ul className="flex shrink-0 items-center gap-2">
           <li>
-            <Button variant="ghost">
-              <IconBookmark />
-              <span className="hidden md:block">Bookmark</span>
-            </Button>
+            <BookmarkButton hideLabel={false} id={id} isBookmarked={isBookmarked} size="default" variant="ghost" />
           </li>
           <li>
-            <Button variant="ghost">
-              <IconShare />
-              <span className="hidden md:block">Share</span>
-            </Button>
+            <ShareButton data={data} />
           </li>
         </ul>
       </div>

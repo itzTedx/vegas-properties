@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 import { ImageObject } from "@/lib/payload/components/media";
+import { cn } from "@/lib/utils";
 import { Media } from "@/payload-types";
 
 interface Props {
@@ -25,11 +26,12 @@ export const PropertyHeaderImages = ({ gallery, image }: Props) => {
   const showSpans = displayCount > 0; // Only span if we actually have side images
 
   return (
-    <div className={`relative grid grid-cols-1 gap-2 ${getGridClasses(displayCount)}`}>
+    <div className={cn("relative grid grid-cols-1 gap-2", getGridClasses(displayCount))}>
       <div
-        className={`relative aspect-video overflow-hidden rounded-md ${
+        className={cn(
+          "relative aspect-video overflow-hidden rounded-md",
           showSpans ? "md:col-span-2 md:row-span-2 md:aspect-auto" : "md:col-span-1 md:row-span-1"
-        }`}
+        )}
       >
         {typeof image !== "number" && image && (
           <ImageObject {...image} className="object-cover transition-transform ease-out hover:scale-105" fill />
