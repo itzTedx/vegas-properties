@@ -1,12 +1,13 @@
 import Link from "next/link";
 
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
+import { IconArrowRight } from "@/assets/icons/arrows";
 
 import { getBookmarkByPropertyId } from "@/actions/bookmarks";
 
 import { PropertyNavType } from "../types";
-import { BackButton } from "./ui/back-button";
 import { BookmarkButton } from "./ui/bookmark-button";
 import { ShareButton } from "./ui/share-button";
 
@@ -19,13 +20,16 @@ export const PropertyNavbar = async ({ id, data }: Props) => {
   const isBookmarked = await getBookmarkByPropertyId(id);
   return (
     <nav className="sticky top-0 z-999 mb-6 border-b bg-card py-2">
-      <div className="container grid grid-cols-4 items-center gap-2 md:flex md:justify-between">
-        <div className="col-span-3">
-          <ScrollArea>
-            <ul className="flex items-center gap-2 whitespace-nowrap">
-              <li>
-                <BackButton />
-              </li>
+      <div className="container grid grid-cols-6 items-center gap-2 md:flex md:justify-between">
+        <div className="col-span-4 flex items-center">
+          <Button asChild className="max-md:px-1" variant="ghost">
+            <Link href="/properties">
+              <IconArrowRight className="rotate-180" />
+            </Link>
+            <span className="hidden md:block">Properties</span>
+          </Button>
+          <ScrollArea className="w-full">
+            <ul className="flex items-center gap-1 whitespace-nowrap md:gap-2">
               <li>
                 <Link className={buttonVariants({ variant: "ghost", className: "max-md:px-2" })} href="#overview">
                   Overview
@@ -52,10 +56,10 @@ export const PropertyNavbar = async ({ id, data }: Props) => {
                 </Link>
               </li>
             </ul>
-            <ScrollBar />
+            <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </div>
-        <ul className="flex shrink-0 items-center gap-2">
+        <ul className="col-span-2 flex items-center justify-end gap-2">
           <li>
             <BookmarkButton hideLabel={false} id={id} isBookmarked={isBookmarked} size="default" variant="ghost" />
           </li>

@@ -2,21 +2,23 @@ import Link from "next/link";
 
 import { Building2, Calendar, Car, Layers, Ruler } from "lucide-react";
 
+import { Cta } from "@/components/layout/cta";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContainer, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator, SeparatorDashed } from "@/components/ui/separator";
 
-import { IconBuilding, IconKey, IconSaleBuilding, IconStar } from "@/assets/icons";
+import { IconBuilding, IconFire, IconKey, IconSaleBuilding, IconStar } from "@/assets/icons";
 
 import { formatDate } from "@/lib/functions/format-date";
 import { ImageObject } from "@/lib/payload/components/media";
 import RichText from "@/lib/payload/components/rich-text";
 import { formatPrice } from "@/lib/utils";
-import { getPropertyBySlug } from "@/modules/properties/actions/query";
-import { PropertyNavbar } from "@/modules/properties/component";
+import { getPropertiesByDeveloper, getPropertyBySlug } from "@/modules/properties/actions/query";
+import { PropertyCard, PropertyNavbar } from "@/modules/properties/component";
 import { Gallery } from "@/modules/properties/component/gallery";
 import { PropertyHeaderImages } from "@/modules/properties/component/property-header-images";
+import { FeaturedProperties } from "@/modules/properties/sections/featured-properties";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -70,6 +72,13 @@ export default async function PropertyPage({ params }: Props) {
     isFeatured,
     updatedAt,
   } = await getPropertyBySlug(slug);
+
+  const developerId =
+    propertyDetails.developer && typeof propertyDetails.developer === "object"
+      ? propertyDetails.developer.id
+      : undefined;
+
+  const propertiesByDev = await getPropertiesByDeveloper(developerId, 8);
 
   return (
     <main className="pb-12">
@@ -235,20 +244,22 @@ export default async function PropertyPage({ params }: Props) {
               </CardContent>
             </Card>
           </section>
-          {propertyDetails.developer && typeof propertyDetails.developer === "object" && (
-            <section className="scroll-mt-20" id="developer">
-              <Card className="py-0">
-                <CardContent className="p-6">
-                  <h2 className="font-light font-sans text-muted-foreground text-xl">More about the Developer</h2>
+          {propertyDetails.developer &&
+            typeof propertyDetails.developer === "object" &&
+            propertyDetails.developer.description && (
+              <section className="scroll-mt-20" id="developer">
+                <Card className="py-0">
+                  <CardContent className="p-6">
+                    <h2 className="font-light font-sans text-muted-foreground text-xl">More about the Developer</h2>
 
-                  <div className="mt-4">
-                    <h3 className="text-muted-foreground">{propertyDetails.developer?.title}</h3>
-                    <p className="font-medium text-lg">{propertyDetails.developer?.description}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
-          )}
+                    <div className="mt-4">
+                      <h3 className="text-muted-foreground">{propertyDetails.developer.title}</h3>
+                      <p className="font-medium text-lg">{propertyDetails.developer.description}</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+            )}
         </div>
         <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-4 sm:p-6 lg:sticky lg:top-20">
           <Button asChild className="w-full font-semibold text-lg" size="lg">
@@ -273,6 +284,37 @@ export default async function PropertyPage({ params }: Props) {
           </div>
         </aside>
       </div>
+      {propertiesByDev && (
+        <section className="container mt-12">
+          Related properties from {typeof propertyDetails.developer === "object" && propertyDetails.developer?.title}
+          <div className="grid grid-cols-4 gap-3">
+            {propertiesByDev.map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))}
+          </div>
+        </section>
+      )}
+      <section className="container py-14">
+        <div className="space-y-4">
+          <Badge>
+            <IconFire />
+            Featured
+          </Badge>
+          <div className="grid gap-3 md:grid-cols-2">
+            <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
+              <span className="text-brand-600">Handpicked</span> Properties for You
+            </h2>
+            <p className="text-balance text-sm leading-relaxed">
+              Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas. Explore
+              premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
+            </p>
+          </div>
+        </div>
+
+        <FeaturedProperties />
+      </section>
+
+      <Cta />
     </main>
   );
 }

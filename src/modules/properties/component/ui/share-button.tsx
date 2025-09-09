@@ -95,7 +95,7 @@ export const ShareButton = ({ data }: Props) => {
                 <Input
                   ref={inputRef}
                   className="pe-8"
-                  readOnly 
+                  readOnly
                   type="text"
                   defaultValue={`${env.NEXT_PUBLIC_BASE_URL}/properties/hello-long-test/${data.slug}`}
                 />
