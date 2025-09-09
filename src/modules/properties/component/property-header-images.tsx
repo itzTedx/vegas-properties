@@ -18,7 +18,8 @@ export const PropertyHeaderImages = ({ gallery, image }: Props) => {
   const getGridClasses = (count: number) => {
     if (count === 0) return "md:grid-cols-1 md:grid-rows-1";
     if (count <= 2) return "md:grid-cols-3 md:grid-rows-2";
-    return "md:grid-cols-5 md:grid-rows-2"; // 3+ images
+    if (count <= 4) return "md:grid-cols-4 md:grid-rows-2"; // 3-4 images
+    return "md:grid-cols-5 md:grid-rows-2"; // 5-6 images
   };
 
   const showSpans = displayCount > 0; // Only span if we actually have side images
