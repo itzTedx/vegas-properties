@@ -10,9 +10,10 @@ import { toggleBookmark } from "@/actions/bookmarks";
 
 interface Props {
   id: number;
+  isBookmarked?: boolean;
 }
 
-export const BookmarkButton = ({ id }: Props) => {
+export const BookmarkButton = ({ id, isBookmarked = false }: Props) => {
   const [isPending, startTransition] = useTransition();
 
   function handleBookmark() {
@@ -21,8 +22,14 @@ export const BookmarkButton = ({ id }: Props) => {
     });
   }
   return (
-    <Button className="relative z-50" disabled={isPending} onClick={handleBookmark} size="icon" variant="outline">
-      <IconBookmark className="text-secondary" />
+    <Button
+      className="relative z-50"
+      disabled={isPending}
+      onClick={handleBookmark}
+      size="icon"
+      variant={isBookmarked ? "destructive" : "outline"}
+    >
+      <IconBookmark className={isBookmarked ? "text-secondary-50" : "text-secondary"} />
     </Button>
   );
 };

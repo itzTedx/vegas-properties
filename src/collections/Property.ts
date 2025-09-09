@@ -87,6 +87,7 @@ export const Property: CollectionConfig = {
                   name: "location",
                   type: "text",
                   required: true,
+                  index: true,
                 },
                 {
                   name: "developer",
@@ -98,6 +99,7 @@ export const Property: CollectionConfig = {
                   name: "bedrooms",
                   type: "number",
                   required: true,
+                  index: true,
                   min: 0,
                   admin: {
                     description: "Number of bedrooms",
@@ -106,7 +108,6 @@ export const Property: CollectionConfig = {
                 {
                   name: "bathrooms",
                   type: "number",
-                  required: true,
                   min: 0,
                   admin: {
                     description: "Number of bathrooms",
@@ -122,6 +123,7 @@ export const Property: CollectionConfig = {
                 {
                   name: "propertyType",
                   type: "select",
+                  index: true,
                   options: [
                     {
                       label: "Apartment",
@@ -173,10 +175,12 @@ export const Property: CollectionConfig = {
                 {
                   name: "salePrice",
                   type: "number",
+                  index: true,
                 },
                 {
                   name: "rentalPrice",
                   type: "number",
+                  index: true,
                 },
 
                 {

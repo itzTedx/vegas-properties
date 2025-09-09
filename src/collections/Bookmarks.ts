@@ -12,9 +12,7 @@ export const Bookmarks: CollectionConfig = {
     update: () => true,
     delete: () => true,
   },
-  admin: {
-    defaultColumns: ["sessionId", "property", "updatedAt"],
-  },
+  admin: { hidden: true },
   fields: [
     {
       name: "sessionId",

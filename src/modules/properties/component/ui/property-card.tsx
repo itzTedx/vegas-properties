@@ -10,6 +10,7 @@ import { SeparatorDashed } from "@/components/ui/separator";
 import { IconBathtub, IconBedroom, IconKey, IconLocationPin, IconSaleBuilding, IconStar } from "@/assets/icons";
 import { IconArrowRight } from "@/assets/icons/arrows";
 
+import { getBookmarkByPropertyId } from "@/actions/bookmarks";
 import { formatPrice } from "@/lib/utils";
 import { Property } from "@/payload-types";
 
@@ -21,7 +22,8 @@ interface Props {
   showBadges?: boolean;
 }
 
-export const PropertyCard = ({ property, showBadges = true }: Props) => {
+export const PropertyCard = async ({ property, showBadges = true }: Props) => {
+  const isBookmarked = await getBookmarkByPropertyId(property.id);
   const developer = typeof property.propertyDetails.developer === "object" ? property.propertyDetails.developer : null;
   const developerLogo = typeof developer?.logo === "object" ? developer.logo : "";
   const developerLogoUrl = typeof developerLogo === "object" ? developerLogo.url || "" : "";
@@ -105,7 +107,7 @@ export const PropertyCard = ({ property, showBadges = true }: Props) => {
               View Details
             </Link>
           </Button>
-          <BookmarkButton id={property.id} />
+          <BookmarkButton id={property.id} isBookmarked={isBookmarked} />
         </div>
       </CardContent>
     </Card>

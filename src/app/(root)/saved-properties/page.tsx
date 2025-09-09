@@ -1,42 +1,40 @@
-"use client";
+import { Badge } from "@/components/ui/badge";
 
-import { useEffect, useState } from "react";
+import { IconBookmark } from "@/assets/icons";
 
 import { ensureGuestSession, getBookmarkedProperties } from "@/actions/bookmarks";
 import { PropertyCard } from "@/modules/properties/component";
-import type { Property } from "@/payload-types";
 
-export default function SavedProperties() {
-  const [favorites, setFavorites] = useState<Property[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const init = async () => {
-      try {
-        await ensureGuestSession();
-        const favs = await getBookmarkedProperties();
-        setFavorites(favs as Property[]);
-      } finally {
-        setLoading(false);
-      }
-    };
-    void init();
-  }, []);
-
-  // const onToggle = async (propertyId: number) => {
-  //   const ids = await toggleBookmark(propertyId);
-  //   setFavorites((prev) => prev.filter((p) => ids.includes(p.id)));
-  // };
-
-  if (loading) return <div className="py-12 text-center font-bold text-2xl">Loading saved properties…</div>;
+export default async function SavedProperties() {
+  await ensureGuestSession();
+  const favorites = await getBookmarkedProperties();
 
   if (!favorites.length) return <div className="py-12 text-center font-bold text-2xl">No saved properties yet.</div>;
 
   return (
-    <div style={{ display: "grid", gap: 16 }}>
-      {favorites.map((p) => (
-        <PropertyCard key={p.id} property={p} />
-      ))}
-    </div>
+    <main className="container space-y-20 pt-6 pb-12">
+      <div className="space-y-4">
+        <header className="space-y-4">
+          <Badge>
+            <IconBookmark />
+            Saved
+          </Badge>
+          <div className="grid gap-3 md:grid-cols-2">
+            <h2 className="text-balance text-center font-serif text-2xl md:text-left md:text-4xl">
+              Bookmarked Properties
+            </h2>
+            <p className="text-balance text-center leading-relaxed md:text-left">
+              View and manage the properties you've saved. Revisit your favorites, compare options, and keep track of
+              homes that match your needs.
+            </p>
+          </div>
+        </header>
+        <article className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+          {favorites.map((p) => (
+            <PropertyCard key={p.id} property={p} />
+          ))}
+        </article>
+      </div>
+    </main>
   );
 }

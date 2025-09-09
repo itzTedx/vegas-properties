@@ -149,7 +149,7 @@ export interface Property {
     /**
      * Number of bathrooms
      */
-    bathrooms: number;
+    bathrooms?: number | null;
     /**
      * Property area in square feet
      */

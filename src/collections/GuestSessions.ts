@@ -12,10 +12,7 @@ export const GuestSessions: CollectionConfig = {
     update: () => true,
     delete: () => true,
   },
-  admin: {
-    useAsTitle: "sessionId",
-    defaultColumns: ["sessionId", "updatedAt"],
-  },
+  admin: { hidden: true },
   fields: [
     {
       name: "sessionId",
