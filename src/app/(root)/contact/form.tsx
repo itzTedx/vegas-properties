@@ -11,14 +11,19 @@ import { cn } from "@/lib/utils";
 import { FloatingLabelInput } from "./floation-input";
 import { ContactFormData, contactSchema } from "./schema";
 
-export function ContactForm() {
+interface Props {
+  initialMessage?: string;
+}
+
+export function ContactForm({ initialMessage }: Props) {
+  console.log("message", initialMessage);
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
       email: "",
       phone: "",
-      message: "",
+      message: initialMessage ?? "",
     },
   });
 
@@ -41,7 +46,7 @@ export function ContactForm() {
 
         <FloatingLabelInput control={form.control} isTextarea label="Message" name="message" />
 
-        <Button className="w-full" type="submit">
+        <Button className="w-full" size="lg" type="submit">
           Send Message
         </Button>
       </form>

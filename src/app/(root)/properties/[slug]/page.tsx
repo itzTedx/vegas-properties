@@ -263,7 +263,7 @@ export default async function PropertyPage({ params }: Props) {
         </div>
         <aside className="z-997 flex h-fit flex-col gap-2 rounded-md border bg-card p-4 max-sm:sticky max-sm:bottom-0 sm:p-6 lg:sticky lg:top-20">
           <Button asChild className="w-full font-semibold text-lg" size="lg">
-            <Link href="/contact">Get Consultation</Link>
+            <Link href={`/contact?message=Can i get more details about ${title}`}>Get Consultation</Link>
           </Button>
           <p className="text-muted-foreground text-xs">Get an Expert advice to find the perfect property for you.</p>
           <Separator />

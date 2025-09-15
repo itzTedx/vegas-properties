@@ -3,10 +3,17 @@ import { Cta } from "@/components/layout/cta";
 import { ContactForm } from "./form";
 import { SectionHeader } from "./section-header";
 
-export default function ContactPage() {
+type SearchParams = Promise<{ message: string | undefined }>;
+interface Props {
+  searchParams: SearchParams;
+}
+
+export default async function ContactPage({ searchParams }: Props) {
+  const query = await searchParams;
+
   return (
-    <main className="py-4 sm:py-9 md:py-12">
-      <section className="container relative pb-20">
+    <main className="pt-4 sm:pt-9 md:pt-12">
+      <section className="container relative pb-9 sm:pb-14">
         <SectionHeader
           as="h1"
           hasHighlight
@@ -17,7 +24,7 @@ export default function ContactPage() {
           title={`Let's Start\na Conversation`}
         />
         <div className="mt-12 grid grid-cols-3 gap-6">
-          <ContactForm />
+          <ContactForm initialMessage={query?.message} />
           <aside>
             <h2 className="font-jaguar text-3xl">Other Ways to Reach Us</h2>
             <div className="mt-4 grid grid-cols-1 gap-6">

@@ -124,12 +124,7 @@ export const SectionHeader = ({
           </h2>
         )}
         {subtitle && (
-          <p
-            className={cn(
-              "text-balance font-light text-base text-muted-foreground sm:text-lg md:text-xl",
-              subtitleClassName
-            )}
-          >
+          <p className={cn("text-balance text-base text-muted-foreground sm:text-lg md:text-xl", subtitleClassName)}>
             {subtitle}
           </p>
         )}

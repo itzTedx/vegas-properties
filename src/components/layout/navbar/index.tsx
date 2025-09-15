@@ -23,8 +23,8 @@ export function Navbar() {
 
         <ul className="flex items-center gap-2 md:gap-4">
           <li className="hidden md:block">
-            <Button asChild variant="ghost">
-              <Link href="/">
+            <Button asChild className="hover:text-emerald-800" variant="ghost">
+              <Link className="text-emerald-600" href="/">
                 <IconBrandWhatsapp />
                 Whatsapp
               </Link>
