@@ -59,7 +59,7 @@ export function FloatingLabelInput<T extends FieldValues>({
                 <span className={cn("inline-flex bg-card px-1 text-muted-foreground")}>{label}</span>
               </FormLabel>
               {isTextarea ? (
-                <Textarea className={cn("min-h-[120px] resize-none")} placeholder="" {...field} id={name} />
+                <Textarea className={cn("min-h-[120px] resize-none pt-6")} placeholder="" {...field} id={name} />
               ) : (
                 <Input placeholder="" type={type} {...field} id={name} />
               )}
