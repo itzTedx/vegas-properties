@@ -6,11 +6,14 @@ import { buildConfig } from "payload";
 import sharp from "sharp";
 import { fileURLToPath } from "url";
 
+import { Agents } from "./collections/agents";
 import { Bookmarks } from "./collections/Bookmarks";
 import { Developers } from "./collections/Developers";
 import { GuestSessions } from "./collections/GuestSessions";
 import { Media } from "./collections/Media";
 import { Property } from "./collections/Property";
+import { ServiceAreas } from "./collections/ServiceAreas";
+import { Specialties } from "./collections/Specialties";
 import { Users } from "./collections/Users";
 import { env } from "./lib/env/server";
 import { plugins } from "./lib/payload/plugins";
@@ -25,7 +28,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Property, Media, Developers, Users, GuestSessions, Bookmarks],
+  collections: [Property, Agents, Media, Developers, Users, GuestSessions, Bookmarks, Specialties, ServiceAreas],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
   typescript: {

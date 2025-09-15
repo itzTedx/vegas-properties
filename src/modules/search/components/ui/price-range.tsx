@@ -14,12 +14,14 @@ interface Props {
   className?: string;
   value?: string;
   onChange?: (value: string) => void;
+  min: number;
+  max: number;
 }
 
-export default function PriceRange({ className, value, onChange }: Props) {
-  const minValue = 0;
-  const maxValue = 200;
-  const initialValue = [50, 150];
+export default function PriceRange({ className, value, onChange, min, max }: Props) {
+  const minValue = min;
+  const maxValue = max;
+  const initialValue = [min, max];
 
   // Parse the value from the form (format: "min-max" or empty string)
   const parseValue = (val?: string): number[] => {

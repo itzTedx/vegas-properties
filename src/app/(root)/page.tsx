@@ -11,11 +11,13 @@ import { DEVELOPERS } from "@/data/constants";
 import { cn } from "@/lib/utils";
 import { FeaturedProperties } from "@/modules/properties/sections/featured-properties";
 import { LatestProperties } from "@/modules/properties/sections/latest-properties";
+import { getPropertiesPriceRange } from "@/modules/search/actions/query";
 import { SearchFilter } from "@/modules/search/components/search-filter";
 import Testimonials from "@/modules/sections/home/testimonials";
 import Features from "@/modules/sections/home/why-choose-us";
 
-export default function Home() {
+export default async function Home() {
+  const { max, min } = await getPropertiesPriceRange();
   const MAX_WIDTH = "max-w-4xl";
   return (
     <main>
@@ -33,7 +35,14 @@ export default function Home() {
           <Image alt="Hero Background" className="object-cover" fill src="/images/hero-bg.jpg" />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80" />
         </div>
-        <SearchFilter className="md:-mt-12 mt-6" width={MAX_WIDTH} />
+        <SearchFilter
+          className="md:-mt-12 mt-6"
+          prices={{
+            max,
+            min,
+          }}
+          width={MAX_WIDTH}
+        />
       </section>
       {/* <section className="container py-14">
         <div className="grid grid-cols-2 gap-4 space-y-4">

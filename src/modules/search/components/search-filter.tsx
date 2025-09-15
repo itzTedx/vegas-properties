@@ -11,6 +11,7 @@ import { Currency } from "@/components/ui/currency";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 import {
   Select,
   SelectContent,
@@ -32,9 +33,13 @@ import PriceRange from "./ui/price-range";
 interface Props {
   width?: string;
   className?: string;
+  prices: {
+    min: number;
+    max: number;
+  };
 }
 
-export function SearchFilter({ width, className }: Props) {
+export function SearchFilter({ width, className, prices }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const form = useForm<SearchFormType>({
@@ -55,8 +60,8 @@ export function SearchFilter({ width, className }: Props) {
     };
     return (
       <>
-        <Currency />
-        {formatPrice(min)} - <Currency />
+        <Currency className="text-xs leading-0" />
+        {formatPrice(min)} - <Currency className="text-xs leading-0" />
         {formatPrice(max)}
       </>
     );
@@ -194,13 +199,22 @@ export function SearchFilter({ width, className }: Props) {
               <FormControl>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button className="w-full justify-between md:min-w-40" variant="outline">
-                      <span>{formatPriceRange(field.value)}</span>
-                      <IconChevronUpDown />
+                    <Button
+                      className="w-full justify-between bg-transparent font-normal text-muted-foreground md:min-w-40"
+                      variant="outline"
+                    >
+                      <span className="flex items-center gap-1">{formatPriceRange(field.value)}</span>
+                      <IconChevronUpDown className="opacity-50" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="min-w-80 p-3">
-                    <PriceRange className="w-full" onChange={field.onChange} value={field.value} />
+                    <PriceRange
+                      className="w-full"
+                      max={prices.max}
+                      min={prices.min}
+                      onChange={field.onChange}
+                      value={field.value}
+                    />
                   </DropdownMenuContent>
                 </DropdownMenu>
               </FormControl>
@@ -209,8 +223,8 @@ export function SearchFilter({ width, className }: Props) {
             </FormItem>
           )}
         />
-        <Button className="max-sm:w-full" size="lg" type="submit">
-          Search Property
+        <Button className="max-sm:w-full" disabled={isPending} size="lg" type="submit">
+          <LoadingSwap isLoading={isPending}>Search Property</LoadingSwap>
         </Button>
       </form>
     </Form>

@@ -60,3 +60,34 @@ export async function searchQuery(query: SearchFormType) {
   });
   return docs;
 }
+
+export async function getPropertiesPriceRange() {
+  const { docs } = await payload.find({
+    collection: "properties",
+    draft: false,
+    limit: 10000,
+  });
+
+  const prices: number[] = [];
+
+  for (const doc of docs ?? []) {
+    const salePrice = doc?.pricing?.salePrice;
+    const rentalPrice = doc?.pricing?.rentalPrice;
+
+    if (typeof salePrice === "number" && Number.isFinite(salePrice)) {
+      prices.push(salePrice);
+    }
+    if (typeof rentalPrice === "number" && Number.isFinite(rentalPrice)) {
+      prices.push(rentalPrice);
+    }
+  }
+
+  if (prices.length === 0) {
+    return { min: 0, max: 0 } as const;
+  }
+
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+
+  return { min, max } as const;
+}
