@@ -21,17 +21,20 @@ export const getAgents = async () =>
 export const getAgentBySlug = async (slug: string) =>
   cache(
     async () => {
-      const { docs } = await payload.find({
-        collection: "agents",
-        limit: 1,
-        where: { slug: { equals: slug } },
-      });
+      const res = await payload
+        .find({
+          collection: "agents",
+          draft: false,
+          limit: 1,
+          where: {
+            slug: { equals: slug },
+          },
+          depth: 3,
+        })
+        .then((res) => res.docs[0]);
 
-      return docs[0];
+      return res;
     },
     [AGENT_BY_SLUG(slug)],
-    {
-      tags: [AGENT_BY_SLUG(slug)],
-      revalidate: false,
-    }
-  );
+    { tags: [AGENTS_TAG(), AGENT_BY_SLUG(slug)], revalidate: false }
+  )();

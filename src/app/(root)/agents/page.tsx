@@ -34,7 +34,7 @@ export default async function AgentsPage() {
           </div>
         </div>
       </header>
-      <section className="grid grid-cols-3 gap-6">
+      <section className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {agents.map((agent) => (
           <Card key={agent.id}>
             <CardContent className="group relative">

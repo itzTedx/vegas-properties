@@ -11,6 +11,7 @@ interface Props {
 export default async function AgentPage({ params }: Props) {
   const { slug } = await params;
   const agent = await getAgentBySlug(slug);
+  console.log("agents", agent);
 
   if (!agent) return notFound();
 
