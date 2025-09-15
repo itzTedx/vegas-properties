@@ -17,7 +17,7 @@ export default function Testimonials() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-rows-2">
-          <Card className="grid grid-rows-[auto_1fr] gap-8 sm:col-span-2 sm:p-6 lg:row-span-2">
+          <Card className="grid gap-8 sm:col-span-2 sm:p-6 lg:row-span-2">
             {/* <CardHeader><LogoMono className="h-5 w-auto" /></CardHeader> */}
             <CardContent>
               <blockquote className="grid h-full grid-rows-[1fr_auto] gap-6">
