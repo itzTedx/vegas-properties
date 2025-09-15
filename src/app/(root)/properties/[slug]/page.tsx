@@ -81,7 +81,7 @@ export default async function PropertyPage({ params }: Props) {
   const propertiesByDev = await getPropertiesByDeveloper(developerId, 8);
 
   return (
-    <main className="pb-12">
+    <main>
       <PropertyNavbar
         data={{
           slug,
@@ -286,8 +286,10 @@ export default async function PropertyPage({ params }: Props) {
       </div>
       {propertiesByDev && (
         <section className="container mt-12">
-          Related properties from {typeof propertyDetails.developer === "object" && propertyDetails.developer?.title}
-          <div className="grid grid-cols-4 gap-3">
+          <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
+            Related properties from {typeof propertyDetails.developer === "object" && propertyDetails.developer?.title}
+          </h2>
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
             {propertiesByDev.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}

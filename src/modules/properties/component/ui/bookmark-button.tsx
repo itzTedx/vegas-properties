@@ -35,7 +35,7 @@ export const BookmarkButton = ({
   }
   return (
     <Button
-      className="relative z-50"
+      className="relative z-50 max-sm:size-9 max-sm:px-0"
       disabled={isPending}
       onClick={handleBookmark}
       size={size}

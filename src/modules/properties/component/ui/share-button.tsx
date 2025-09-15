@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { CheckIcon, } from "lucide-react";
+
+import { CheckIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,22 +17,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 import { IconBrandFacebook, IconBrandInstagram, IconBrandX, IconEmail, IconShare } from "@/assets/icons";
+import { IconCopy } from "@/assets/icons/copy";
 import { LogoIconMono } from "@/assets/logo";
 
 import { env } from "@/lib/env/client";
+import { cn } from "@/lib/utils";
 
 import { PropertyNavType } from "../../types";
-import { cn } from "@/lib/utils";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { IconCopy, } from "@/assets/icons/copy";
-import {
-  shareViaEmail,
-  shareViaFacebook,
-  shareViaInstagram,
-  shareViaTwitter,
-} from "../../utils";
+import { shareViaEmail, shareViaFacebook, shareViaInstagram, shareViaTwitter } from "../../utils";
 
 interface Props {
   data: PropertyNavType;
@@ -70,7 +66,7 @@ export const ShareButton = ({ data }: Props) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost">
+        <Button className="max-sm:size-9 max-sm:px-0" variant="ghost">
           <IconShare />
           <span className="hidden md:block">Share</span>
         </Button>
@@ -91,23 +87,23 @@ export const ShareButton = ({ data }: Props) => {
               <h3 className="mb-1 font-medium text-muted-foreground text-sm">Share link</h3>
               <div className="relative">
                 <Input
-                  ref={inputRef}
                   className="pe-8"
-                  readOnly
-                  type="text"
                   defaultValue={`${env.NEXT_PUBLIC_BASE_URL}/properties/hello-long-test/${data.slug}`}
+                  readOnly
+                  ref={inputRef}
+                  type="text"
                 />
                 <TooltipProvider delayDuration={0}>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <button
-                        onClick={handleCopy}
-                        className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md text-muted-foreground outline-none transition-[color,box-shadow] hover:text-brand-500 focus:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed"
                         aria-label={copied ? "Copied" : "Copy to clipboard"}
+                        className="absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md text-muted-foreground outline-none transition-[color,box-shadow] hover:text-brand-500 focus:z-10 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed"
                         disabled={copied}
+                        onClick={handleCopy}
                       >
                         <div className={cn("transition-all", copied ? "scale-100 opacity-100" : "scale-0 opacity-0")}>
-                          <CheckIcon className="stroke-emerald-600" size={16} aria-hidden="true" />
+                          <CheckIcon aria-hidden="true" className="stroke-emerald-600" size={16} />
                         </div>
                         <div
                           className={cn(

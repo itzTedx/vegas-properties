@@ -19,14 +19,14 @@ interface Props {
 export const PropertyNavbar = async ({ id, data }: Props) => {
   const isBookmarked = await getBookmarkByPropertyId(id);
   return (
-    <nav className="sticky top-0 z-999 mb-6 border-b bg-card py-2">
+    <nav className="sticky top-[calc(3.5rem+1px)] z-999 mb-6 border-b bg-card py-2 md:top-0">
       <div className="container grid grid-cols-6 items-center gap-2 md:flex md:justify-between">
         <div className="col-span-4 flex items-center">
           <Button asChild className="max-md:px-1" variant="ghost">
             <Link href="/properties">
               <IconArrowRight className="rotate-180" />
+              <span className="hidden md:block">Properties</span>
             </Link>
-            <span className="hidden md:block">Properties</span>
           </Button>
           <ScrollArea className="w-full">
             <ul className="flex items-center gap-1 whitespace-nowrap md:gap-2">

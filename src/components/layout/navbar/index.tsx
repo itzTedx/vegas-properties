@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 import { IconBrandWhatsapp } from "@/assets/icons";
-import { IconSearch } from "@/assets/icons/search";
 import { Logo } from "@/assets/logo";
 
 import { DesktopNavbar } from "./desktop";
@@ -12,7 +11,7 @@ import { MobileSearch } from "./mobile-search";
 
 export function Navbar() {
   return (
-    <header className="border-b bg-card py-2.5">
+    <header className="z-999 border-b bg-card py-2.5 max-md:sticky max-md:top-0">
       <nav className="container flex items-center justify-between gap-8">
         <div className="flex items-center gap-8">
           <Link href="/">
