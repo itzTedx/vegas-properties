@@ -1,5 +1,9 @@
 import { CollectionConfig } from "payload";
 
+import { slugify } from "@/lib/functions/slugify";
+
+import { revalidateAgentsCache, revalidateAgentsCacheAfterDelete } from "./hooks/revalidate-agents-cache";
+
 export const Agents: CollectionConfig = {
   slug: "agents",
   access: {
@@ -8,6 +12,10 @@ export const Agents: CollectionConfig = {
   admin: {
     useAsTitle: "name",
     defaultColumns: ["name", "contact.phonePrimary", "contact.email"],
+  },
+  hooks: {
+    afterChange: [revalidateAgentsCache],
+    afterDelete: [revalidateAgentsCacheAfterDelete],
   },
   fields: [
     { name: "photo", type: "upload", relationTo: "media" },
@@ -105,6 +113,26 @@ export const Agents: CollectionConfig = {
           fields: [{ name: "about", label: "About Me", type: "richText" }],
         },
       ],
+    },
+
+    {
+      name: "slug",
+      type: "text",
+      unique: true,
+      admin: {
+        position: "sidebar",
+        description: "URL-friendly version of the name",
+      },
+      hooks: {
+        beforeValidate: [
+          ({ value, data }) => {
+            if (!value && data?.name) {
+              return slugify(data.name);
+            }
+            return value;
+          },
+        ],
+      },
     },
   ],
 };

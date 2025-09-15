@@ -1,6 +1,10 @@
+import Link from "next/link";
+
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
+import { IconBrandWhatsapp, IconPhone } from "@/assets/icons";
 import { IconAgent } from "@/assets/icons/agent";
 
 import { ImageObject } from "@/lib/payload/components/media";
@@ -8,6 +12,7 @@ import { getAgents } from "@/modules/agents/query";
 
 export default async function AgentsPage() {
   const agents = await getAgents();
+  console.log("Agents: ", agents);
 
   return (
     <main className="container space-y-6 py-12">
@@ -33,6 +38,7 @@ export default async function AgentsPage() {
         {agents.map((agent) => (
           <Card key={agent.id}>
             <CardContent className="group relative">
+              <Link className="absolute inset-0 z-10" href={`/agents/${agent.slug}`} />
               <div className="relative aspect-4/3 overflow-hidden rounded-md">
                 {typeof agent.photo !== "number" && agent.photo && (
                   <ImageObject
@@ -43,15 +49,33 @@ export default async function AgentsPage() {
                 )}
               </div>
 
-              <CardHeader className="flex-1">
-                <CardTitle>
-                  <h3 className="text-lg">{agent.name}</h3>
-                </CardTitle>
-                <CardDescription>
-                  <p className="flex items-center gap-1.5">
-                    <span className="leading-none [text-box-trim:trim-both]">{agent.title}</span>
-                  </p>
-                </CardDescription>
+              <CardHeader className="flex flex-1 items-center justify-between gap-2 pt-2">
+                <div>
+                  <CardTitle>
+                    <h3 className="text-lg">{agent.name}</h3>
+                  </CardTitle>
+                  <CardDescription>
+                    <p className="flex items-center gap-1.5">
+                      <span className="leading-none [text-box-trim:trim-both]">{agent.title}</span>
+                    </p>
+                  </CardDescription>
+                </div>
+                <div className="relative z-50 flex items-center gap-2">
+                  {agent.contact?.phonePrimary && (
+                    <Button asChild size="icon" variant="outline">
+                      <Link href={`tel:${agent.contact.phonePrimary}`}>
+                        <IconPhone />
+                      </Link>
+                    </Button>
+                  )}
+                  {agent.contact?.whatsAppNumber && (
+                    <Button asChild size="icon" variant="outline">
+                      <Link href={`tel:${agent.contact.whatsAppNumber}`}>
+                        <IconBrandWhatsapp className="size-5" />
+                      </Link>
+                    </Button>
+                  )}
+                </div>
               </CardHeader>
             </CardContent>
           </Card>

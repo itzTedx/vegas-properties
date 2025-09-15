@@ -357,6 +357,10 @@ export interface Agent {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * URL-friendly version of the name
+   */
+  slug?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -659,6 +663,7 @@ export interface AgentsSelect<T extends boolean = true> {
         serviceAreas?: T;
       };
   about?: T;
+  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
