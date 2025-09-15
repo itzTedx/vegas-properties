@@ -3,10 +3,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 import { IconBrandWhatsapp } from "@/assets/icons";
+import { IconSearch } from "@/assets/icons/search";
 import { Logo } from "@/assets/logo";
 
 import { DesktopNavbar } from "./desktop";
 import { MobileNavbar } from "./mobile";
+import { MobileSearch } from "./mobile-search";
 
 export function Navbar() {
   return (
@@ -20,7 +22,7 @@ export function Navbar() {
           <DesktopNavbar />
         </div>
 
-        <ul className="flex items-center gap-4">
+        <ul className="flex items-center gap-2 md:gap-4">
           <li className="hidden md:block">
             <Button asChild variant="ghost">
               <Link href="/">
@@ -35,17 +37,8 @@ export function Navbar() {
               <Link href="/contact">Get in touch</Link>
             </Button>
           </li>
-          <li>
-            {/* <Button
-              asChild
-              className="bg-brand-500/10 text-brand-600 hover:text-brand-500"
-              size="icon"
-              variant="outline"
-            >
-              <Link href="/contact">
-                <IconBookmark />
-              </Link>
-            </Button> */}
+          <li className="md:hidden">
+            <MobileSearch />
           </li>
           <li>
             <MobileNavbar />
