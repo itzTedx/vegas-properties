@@ -15,17 +15,26 @@ export function useSliderWithInput({
   initialValue = [minValue],
   defaultValue = [minValue],
 }: UseSliderWithInputProps) {
+  const formatNumber = useCallback((value: number) => {
+    // Prices are integers; keep it simple and consistent across locales
+    const rounded = Math.round(value);
+    return rounded.toLocaleString();
+  }, []);
+
   const [sliderValue, setSliderValue] = useState(initialValue);
-  const [inputValues, setInputValues] = useState(initialValue.map((v) => v.toString()));
+  const [inputValues, setInputValues] = useState(initialValue.map((v) => formatNumber(v)));
 
   const showReset =
     sliderValue.length === defaultValue.length && !sliderValue.every((value, index) => value === defaultValue[index]);
 
   const validateAndUpdateValue = useCallback(
     (rawValue: string, index: number) => {
-      if (rawValue === "" || rawValue === "-") {
+      // Sanitize any currency formatting (commas, spaces, symbols)
+      const sanitized = rawValue.replace(/[^\d.-]/g, "");
+
+      if (sanitized === "" || sanitized === "-") {
         const newInputValues = [...inputValues];
-        newInputValues[index] = "0";
+        newInputValues[index] = formatNumber(0);
         setInputValues(newInputValues);
 
         const newSliderValues = [...sliderValue];
@@ -34,11 +43,11 @@ export function useSliderWithInput({
         return;
       }
 
-      const numValue = Number.parseFloat(rawValue);
+      const numValue = Number.parseFloat(sanitized);
 
       if (isNaN(numValue)) {
         const newInputValues = [...inputValues];
-        newInputValues[index] = sliderValue[index]!.toString();
+        newInputValues[index] = formatNumber(sliderValue[index]!);
         setInputValues(newInputValues);
         return;
       }
@@ -58,16 +67,17 @@ export function useSliderWithInput({
       setSliderValue(newSliderValues);
 
       const newInputValues = [...inputValues];
-      newInputValues[index] = clampedValue.toString();
+      newInputValues[index] = formatNumber(clampedValue);
       setInputValues(newInputValues);
     },
-    [sliderValue, inputValues, minValue, maxValue]
+    [sliderValue, inputValues, minValue, maxValue, formatNumber]
   );
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
       const newValue = e.target.value;
-      if (newValue === "" || /^-?\d*\.?\d*$/.test(newValue)) {
+      // Allow digits, commas, periods, spaces, and hyphen while typing
+      if (newValue === "" || /^[\d,\.\s-]*$/.test(newValue)) {
         const newInputValues = [...inputValues];
         newInputValues[index] = newValue;
         setInputValues(newInputValues);
@@ -76,15 +86,18 @@ export function useSliderWithInput({
     [inputValues]
   );
 
-  const handleSliderChange = useCallback((newValue: number[]) => {
-    setSliderValue(newValue);
-    setInputValues(newValue.map((v) => v.toString()));
-  }, []);
+  const handleSliderChange = useCallback(
+    (newValue: number[]) => {
+      setSliderValue(newValue);
+      setInputValues(newValue.map((v) => formatNumber(v)));
+    },
+    [formatNumber]
+  );
 
   const resetToDefault = useCallback(() => {
     setSliderValue(defaultValue);
-    setInputValues(defaultValue.map((v) => v.toString()));
-  }, [defaultValue]);
+    setInputValues(defaultValue.map((v) => formatNumber(v)));
+  }, [defaultValue, formatNumber]);
 
   return {
     sliderValue,

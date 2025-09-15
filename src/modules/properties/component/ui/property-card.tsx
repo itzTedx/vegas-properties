@@ -92,7 +92,7 @@ export const PropertyCard = async ({ property, showBadges = true }: Props) => {
             <div className="inline-flex items-center gap-2">
               {property.pricing.salePrice && (
                 <p className="font-semibold text-brand-800">
-                  From <Currency /> {formatPrice(property.pricing.salePrice)}
+                  <Currency /> {formatPrice(property.pricing.salePrice)}
                 </p>
               )}
               {property.pricing.rentalPrice && (

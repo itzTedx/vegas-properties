@@ -37,18 +37,19 @@ interface Props {
     min: number;
     max: number;
   };
+  initialValue?: SearchFormType;
 }
 
-export function SearchFilter({ width, className, prices }: Props) {
+export function SearchFilter({ width, className, prices, initialValue }: Props) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const form = useForm<SearchFormType>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
-      location: "",
-      type: "",
-      priceRange: "",
-      bedrooms: "",
+      location: initialValue?.location ?? "",
+      type: initialValue?.type ?? "",
+      priceRange: initialValue?.priceRange ?? "",
+      bedrooms: initialValue?.bedrooms ?? "",
     },
   });
 
@@ -200,7 +201,7 @@ export function SearchFilter({ width, className, prices }: Props) {
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
-                      className="w-full justify-between bg-transparent font-normal text-muted-foreground md:min-w-40"
+                      className="w-full justify-between bg-transparent font-normal text-muted-foreground md:min-w-56"
                       variant="outline"
                     >
                       <span className="flex items-center gap-1">{formatPriceRange(field.value)}</span>

@@ -72,13 +72,9 @@ export async function getPropertiesPriceRange() {
 
   for (const doc of docs ?? []) {
     const salePrice = doc?.pricing?.salePrice;
-    const rentalPrice = doc?.pricing?.rentalPrice;
 
     if (typeof salePrice === "number" && Number.isFinite(salePrice)) {
       prices.push(salePrice);
-    }
-    if (typeof rentalPrice === "number" && Number.isFinite(rentalPrice)) {
-      prices.push(rentalPrice);
     }
   }
 

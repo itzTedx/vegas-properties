@@ -6,6 +6,7 @@ import { Currency } from "@/components/ui/currency";
 import { FormDescription } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 
 import { useSliderWithInput } from "@/hooks/use-slider-with-input";
@@ -47,60 +48,68 @@ export default function PriceRange({ className, value, onChange, min, max }: Pro
     }
   }, [sliderValue, onChange]);
 
-  const formatPrice = (price: number) => {
-    return price === maxValue ? `${price.toLocaleString()}+` : `${price.toLocaleString()}`;
-  };
+  // const formatPrice = (price: number) => {
+  //   return price === maxValue ? `${price.toLocaleString()}+` : `${price.toLocaleString()}`;
+  // };
 
   return (
-    <div className={cn("flex flex-col gap-4", className)}>
+    <div className={cn("flex flex-col gap-4 pt-3", className)}>
       <Slider
         aria-label="Dual range slider with input"
         className="grow"
         max={maxValue}
         min={minValue}
         onValueChange={handleSliderChange}
+        step={100}
         value={sliderValue}
       />
       <div className="flex items-center gap-1">
         <div>
-          <Label>Minimum</Label>
-          <Input
-            aria-label="Enter minimum value"
-            className="w-full px-2 py-1"
-            inputMode="decimal"
-            onBlur={() => validateAndUpdateValue(inputValues[0], 0)}
-            onChange={(e) => handleInputChange(e, 0)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                validateAndUpdateValue(inputValues[0], 0);
-              }
-            }}
-            type="text"
-            value={inputValues[0]}
-          />
+          <Label className="font-light text-xs">Minimum</Label>
+          <div className="relative">
+            <Input
+              aria-label="Enter minimum value"
+              className="peer w-full ps-7"
+              inputMode="decimal"
+              onBlur={() => validateAndUpdateValue(inputValues[0], 0)}
+              onChange={(e) => handleInputChange(e, 0)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  validateAndUpdateValue(inputValues[0], 0);
+                }
+              }}
+              type="text"
+              value={inputValues[0]}
+            />
+            <Currency className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground text-sm peer-disabled:opacity-50" />
+          </div>
         </div>
         <div>
-          <Label>Maximum</Label>
-          <Input
-            aria-label="Enter maximum value"
-            className="w-full px-2 py-1"
-            inputMode="decimal"
-            onBlur={() => validateAndUpdateValue(inputValues[1], 1)}
-            onChange={(e) => handleInputChange(e, 1)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                validateAndUpdateValue(inputValues[1], 1);
-              }
-            }}
-            type="text"
-            value={inputValues[1]}
-          />
+          <Label className="font-light text-xs">Maximum</Label>
+          <div className="relative">
+            <Input
+              aria-label="Enter maximum value"
+              className="peer w-full ps-7"
+              inputMode="decimal"
+              onBlur={() => validateAndUpdateValue(inputValues[1], 1)}
+              onChange={(e) => handleInputChange(e, 1)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  validateAndUpdateValue(inputValues[1], 1);
+                }
+              }}
+              type="text"
+              value={inputValues[1]}
+            />
+            <Currency className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground text-sm peer-disabled:opacity-50" />
+          </div>
         </div>
       </div>
+      <Separator />
       <FormDescription>
         From <Currency />
-        {formatPrice(Number(inputValues[0]))} to <Currency />
-        {formatPrice(Number(inputValues[1]))}
+        {inputValues[0]} to <Currency />
+        {inputValues[1]}
       </FormDescription>
     </div>
   );

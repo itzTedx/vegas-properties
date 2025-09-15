@@ -18,7 +18,7 @@ import Features from "@/modules/sections/home/why-choose-us";
 
 export default async function Home() {
   const { max, min } = await getPropertiesPriceRange();
-  const MAX_WIDTH = "max-w-4xl";
+  const MAX_WIDTH = "max-w-5xl";
   return (
     <main>
       <section className="px-8 py-4">
@@ -36,7 +36,7 @@ export default async function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80" />
         </div>
         <SearchFilter
-          className="md:-mt-12 mt-6"
+          className="md:-mt-12 mt-6 shadow-xl"
           prices={{
             max,
             min,
