@@ -6,6 +6,7 @@ import { Cta } from "@/components/layout/cta";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContainer, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Currency } from "@/components/ui/currency";
 import { Separator, SeparatorDashed } from "@/components/ui/separator";
 
 import { IconBuilding, IconFire, IconKey, IconSaleBuilding, IconStar } from "@/assets/icons";
@@ -124,8 +125,8 @@ export default async function PropertyPage({ params }: Props) {
                   <div className="space-y-1">
                     <h3 className="text-muted-foreground">Prices from</h3>
                     <div className="flex items-center gap-2">
-                      <p className="font-medium text-3xl text-secondary-600 leading-none">
-                        {formatPrice(pricing.salePrice ?? 0)}
+                      <p className="flex items-center gap-1 font-semibold text-3xl text-secondary-600 leading-none">
+                        <Currency className="text-xl" /> {formatPrice(pricing.salePrice ?? 0)}
                       </p>
                       {pricing.rentalPrice && (
                         <span className="text-muted-foreground text-sm">{pricing.rentalPrice}/month</span>
@@ -286,10 +287,13 @@ export default async function PropertyPage({ params }: Props) {
       </div>
       {propertiesByDev && (
         <section className="container mt-20">
-          <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
-            Related properties from {typeof propertyDetails.developer === "object" && propertyDetails.developer?.title}
+          <h2 className="max-w-2xl text-balance font-medium font-sans text-2xl md:text-4xl">
+            Related properties from{" "}
+            <span className="text-brand-600">
+              {typeof propertyDetails.developer === "object" && propertyDetails.developer?.title}
+            </span>
           </h2>
-          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
             {propertiesByDev.map((property) => (
               <PropertyCard key={property.id} property={property} />
             ))}
