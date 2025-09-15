@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { Cta } from "@/components/layout/cta";
 import { Badge } from "@/components/ui/badge";
@@ -143,12 +142,6 @@ export default async function Home() {
                 <Image alt={dev.alt} className="m-auto" height={80} src={dev.src} width={80} />
               </li>
             ))}
-
-            <li className="relative flex aspect-video bg-card">
-              <Link className="m-auto" href="/">
-                View All
-              </Link>
-            </li>
           </ul>
         </div>
       </section>

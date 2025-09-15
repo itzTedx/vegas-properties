@@ -103,7 +103,7 @@ export const PropertyCard = async ({ property, showBadges = true }: Props) => {
             </div>
           </CardContainer>
         </div>
-        <div className="mt-auto flex items-center gap-2">
+        <div className="mt-auto flex items-center gap-2 pt-3">
           <Button asChild className="z-50 w-full flex-1">
             <Link href={`/properties/${property.slug}`} title="View Details">
               View Details
