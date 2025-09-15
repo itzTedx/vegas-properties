@@ -261,7 +261,7 @@ export default async function PropertyPage({ params }: Props) {
               </section>
             )}
         </div>
-        <aside className="flex h-fit flex-col gap-2 rounded-md border bg-card p-4 sm:p-6 lg:sticky lg:top-20">
+        <aside className="z-997 flex h-fit flex-col gap-2 rounded-md border bg-card p-4 max-sm:sticky max-sm:bottom-0 sm:p-6 lg:sticky lg:top-20">
           <Button asChild className="w-full font-semibold text-lg" size="lg">
             <Link href="/contact">Get Consultation</Link>
           </Button>
@@ -285,7 +285,7 @@ export default async function PropertyPage({ params }: Props) {
         </aside>
       </div>
       {propertiesByDev && (
-        <section className="container mt-12">
+        <section className="container mt-20">
           <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
             Related properties from {typeof propertyDetails.developer === "object" && propertyDetails.developer?.title}
           </h2>
@@ -296,7 +296,7 @@ export default async function PropertyPage({ params }: Props) {
           </div>
         </section>
       )}
-      <section className="container py-14">
+      <section className="container py-14 md:py-16 lg:py-20">
         <div className="space-y-4">
           <Badge>
             <IconFire />
