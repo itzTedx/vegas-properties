@@ -29,15 +29,15 @@ export default function Features() {
 
   // Auto-cycle images every 2 seconds
   const imageKeys: ImageKey[] = ["item-1", "item-2", "item-3"];
-  const goToNextImage = () => {
-    setActiveItem((current) => {
-      const currentIndex = imageKeys.indexOf(current);
-      const nextIndex = (currentIndex + 1) % imageKeys.length;
-      return imageKeys[nextIndex];
-    });
-  };
 
   useEffect(() => {
+    const goToNextImage = () => {
+      setActiveItem((current) => {
+        const currentIndex = imageKeys.indexOf(current);
+        const nextIndex = (currentIndex + 1) % imageKeys.length;
+        return imageKeys[nextIndex];
+      });
+    };
     const intervalId = setInterval(goToNextImage, 2000);
     return () => clearInterval(intervalId);
   }, []);
