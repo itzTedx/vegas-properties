@@ -1,15 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { MapPin, Shield, Smartphone, Users } from "lucide-react";
+import { MapPin, Shield, Users } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BorderBeam } from "@/components/ui/border-beam";
 
 export default function Features() {
-  type ImageKey = "item-1" | "item-2" | "item-3" | "item-4";
+  type ImageKey = "item-1" | "item-2" | "item-3";
   const [activeItem, setActiveItem] = useState<ImageKey>("item-1");
 
   const images = {
@@ -22,14 +22,25 @@ export default function Features() {
       alt: "Prime Dubai locations",
     },
     "item-3": {
-      image: "/mail2.png",
+      image: "/images/expert.webp",
       alt: "Expert guidance team",
     },
-    "item-4": {
-      image: "/payments.png",
-      alt: "Digital experience platform",
-    },
   };
+
+  // Auto-cycle images every 2 seconds
+  const imageKeys: ImageKey[] = ["item-1", "item-2", "item-3"];
+  const goToNextImage = () => {
+    setActiveItem((current) => {
+      const currentIndex = imageKeys.indexOf(current);
+      const nextIndex = (currentIndex + 1) % imageKeys.length;
+      return imageKeys[nextIndex];
+    });
+  };
+
+  useEffect(() => {
+    const intervalId = setInterval(goToNextImage, 2000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <section className="py-12 md:py-20 lg:py-32">
@@ -84,7 +95,7 @@ export default function Features() {
                 Our team brings years of experience to simplify every step of your journey.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-4">
+            {/* <AccordionItem value="item-4">
               <AccordionTrigger>
                 <div className="flex items-center gap-2 text-xl">
                   <Smartphone className="size-6" />
@@ -94,7 +105,7 @@ export default function Features() {
               <AccordionContent className="text-lg">
                 From virtual tours to online payments, manage everything seamlessly.
               </AccordionContent>
-            </AccordionItem>
+            </AccordionItem> */}
           </Accordion>
 
           <div className="relative flex overflow-hidden rounded-3xl border bg-background p-2">
