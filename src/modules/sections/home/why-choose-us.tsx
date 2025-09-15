@@ -14,11 +14,11 @@ export default function Features() {
 
   const images = {
     "item-1": {
-      image: "/charts.png",
+      image: "/images/deals.webp",
       alt: "Transparent deals verification",
     },
     "item-2": {
-      image: "/music.png",
+      image: "/images/dubai.webp",
       alt: "Prime Dubai locations",
     },
     "item-3": {
