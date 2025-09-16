@@ -6,7 +6,8 @@ export const MEDIA_TAG = () => "media";
 
 // Item-specific cache keys
 export const PROPERTY_BY_SLUG = () => "property-by-slug";
-export const AGENT_BY_SLUG = (slug: string) => `property-by-id-${slug}`;
+export const AGENT_BY_SLUG = (slug: string) => `agent-by-slug-${slug}`;
+export const AGENT_BY_ID_TAG = (id: number) => `agent-by-id-${id}`;
 
 export const PROPERTY_BY_ID_TAG = (id: number) => `property-by-id-${id}`;
 export const PROPERTY_BY_SLUG_TAG = (slug: string) => `property-by-slug-${slug}`;

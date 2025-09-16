@@ -322,8 +322,7 @@ export interface Agent {
             | 'snapchat'
             | 'telegram';
           handle?: string | null;
-          url?: string | null;
-          isPrimary?: boolean | null;
+          url: string;
           id?: string | null;
         }[]
       | null;
@@ -642,7 +641,6 @@ export interface AgentsSelect<T extends boolean = true> {
               platform?: T;
               handle?: T;
               url?: T;
-              isPrimary?: T;
               id?: T;
             };
       };
