@@ -57,6 +57,7 @@ export async function searchQuery(query: SearchFormType) {
   const { docs } = await payload.find({
     collection: "properties",
     where,
+    sort: ["-isFeatured", "-createdAt"],
   });
   return docs;
 }

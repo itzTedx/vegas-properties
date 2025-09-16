@@ -78,12 +78,12 @@ export default async function Home() {
       </Link>
       <main id="main-content">
         <section aria-labelledby="home-hero-heading" className="md:px-8 md:py-4" id="home-hero">
-          <div className="relative flex h-[calc(100svh-3rem)] sm:h-96 items-end overflow-hidden md:rounded-2xl p-6 md:h-[32rem]">
-            <div className={cn("relative z-50 mx-auto text-white pb-14", MAX_WIDTH)}>
+          <div className="relative flex h-[calc(100svh-3rem)] items-end overflow-hidden p-6 sm:h-96 md:h-[32rem] md:rounded-2xl">
+            <div className={cn("relative z-50 mx-auto pb-14 text-white", MAX_WIDTH)}>
               <h1 className="font-serif text-3xl md:text-4xl" id="home-hero-heading">
                 Find Your Perfect Property in Dubai’s Most Prestigious Communities
               </h1>
-              <p className="sm:-tracking-[0.24px] mt-3 sm:text-sm leading-relaxed md:text-lg">
+              <p className="sm:-tracking-[0.24px] mt-3 leading-relaxed sm:text-sm md:text-lg">
                 Discover luxury apartments, villas, and townhouses designed for modern living. Explore exclusive
                 neighborhoods with world-class amenities and flexible payment plans.
               </p>
@@ -100,7 +100,7 @@ export default async function Home() {
           </div>
           <div aria-label="Property search" role="search">
             <SearchFilter
-              className="md:-mt-12 mt-6 shadow-xl hidden md:flex"
+              className="md:-mt-12 mt-6 hidden shadow-xl md:flex"
               prices={{
                 max,
                 min,
