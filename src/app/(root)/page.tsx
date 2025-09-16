@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  metadataBase: new URL("https://www.vegasproperties.ae/")
+  metadataBase: new URL("https://www.vegasproperties.ae/"),
 };
 
 export default async function Home() {
