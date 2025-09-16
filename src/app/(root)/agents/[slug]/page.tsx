@@ -25,7 +25,7 @@ export default async function AgentPage({ params }: Props) {
 
   return (
     <main className="container max-w-7xl">
-      <div className="py-12 grid grid-cols-2 gap-4">
+      <div className="py-4 sm:py-9 md:py-12 grid md:grid-cols-2 gap-4">
         <div className="flex flex-col items-center gap-4">
           {typeof agent.photo !== "number" && agent.photo && (
             <div className="rounded-xl overflow-hidden">
