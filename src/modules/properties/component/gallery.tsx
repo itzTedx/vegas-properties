@@ -6,6 +6,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { ImageZoom } from "@/components/ui/image-zoom";
 
 import { ImageObject } from "@/lib/payload/components/media";
 import { Media } from "@/payload-types";
@@ -38,7 +39,7 @@ export const Gallery = ({ gallery }: Props) => {
         {gallery?.map((img, i) => (
           <CarouselItem className="3xl:basis-1/3 pl-1 md:basis-1/2" key={i}>
             <div className="h-full p-1">
-              <div className="relative aspect-4/3 overflow-hidden rounded-md xl:aspect-5/4">
+              <ImageZoom className="relative aspect-4/3 overflow-hidden rounded-md xl:aspect-5/4" zoomMargin={100}>
                 {typeof img !== "number" && img && (
                   <ImageObject
                     {...img}
@@ -46,7 +47,7 @@ export const Gallery = ({ gallery }: Props) => {
                     fill
                   />
                 )}
-              </div>
+              </ImageZoom>
             </div>
           </CarouselItem>
         ))}
