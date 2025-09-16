@@ -82,7 +82,6 @@ export const Agents: CollectionConfig = {
                 { name: "experienceYears", label: "Experience (Years)", type: "number", min: 0 },
                 { name: "awards", label: "Realtor Awards", type: "textarea" },
                 { name: "mlsNumber", label: "MLS Number", type: "text" },
-                { name: "myIdExpiry", label: "MYID Expiration", type: "date" },
                 {
                   name: "languages",
                   label: "Languages Spoken",

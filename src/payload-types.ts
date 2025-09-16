@@ -331,7 +331,6 @@ export interface Agent {
     experienceYears?: number | null;
     awards?: string | null;
     mlsNumber?: string | null;
-    myIdExpiry?: string | null;
     languages?:
       | {
           language?: string | null;
@@ -650,7 +649,6 @@ export interface AgentsSelect<T extends boolean = true> {
         experienceYears?: T;
         awards?: T;
         mlsNumber?: T;
-        myIdExpiry?: T;
         languages?:
           | T
           | {

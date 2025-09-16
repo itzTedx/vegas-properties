@@ -9,6 +9,8 @@ import { IconBrandWhatsapp, IconEmail, IconPhone } from "@/assets/icons";
 import type { Route } from "next";
 import { getSocialIcons } from "@/lib/functions/get-social-icons";
 import { pluralize } from "@/lib/functions/pluralize";
+import { Badge } from "@/components/ui/badge";
+import RichText from "@/lib/payload/components/rich-text";
 
 interface Props {
   params: Promise<{
@@ -124,23 +126,64 @@ export default async function AgentPage({ params }: Props) {
               )}
             </ul>
           </div>
-          <ul className="gird grid-cols-2 gap-6">
+          <ul className="grid grid-cols-2 gap-6">
             {agent.professional?.experienceYears && (
               <li>
                 <h3 className="text-sm text-muted-foreground">Experience</h3>
-                <p className="text-lg font-medium">{agent.professional.experienceYears} {pluralize('year', agent.professional.experienceYears)} as {agent.title}</p>
+                <p className="text-lg font-medium">
+                  {agent.professional.experienceYears} {pluralize("year", agent.professional.experienceYears)} as{" "}
+                  {agent.title}
+                </p>
               </li>
             )}
-            {agent.professional?.experienceYears && (
+            {agent.professional?.awards && (
               <li>
-                <h3 className="text-sm text-muted-foreground">Experience</h3>
-                <p className="text-lg font-medium">{agent.professional.experienceYears} {pluralize('year', agent.professional.experienceYears)} as {agent.title}</p>
+                <h3 className="text-sm text-muted-foreground">Awards</h3>
+                <p className="text-lg font-medium">{agent.professional.awards}</p>
+              </li>
+            )}
+            {agent.professional?.mlsNumber && (
+              <li>
+                <h3 className="text-sm text-muted-foreground">MLS Number</h3>
+                <p className="text-lg font-medium">{agent.professional.mlsNumber}</p>
+              </li>
+            )}
+            {agent.professional?.languages && (
+              <li>
+                <h3 className="text-sm text-muted-foreground">Languages Spoken</h3>
+                <p className="text-lg font-medium">
+                  {agent.professional.languages
+                    .map((l) => l.language)
+                    .filter(Boolean)
+                    .join(", ")}
+                </p>
               </li>
             )}
           </ul>
         </div>
+       
       </div>
+      <div className="space-y-6">
 
+      {agent.professional?.specialties && (
+        <div>
+            <h4 className="text-sm text-muted-foreground">Specialties & Service Areas</h4>
+            <ul className="flex flex-wrap gap-3 mt-2">
+              {agent.professional?.specialties.map((s) => typeof s !== 'number' && s.title && (
+                <li key={s.id}>
+                  <Badge>{s.title }</Badge>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        {agent.about && (
+          <div>
+             <h4 className="text-sm text-muted-foreground mb-2">About me</h4>
+            <RichText data={agent.about} enableGutter={false} />
+          </div>
+        )}
+        </div>
       <Cta />
     </main>
   );
