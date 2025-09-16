@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 
 import { Building2, Calendar, Car, Layers, Ruler } from "lucide-react";
 
@@ -15,7 +17,7 @@ import { formatDate } from "@/lib/functions/format-date";
 import { ImageObject } from "@/lib/payload/components/media";
 import RichText from "@/lib/payload/components/rich-text";
 import { formatPrice } from "@/lib/utils";
-import { getPropertiesByDeveloper, getPropertyBySlug } from "@/modules/properties/actions/query";
+import { getProperties, getPropertiesByDeveloper, getPropertyBySlug } from "@/modules/properties/actions/query";
 import { PropertyCard, PropertyNavbar } from "@/modules/properties/component";
 import { Gallery } from "@/modules/properties/component/gallery";
 import { PropertyHeaderImages } from "@/modules/properties/component/property-header-images";
@@ -25,36 +27,54 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-function getDetailIcon(label: string) {
-  const normalized = label.toLowerCase().trim();
+export async function generateStaticParams() {
+  const properties = await getProperties();
+  return properties.docs.map((property) => property.slug).map((slug) => ({ slug }));
+}
 
-  if (normalized.includes("parking") || normalized.includes("garage") || normalized.includes("car park")) {
-    return <Car className="size-6" />;
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const property = await getPropertyBySlug(slug);
+    const title = property.meta?.title ?? `${property.title} | Vegas Properties`;
+    const description =
+      property.meta?.description ??
+      property.description ??
+      `Discover ${property.title} in ${property.propertyDetails?.location ?? "Dubai"}. Explore prices, features, amenities and more.`;
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: `/properties/${slug}`,
+      },
+      openGraph: {
+        title,
+        description,
+        type: "website",
+        url: `/properties/${slug}`,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+      },
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+        },
+      },
+    };
+  } catch {
+    return {
+      title: "Property | Vegas Properties",
+      description: "Explore Dubai properties for sale and rent with Vegas Properties.",
+    };
   }
-
-  if (normalized.includes("year built") || normalized.includes("built") || normalized.includes("construction year")) {
-    return <Calendar className="size-6" />;
-  }
-
-  if (
-    normalized.includes("area") ||
-    normalized.includes("size") ||
-    normalized.includes("lot") ||
-    normalized.includes("sqft") ||
-    normalized.includes("square")
-  ) {
-    return <Ruler className="size-6" />;
-  }
-
-  if (normalized.includes("floor") || normalized.includes("storey") || normalized.includes("stories")) {
-    return <Building2 className="size-6" />;
-  }
-
-  if (normalized.includes("amenities") || normalized.includes("features")) {
-    return <Layers className="size-6" />;
-  }
-
-  return <IconBuilding className="size-6" />;
 }
 
 export default async function PropertyPage({ params }: Props) {
@@ -94,6 +114,21 @@ export default async function PropertyPage({ params }: Props) {
 
       <header className="container">
         <PropertyHeaderImages gallery={gallery} image={image} />
+        <nav aria-label="Breadcrumb" className="py-3 text-muted-foreground text-sm">
+          <ol className="flex items-center gap-2">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li aria-hidden>›</li>
+            <li>
+              <Link href="/properties">Properties</Link>
+            </li>
+            <li aria-hidden>›</li>
+            <li aria-current="page" className="text-foreground">
+              {title}
+            </li>
+          </ol>
+        </nav>
       </header>
       <div className="container mt-9 grid max-w-7xl grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
@@ -154,7 +189,7 @@ export default async function PropertyPage({ params }: Props) {
                   <div className="mt-4 flex gap-12">
                     <div>
                       <h2 className="flex items-center gap-2 text-muted-foreground">Location</h2>
-                      <p className="font-medium text-xl">{propertyDetails.location}</p>
+                      <address className="font-medium text-xl not-italic">{propertyDetails.location}</address>
                     </div>
                     {propertyDetails.developer && typeof propertyDetails.developer === "object" && (
                       <div>
@@ -170,7 +205,7 @@ export default async function PropertyPage({ params }: Props) {
           <section className="scroll-mt-20" id="about">
             <Card className="py-0">
               <CardContent className="space-y-4 p-6">
-                <h3 className="font-light font-sans text-muted-foreground text-xl">About the property</h3>
+                <h2 className="font-light font-sans text-muted-foreground text-xl">About the property</h2>
 
                 {overview && <RichText data={overview} enableGutter={false} />}
 
@@ -320,7 +355,101 @@ export default async function PropertyPage({ params }: Props) {
         <FeaturedProperties />
       </section>
 
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: title,
+            description: description,
+            brand:
+              propertyDetails.developer && typeof propertyDetails.developer === "object"
+                ? {
+                    "@type": "Organization",
+                    name: propertyDetails.developer.title,
+                  }
+                : undefined,
+            offers: pricing?.salePrice
+              ? {
+                  "@type": "Offer",
+                  price: pricing.salePrice,
+                  priceCurrency: "AED",
+                  availability: "https://schema.org/InStock",
+                  url: `/properties/${slug}`,
+                }
+              : undefined,
+            url: `/properties/${slug}`,
+            category: propertyDetails.propertyType,
+          }),
+        }}
+        id="ld-json-property"
+        type="application/ld+json"
+      />
+
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: "/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Properties",
+                item: "/properties",
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: title,
+                item: `/properties/${slug}`,
+              },
+            ],
+          }),
+        }}
+        id="ld-json-breadcrumbs"
+        type="application/ld+json"
+      />
+
       <Cta />
     </main>
   );
+}
+
+function getDetailIcon(label: string) {
+  const normalized = label.toLowerCase().trim();
+
+  if (normalized.includes("parking") || normalized.includes("garage") || normalized.includes("car park")) {
+    return <Car className="size-6" />;
+  }
+
+  if (normalized.includes("year built") || normalized.includes("built") || normalized.includes("construction year")) {
+    return <Calendar className="size-6" />;
+  }
+
+  if (
+    normalized.includes("area") ||
+    normalized.includes("size") ||
+    normalized.includes("lot") ||
+    normalized.includes("sqft") ||
+    normalized.includes("square")
+  ) {
+    return <Ruler className="size-6" />;
+  }
+
+  if (normalized.includes("floor") || normalized.includes("storey") || normalized.includes("stories")) {
+    return <Building2 className="size-6" />;
+  }
+
+  if (normalized.includes("amenities") || normalized.includes("features")) {
+    return <Layers className="size-6" />;
+  }
+
+  return <IconBuilding className="size-6" />;
 }

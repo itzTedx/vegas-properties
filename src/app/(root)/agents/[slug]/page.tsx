@@ -1,16 +1,20 @@
+import type { Metadata, Route } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ImageObject } from "@/lib/payload/components/media";
-import { getAgentBySlug } from "@/modules/agents/query";
 import { Cta } from "@/components/layout/cta";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+
 import { IconBrandWhatsapp, IconEmail, IconPhone } from "@/assets/icons";
-import type { Route } from "next";
+
 import { getSocialIcons } from "@/lib/functions/get-social-icons";
 import { pluralize } from "@/lib/functions/pluralize";
-import { Badge } from "@/components/ui/badge";
+import { ImageObject } from "@/lib/payload/components/media";
 import RichText from "@/lib/payload/components/rich-text";
+import { getAgentBySlug, getAgents } from "@/modules/agents/query";
+import { addBreadcrumbs } from "@/modules/seo";
+import { Schema } from "@/modules/seo/schema";
 
 interface Props {
   params: Promise<{
@@ -18,47 +22,129 @@ interface Props {
   }>;
 }
 
+export async function generateStaticParams() {
+  const agents = await getAgents();
+  return agents.map((agent) => agent.slug).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const agent = await getAgentBySlug(slug);
+
+  if (!agent) {
+    return {
+      title: "Agent Not Found | Vegas Properties",
+      description: "The requested agent profile could not be found.",
+      robots: { index: false, follow: false },
+      alternates: { canonical: `/agents/${slug}` },
+      metadataBase: new URL("https://www.vegasproperties.ae/"),
+    };
+  }
+
+  const title = `${agent.name}${agent.title ? `, ${agent.title}` : ""} | Vegas Properties`;
+  const description = agent.about
+    ? `Learn more about ${agent.name}, ${agent.title || "real estate agent"}.`
+    : `${agent.name} ${agent.title ? `- ${agent.title} ` : ""}at Vegas Properties.`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/agents/${slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "profile",
+      url: `/agents/${slug}`,
+      siteName: "Vegas Properties",
+    },
+    twitter: {
+      card: "summary",
+      title,
+      description,
+    },
+    robots: { index: true, follow: true },
+  };
+}
+
 export default async function AgentPage({ params }: Props) {
   const { slug } = await params;
   const agent = await getAgentBySlug(slug);
   if (!agent) return notFound();
 
+  const sanitizedWhatsapp = agent.contact?.whatsAppNumber?.replace(/[^\d]/g, "");
+  const sanitizedPhonePrimary = agent.contact?.phonePrimary?.replace(/[^\d]/g, "");
+  const sanitizedPhoneSecondary = agent.contact?.phoneSecondary?.replace(/[^\d]/g, "");
+  const imageAlt =
+    typeof agent.photo !== "number" && agent.photo?.alt
+      ? agent.photo.alt
+      : `${agent.name}${agent.title ? ` - ${agent.title}` : ""}`;
+
+  const breadcrumbs = addBreadcrumbs([
+    { name: "Agents", link: "/agents" },
+    { name: agent.name, link: `/agents/${slug}` },
+  ]);
+
   return (
     <main className="container max-w-7xl">
-      <div className="py-4 sm:py-9 md:py-12 grid md:grid-cols-2 gap-4">
-        <div className="flex flex-col items-center gap-4">
+      <article
+        className="grid gap-4 py-4 sm:py-9 md:grid-cols-2 md:py-12"
+        itemScope
+        itemType="https://schema.org/Person"
+      >
+        <header className="flex flex-col items-center gap-4">
           {typeof agent.photo !== "number" && agent.photo && (
-            <div className="rounded-xl overflow-hidden">
-              <ImageObject {...agent.photo} />
-            </div>
+            <figure className="overflow-hidden rounded-xl">
+              <ImageObject {...agent.photo} alt={imageAlt} />
+            </figure>
           )}
-          <div className="flex items-center gap-3">
+          <nav aria-label="Social profiles" className="flex items-center gap-3">
             {agent.contact?.socials?.map((social) => {
               const Icon = getSocialIcons(social.platform);
               return (
-                <Button size="icon" variant="outline" asChild key={social.id}>
-                  <Link href={social.url as Route}>
+                <Button asChild key={social.id} size="icon" variant="outline">
+                  <Link href={social.url as Route} rel="noopener noreferrer" target="_blank">
                     <Icon />
                   </Link>
                 </Button>
               );
             })}
-          </div>
-        </div>
-        <div className="py-4 space-y-6">
+          </nav>
+          {/* Microdata */}
+          <meta content={agent.name} itemProp="name" />
+          {agent.title && <meta content={agent.title} itemProp="jobTitle" />}
+          {agent.contact?.email && <meta content={agent.contact.email} itemProp="email" />}
+          {sanitizedPhonePrimary && <meta content={sanitizedPhonePrimary} itemProp="telephone" />}
+          {agent.contact?.socials?.length ? (
+            <>
+              {agent.contact.socials
+                .filter((s) => !!s.url)
+                .map((s) => (
+                  <link href={s.url as string} itemProp="sameAs" key={s.id} />
+                ))}
+            </>
+          ) : null}
+        </header>
+
+        <div className="space-y-6 py-4">
           <div>
             <div className="flex items-end gap-2">
-              <h1 className="font-serif text-4xl">{agent.name}</h1>
+              <h1 className="font-serif text-4xl" itemProp="name">
+                {agent.name}
+              </h1>
               {agent.contact?.licenseNumber && (
                 <p className="text-muted-foreground text-sm">{agent.contact?.licenseNumber}</p>
               )}
             </div>
-            <p className="text-muted-foreground">{agent.title}</p>
+            {agent.title && (
+              <p className="text-muted-foreground" itemProp="jobTitle">
+                {agent.title}
+              </p>
+            )}
           </div>
           <div className="flex items-center gap-3">
-            {agent.contact?.whatsAppNumber && (
-              <Button asChild className="hover:text-emerald-400 bg-emerald-200 text-emerald-800" variant="secondary">
-                <Link href="/">
+            {sanitizedWhatsapp && (
+              <Button asChild className="bg-emerald-200 text-emerald-800 hover:text-emerald-400" variant="secondary">
+                <Link href={`https://wa.me/${sanitizedWhatsapp}`} rel="noopener noreferrer" target="_blank">
                   <IconBrandWhatsapp />
                   Whatsapp
                 </Link>
@@ -72,118 +158,152 @@ export default async function AgentPage({ params }: Props) {
                 </Link>
               </Button>
             )}
-            {agent.contact?.phonePrimary && (
+            {sanitizedPhonePrimary && (
               <Button asChild variant="outline">
-                <Link href={`tel:${agent.contact.phonePrimary}`}>
+                <Link href={`tel:${sanitizedPhonePrimary}`}>
                   <IconPhone />
-                  {agent.contact.phonePrimary}
+                  {agent.contact?.phonePrimary}
                 </Link>
               </Button>
             )}
           </div>
-          <div>
-            <h2 className="text-sm text-muted-foreground mb-3">Contact Details</h2>
+
+          <section aria-labelledby="contact-details">
+            <h2 className="mb-3 text-muted-foreground text-sm" id="contact-details">
+              Contact Details
+            </h2>
             <ul className="space-y-4">
-              {agent.contact?.phonePrimary && (
+              {sanitizedPhonePrimary && (
                 <li>
                   <Link
-                    className="flex items-center gap-3 hover:text-brand-600 transition-colors"
-                    href={`tel:${agent.contact.phonePrimary}`}
+                    className="flex items-center gap-3 transition-colors hover:text-brand-600"
+                    href={`tel:${sanitizedPhonePrimary}`}
                   >
-                    <IconPhone className="size-4" /> {agent.contact.phonePrimary}
+                    <IconPhone className="size-4" /> {agent.contact?.phonePrimary}
                   </Link>
                 </li>
               )}
-              {agent.contact?.phoneSecondary && (
+              {sanitizedPhoneSecondary && (
                 <li>
                   <Link
-                    className="flex items-center gap-3 hover:text-brand-600 transition-colors"
-                    href={`tel:${agent.contact.phoneSecondary}`}
+                    className="flex items-center gap-3 transition-colors hover:text-brand-600"
+                    href={`tel:${sanitizedPhoneSecondary}`}
                   >
-                    <IconPhone className="size-4" /> {agent.contact.phoneSecondary}
+                    <IconPhone className="size-4" /> {agent.contact?.phoneSecondary}
                   </Link>
                 </li>
               )}
-              {agent.contact?.whatsAppNumber && (
+              {sanitizedWhatsapp && (
                 <li>
                   <Link
-                    className="flex items-center gap-3 hover:text-brand-600 transition-colors"
-                    href={`tel:${agent.contact.whatsAppNumber}`}
+                    className="flex items-center gap-3 transition-colors hover:text-brand-600"
+                    href={`https://wa.me/${sanitizedWhatsapp}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
                   >
-                    <IconBrandWhatsapp className="size-4" /> {agent.contact.whatsAppNumber}
+                    <IconBrandWhatsapp className="size-4" /> {agent.contact?.whatsAppNumber}
                   </Link>
                 </li>
               )}
               {agent.contact?.email && (
                 <li>
                   <Link
-                    className="flex items-center gap-3 hover:text-brand-600 transition-colors"
-                    href={`tel:${agent.contact.email}`}
+                    className="flex items-center gap-3 transition-colors hover:text-brand-600"
+                    href={`mailto:${agent.contact.email}`}
                   >
-                    <IconEmail className="size-4" /> {agent.contact.email}
+                    <IconEmail className="size-4" /> {agent.contact?.email}
                   </Link>
                 </li>
               )}
             </ul>
-          </div>
-          <ul className="grid grid-cols-2 gap-6">
-            {agent.professional?.experienceYears && (
-              <li>
-                <h3 className="text-sm text-muted-foreground">Experience</h3>
-                <p className="text-lg font-medium">
-                  {agent.professional.experienceYears} {pluralize("year", agent.professional.experienceYears)} as{" "}
-                  {agent.title}
-                </p>
-              </li>
-            )}
-            {agent.professional?.awards && (
-              <li>
-                <h3 className="text-sm text-muted-foreground">Awards</h3>
-                <p className="text-lg font-medium">{agent.professional.awards}</p>
-              </li>
-            )}
-            {agent.professional?.mlsNumber && (
-              <li>
-                <h3 className="text-sm text-muted-foreground">MLS Number</h3>
-                <p className="text-lg font-medium">{agent.professional.mlsNumber}</p>
-              </li>
-            )}
-            {agent.professional?.languages && (
-              <li>
-                <h3 className="text-sm text-muted-foreground">Languages Spoken</h3>
-                <p className="text-lg font-medium">
-                  {agent.professional.languages
-                    .map((l) => l.language)
-                    .filter(Boolean)
-                    .join(", ")}
-                </p>
-              </li>
-            )}
-          </ul>
-        </div>
-       
-      </div>
-      <div className="space-y-6">
+          </section>
 
-      {agent.professional?.specialties && (
-        <div>
-            <h4 className="text-sm text-muted-foreground">Specialties & Service Areas</h4>
-            <ul className="flex flex-wrap gap-3 mt-2">
-              {agent.professional?.specialties.map((s) => typeof s !== 'number' && s.title && (
-                <li key={s.id}>
-                  <Badge>{s.title }</Badge>
+          <section aria-labelledby="agent-stats">
+            <h2 className="sr-only" id="agent-stats">
+              Agent stats
+            </h2>
+            <ul className="grid grid-cols-2 gap-6">
+              {agent.professional?.experienceYears && (
+                <li>
+                  <h3 className="text-muted-foreground text-sm">Experience</h3>
+                  <p className="font-medium text-lg">
+                    {agent.professional.experienceYears} {pluralize("year", agent.professional.experienceYears)} as{" "}
+                    {agent.title}
+                  </p>
                 </li>
-              ))}
+              )}
+              {agent.professional?.awards && (
+                <li>
+                  <h3 className="text-muted-foreground text-sm">Awards</h3>
+                  <p className="font-medium text-lg">{agent.professional.awards}</p>
+                </li>
+              )}
+              {agent.professional?.mlsNumber && (
+                <li>
+                  <h3 className="text-muted-foreground text-sm">MLS Number</h3>
+                  <p className="font-medium text-lg">{agent.professional.mlsNumber}</p>
+                </li>
+              )}
+              {agent.professional?.languages && (
+                <li>
+                  <h3 className="text-muted-foreground text-sm">Languages Spoken</h3>
+                  <p className="font-medium text-lg">
+                    {agent.professional.languages
+                      .map((l) => l.language)
+                      .filter(Boolean)
+                      .join(", ")}
+                  </p>
+                </li>
+              )}
             </ul>
-          </div>
+          </section>
+        </div>
+      </article>
+
+      <div className="space-y-6">
+        {agent.professional?.specialties && (
+          <section aria-labelledby="specialties">
+            <h4 className="text-muted-foreground text-sm" id="specialties">
+              Specialties & Service Areas
+            </h4>
+            <ul className="mt-2 flex flex-wrap gap-3">
+              {agent.professional?.specialties.map(
+                (s) =>
+                  typeof s !== "number" &&
+                  s.title && (
+                    <li key={s.id}>
+                      <Badge>{s.title}</Badge>
+                    </li>
+                  )
+              )}
+            </ul>
+          </section>
         )}
         {agent.about && (
-          <div>
-             <h4 className="text-sm text-muted-foreground mb-2">About me</h4>
+          <section aria-labelledby="about-agent">
+            <h4 className="mb-2 text-muted-foreground text-sm" id="about-agent">
+              About me
+            </h4>
             <RichText data={agent.about} enableGutter={false} />
-          </div>
+          </section>
         )}
-        </div>
+      </div>
+
+      {/* JSON-LD Schema */}
+      <Schema
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: agent.name,
+          jobTitle: agent.title,
+          url: `/agents/${slug}`,
+          email: agent.contact?.email,
+          telephone: sanitizedPhonePrimary || undefined,
+          sameAs: agent.contact?.socials?.map((s) => s.url).filter(Boolean),
+        }}
+      />
+      <Schema schema={breadcrumbs} />
+
       <Cta />
     </main>
   );

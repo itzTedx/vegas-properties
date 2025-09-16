@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import Script from "next/script";
+
 import { Cta } from "@/components/layout/cta";
 
 import { ContactForm } from "./form";
@@ -8,12 +11,68 @@ interface Props {
   searchParams: SearchParams;
 }
 
+export const metadata: Metadata = {
+  title: "Contact Us | Vegas Properties",
+  description:
+    "Get in touch with Vegas Properties in Dubai. Questions about our properties or services? Our team is ready to help.",
+  alternates: {
+    canonical: "/contact",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Contact Us | Vegas Properties",
+    description:
+      "Get in touch with Vegas Properties in Dubai. Questions about our properties or services? Our team is ready to help.",
+    url: "https://vegasproperties.com/contact",
+    siteName: "Vegas Properties",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Vegas Properties",
+    description:
+      "Get in touch with Vegas Properties in Dubai. Questions about our properties or services? Our team is ready to help.",
+  },
+};
+
 export default async function ContactPage({ searchParams }: Props) {
   const query = await searchParams;
 
   return (
     <main className="pt-4 sm:pt-9 md:pt-12">
-      <section className="container relative pb-9 sm:pb-14">
+      <Script
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "RealEstateAgent",
+            name: "Vegas Properties",
+            url: "https://vegasproperties.com",
+            email: "info@vegasproperties.com",
+            telephone: "+97141234567",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Dubai",
+              addressCountry: "AE",
+            },
+            areaServed: "AE",
+            contactPoint: {
+              "@type": "ContactPoint",
+              contactType: "customer support",
+              email: "info@vegasproperties.com",
+              telephone: "+97141234567",
+              areaServed: "AE",
+              availableLanguage: ["en", "ar"],
+            },
+          }),
+        }}
+        id="ld-json-contact"
+        strategy="afterInteractive"
+        type="application/ld+json"
+      />
+      <section aria-label="Contact Vegas Properties" className="container relative pb-9 sm:pb-14">
         <SectionHeader
           as="h1"
           hasHighlight
@@ -27,30 +86,24 @@ export default async function ContactPage({ searchParams }: Props) {
           <ContactForm initialMessage={query?.message} />
           <aside>
             <h2 className="font-jaguar text-3xl">Other Ways to Reach Us</h2>
-            <div className="mt-4 grid grid-cols-1 gap-6">
-              {[
-                {
-                  title: "Office Location",
-                  content: "Dubai, United Arab Emirates",
-                },
-                {
-                  title: "Email",
-                  content: "info@vegasproperties.com",
-                },
-                {
-                  title: "Phone",
-                  content: "+971 4 123 4567",
-                },
-              ].map((info) => (
-                <div
-                  className="group rounded-lg border p-6 transition-colors duration-300 hover:border-primary/50"
-                  key={info.title}
-                >
-                  <h3 className="mb-2 font-medium text-xl">{info.title}</h3>
-                  <p className="text-muted-foreground">{info.content}</p>
-                </div>
-              ))}
-            </div>
+            <ul className="mt-4 grid grid-cols-1 gap-6">
+              <li className="group rounded-lg border p-6 transition-colors duration-300 hover:border-primary/50">
+                <h3 className="mb-2 font-medium text-xl">Office Location</h3>
+                <address className="text-muted-foreground not-italic">Dubai, United Arab Emirates</address>
+              </li>
+              <li className="group rounded-lg border p-6 transition-colors duration-300 hover:border-primary/50">
+                <h3 className="mb-2 font-medium text-xl">Email</h3>
+                <p className="text-muted-foreground">
+                  <a href="mailto:info@vegasproperties.com">info@vegasproperties.com</a>
+                </p>
+              </li>
+              <li className="group rounded-lg border p-6 transition-colors duration-300 hover:border-primary/50">
+                <h3 className="mb-2 font-medium text-xl">Phone</h3>
+                <p className="text-muted-foreground">
+                  <a href="tel:+97141234567">+971 4 123 4567</a>
+                </p>
+              </li>
+            </ul>
           </aside>
         </div>
       </section>
