@@ -105,29 +105,30 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
 
-  --brand-50: oklch(0.9619 0.0179 272.31);
-  --brand-100: oklch(0.9299 0.0334 272.79);
-  --brand-200: oklch(0.8675 0.065 274.44);
-  --brand-300: oklch(0.7806 0.1115 274.54);
-  --brand-400: oklch(0.6682 0.1771 276.23);
-  --brand-500: oklch(0.5663 0.2398 274.58);
-  --brand-600: oklch(0.5008 0.2823 274.66);
-  --brand-700: oklch(0.4489 0.2353 274.55);
+  --brand-50: oklch(0.9592 0.019253 273.2377);
+  --brand-100: oklch(0.9253 0.0359 275.35);
+  --brand-200: oklch(0.8609 0.0688 276.72);
+  --brand-300: oklch(0.7727 0.1166 276.86);
+  --brand-400: oklch(0.6609 0.1792 278.19);
+  --brand-500: oklch(0.573 0.2231 277.57);
+  --brand-600: oklch(0.5086 0.2429 277.51);
+  --brand-700: oklch(0.4562 0.227 277.85);
   --brand-800: oklch(0.3876 0.2043 273.82);
-  --brand-900: oklch(0.348 0.1554 276.01);
-  --brand-950: oklch(0.2414 0.065 282.96);
+  --brand-900: oklch(0.3569 0.1433 279.8);
+  --brand-950: oklch(0.2964 0.112 281.91);  
 
-  --secondary-50: oklch(0.9694 0.0152 12.42);
-  --secondary-100: oklch(0.9414 0.0298 12.58);
-  --secondary-200: oklch(0.8913 0.0582 10.39);
-  --secondary-300: oklch(0.8081 0.111 12.15);
-  --secondary-400: oklch(0.7189 0.1781 13.97);
-  --secondary-500: oklch(0.6543 0.2338 18.09);
-  --secondary-600: oklch(0.6071 0.2397 20.24);
-  --secondary-700: oklch(0.5263 0.2072 18.7);
-  --secondary-800: oklch(0.4677 0.1827 16.09);
-  --secondary-900: oklch(0.4196 0.1602 12.52);
-  --secondary-950: oklch(0.2612 0.0766 6.77);
+  --secondary: oklch(41.736% 0.14916 10.25);
+  --secondary-50: oklch(99.585% 0.00248 345.21);
+  --secondary-100: oklch(95.686% 0.01807 0.39447);
+  --secondary-200: oklch(87.848% 0.05349 359.05);
+  --secondary-300: oklch(80.238% 0.09123 359.95);
+  --secondary-400: oklch(73.005% 0.12989 2.1606);
+  --secondary-500: oklch(66.48% 0.16745 4.3716);
+  --secondary-600: oklch(61.18% 0.19937 7.8475);
+  --secondary-700: oklch(56.105% 0.20512 11.12);
+  --secondary-800: oklch(49.036% 0.17767 10.996);
+  --secondary-900: oklch(41.736% 0.14916 10.25);
+  --secondary-950: oklch(36.55% 0.12856 9.8149);
 
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
@@ -154,21 +155,23 @@
   /* 0 1px 0 1px color-mix(in oklab, var(--brand-600) 100%, transparent) inset,
     0 2px 2px 1px color-mix(in oklab, var(--brand-100) 40%, transparent) inset,  */
   --shadow-brand-md:
-    0 1px 3px 0 color-mix(in oklab, var(--brand-600) 14%, transparent),
-    0 4px 5px -2px color-mix(in oklab, var(--brand-600) 10%, transparent),
-    0 10px 6px -3px color-mix(in oklab, var(--brand-600) 8%, transparent),
-    0 18px 8px -4px color-mix(in oklab, var(--brand-600) 4%, transparent),
-    0 26px 8px -6px color-mix(in oklab, var(--brand-600) 1%, transparent);
+    0 1px 3px 0 color-mix(in oklab, var(--brand-950) 14%, transparent),
+    0 4px 5px -2px color-mix(in oklab, var(--brand-950) 10%, transparent),
+    0 10px 6px -3px color-mix(in oklab, var(--brand-950) 8%, transparent),
+    0 18px 8px -4px color-mix(in oklab, var(--brand-950) 4%, transparent),
+    0 26px 8px -6px color-mix(in oklab, var(--brand-950) 1%, transparent);
 
-  /* 0 1px 0 1px color-mix(in oklab, var(--brand-600) 100%, transparent) inset, 
+  /* 0 1px 0 1px color-mix(in oklab, var(--brand-950) 100%, transparent) inset, 
     0 2px 2px 1px color-mix(in oklab, var(--brand-100) 40%, transparent) inset,  */
   --shadow-brand-lg:
-    0 1px 3px 0 color-mix(in oklab, var(--brand-600) 18%, transparent),
-    0 5px 5px -2px color-mix(in oklab, var(--brand-600) 16%, transparent),
-    0 11px 6px -3px color-mix(in oklab, var(--brand-600) 12%, transparent),
-    0 20px 8px -4px color-mix(in oklab, var(--brand-600) 6%, transparent),
-    0 30px 8px -6px color-mix(in oklab, var(--brand-600) 1%, transparent);
+    0 1px 3px 0 color-mix(in oklab, var(--brand-950) 18%, transparent),
+    0 5px 5px -2px color-mix(in oklab, var(--brand-950) 16%, transparent),
+    0 11px 6px -3px color-mix(in oklab, var(--brand-950) 12%, transparent),
+    0 20px 8px -4px color-mix(in oklab, var(--brand-950) 6%, transparent),
+    0 30px 8px -6px color-mix(in oklab, var(--brand-950) 1%, transparent);
 }
+
+
 
 @layer base {
   * {

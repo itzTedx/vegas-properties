@@ -15,7 +15,7 @@ export function Navbar() {
       <nav className="container flex items-center justify-between gap-8">
         <div className="flex items-center gap-8">
           <Link href="/">
-            <Logo className="h-7 w-auto sm:h-8" />
+            <Logo className="h-7 w-auto sm:h-12" />
           </Link>
 
           <DesktopNavbar />

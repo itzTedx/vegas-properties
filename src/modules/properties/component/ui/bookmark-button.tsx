@@ -42,7 +42,7 @@ export const BookmarkButton = ({
       variant={isBookmarked ? "destructive" : variant}
     >
       <LoadingSwap className="flex items-center gap-2" isLoading={isPending}>
-        <IconBookmark className={isBookmarked ? "text-secondary-50" : "text-secondary"} />
+        <IconBookmark className={isBookmarked ? "text-secondary-50" : "text-secondary-600"} />
         {!hideLabel && <span className="hidden md:block">Bookmark</span>}
       </LoadingSwap>
     </Button>

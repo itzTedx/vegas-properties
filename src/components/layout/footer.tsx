@@ -12,14 +12,21 @@ export const Footer = async () => {
     <footer className="bg-card">
       <nav className="container py-8 md:py-12">
         <div className="flex flex-col gap-6 md:flex-row md:justify-between">
-          <Link className="self-center md:self-start" href="/">
-            <Logo />
-          </Link>
+          <div>
+            <Link className="self-center md:self-start" href="/">
+              <Logo />
+            </Link>
+            <p className="mt-4 max-w-lg">
+              Vegas Properties offers luxury apartments, villas, and townhouses in Dubai’s top communities. With
+              verified listings, trusted developers, and expert guidance, we make buying, selling, and investing
+              seamless and transparent.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <div>
               <h3 className="mb-3 text-muted-foreground text-xs">Navigation</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 font-medium">
                 <li>
                   <Link className="transition-colors hover:text-foreground" href="/">
                     Home
@@ -44,7 +51,7 @@ export const Footer = async () => {
             </div>
             <div>
               <h3 className="mb-3 text-muted-foreground text-xs">Featured Properties</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 font-medium">
                 {featuredProperties.map((property) => (
                   <li key={property.id}>
                     <Link className="transition-colors hover:text-foreground" href={`/properties/${property.slug}`}>
@@ -56,7 +63,7 @@ export const Footer = async () => {
             </div>
             <div className="sm:col-span-2 lg:col-span-1">
               <h3 className="mb-3 text-muted-foreground text-xs">Popular Searches</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-2 font-medium">
                 {featuredProperties.map((property) => (
                   <li key={property.id}>
                     <Link className="transition-colors hover:text-foreground" href={`/properties/${property.slug}`}>

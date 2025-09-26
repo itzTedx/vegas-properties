@@ -50,7 +50,7 @@ export const PropertyCard = async ({ property, showBadges = true }: Props) => {
                 )}
                 {property.pricing.priceType === "sale" && (
                   <Badge className="border-secondary-600/15 shadow-secondary-700/10 shadow-xl">
-                    <IconSaleBuilding className="text-secondary" /> For Sale
+                    <IconSaleBuilding className="text-secondary-600" /> For Sale
                   </Badge>
                 )}
               </div>
@@ -58,7 +58,7 @@ export const PropertyCard = async ({ property, showBadges = true }: Props) => {
             <figure>
               <CardImage image={property.image} />
             </figure>
-            <div className="flex items-center justify-between gap-2 pr-2">
+            <div className="flex items-center justify-between gap-2 pr-4 pl-2">
               <header className="flex-1">
                 <CardHeader className="flex-1 p-0">
                   <CardTitle>

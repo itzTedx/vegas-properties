@@ -27,8 +27,9 @@ export const Cta = ({ disableBg = false }: Props) => {
         </p>
         <Button
           aria-label="Learn more about our services and expertise"
-          className="text-sm sm:w-auto sm:text-base"
+          className="bg-card text-card-foreground text-sm hover:bg-background sm:w-auto sm:text-base"
           size="lg"
+          variant="secondary"
         >
           Get Expert Advice
         </Button>
