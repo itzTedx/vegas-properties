@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
@@ -27,11 +29,14 @@ export const Cta = ({ disableBg = false }: Props) => {
         </p>
         <Button
           aria-label="Learn more about our services and expertise"
+          asChild
           className="bg-card text-card-foreground text-sm hover:bg-background sm:w-auto sm:text-base"
           size="lg"
           variant="secondary"
         >
-          Get Expert Advice
+          <Link href="https://wa.me/971505691218" rel="noopener noreferrer" target="_blank">
+            Get Expert Advice
+          </Link>
         </Button>
       </div>
     </section>

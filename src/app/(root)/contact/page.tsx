@@ -82,25 +82,31 @@ export default async function ContactPage({ searchParams }: Props) {
           shortly."
           title={`Let's Start\na Conversation`}
         />
-        <div className="mt-12 grid grid-cols-3 gap-6">
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:mt-12 lg:grid-cols-3 lg:gap-8">
           <ContactForm initialMessage={query?.message} />
-          <aside>
-            <h2 className="font-jaguar text-3xl">Other Ways to Reach Us</h2>
-            <ul className="mt-4 grid grid-cols-1 gap-6">
-              <li className="group rounded-lg border p-6 transition-colors duration-300 hover:border-primary/50">
-                <h3 className="mb-2 font-medium text-xl">Office Location</h3>
-                <address className="text-muted-foreground not-italic">Dubai, United Arab Emirates</address>
+          <aside className="lg:col-span-1">
+            <h2 className="font-jaguar text-2xl sm:text-3xl">Other Ways to Reach Us</h2>
+            <ul className="mt-4 grid grid-cols-1 gap-4 sm:gap-6">
+              <li className="group rounded-lg border p-4 transition-colors duration-300 hover:border-primary/50 sm:p-6">
+                <h3 className="mb-2 font-medium text-lg sm:text-xl">Office Location</h3>
+                <address className="text-muted-foreground text-sm not-italic sm:text-base">
+                  Dubai, United Arab Emirates
+                </address>
               </li>
-              <li className="group rounded-lg border p-6 transition-colors duration-300 hover:border-primary/50">
-                <h3 className="mb-2 font-medium text-xl">Email</h3>
-                <p className="text-muted-foreground">
-                  <a href="mailto:info@vegasproperties.com">info@vegasproperties.com</a>
+              <li className="group rounded-lg border p-4 transition-colors duration-300 hover:border-primary/50 sm:p-6">
+                <h3 className="mb-2 font-medium text-lg sm:text-xl">Email</h3>
+                <p className="text-muted-foreground text-sm sm:text-base">
+                  <a className="transition-colors hover:text-primary" href="mailto:info@vegasproperties.com">
+                    info@vegasproperties.com
+                  </a>
                 </p>
               </li>
-              <li className="group rounded-lg border p-6 transition-colors duration-300 hover:border-primary/50">
-                <h3 className="mb-2 font-medium text-xl">Phone</h3>
-                <p className="text-muted-foreground">
-                  <a href="tel:+97141234567">+971 4 123 4567</a>
+              <li className="group rounded-lg border p-4 transition-colors duration-300 hover:border-primary/50 sm:p-6">
+                <h3 className="mb-2 font-medium text-lg sm:text-xl">Phone</h3>
+                <p className="text-muted-foreground text-sm sm:text-base">
+                  <a className="transition-colors hover:text-primary" href="tel:+97141234567">
+                    +971 4 123 4567
+                  </a>
                 </p>
               </li>
             </ul>

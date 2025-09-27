@@ -35,7 +35,7 @@ export function ContactForm({ initialMessage }: Props) {
   return (
     <Form {...form}>
       <form
-        className={cn("col-span-2 flex w-full flex-col gap-4 rounded-md bg-card p-9")}
+        className={cn("flex w-full flex-col gap-4 rounded-md bg-card p-4 sm:p-6 lg:col-span-2 lg:p-9")}
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FloatingLabelInput control={form.control} label="Name" name="name" />
