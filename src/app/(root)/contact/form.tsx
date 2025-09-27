@@ -10,13 +10,17 @@ import { cn } from "@/lib/utils";
 
 import { FloatingLabelInput } from "./floation-input";
 import { ContactFormData, contactSchema } from "./schema";
+import { useTransition } from "react";
+import { sendContactEmail } from "./actions/mutation";
+import { toast } from "sonner";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 
 interface Props {
   initialMessage?: string;
 }
 
 export function ContactForm({ initialMessage }: Props) {
-  console.log("message", initialMessage);
+  const [isPending, startTransition] = useTransition()
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -28,8 +32,14 @@ export function ContactForm({ initialMessage }: Props) {
   });
 
   function onSubmit(values: ContactFormData) {
-    console.log(values);
-    // TODO: Implement form submission
+    startTransition(async () => {
+      const result = await sendContactEmail(values)
+
+      if (result.success) {
+        form.reset()
+        toast.success('Message send successful', {description: "We'll get back to you soon."})
+      }
+    })
   }
 
   return (
@@ -46,8 +56,11 @@ export function ContactForm({ initialMessage }: Props) {
 
         <FloatingLabelInput control={form.control} isTextarea label="Message" name="message" />
 
-        <Button className="w-full" size="lg" type="submit">
+        <Button className="w-full" size="lg" type="submit" disabled={isPending}>
+          <LoadingSwap isLoading={isPending}>
+            
           Send Message
+          </LoadingSwap>
         </Button>
       </form>
     </Form>

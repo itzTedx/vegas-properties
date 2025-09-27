@@ -97,7 +97,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 <h3 className="mb-2 font-medium text-lg sm:text-xl">Email</h3>
                 <p className="text-muted-foreground text-sm sm:text-base">
                   <a className="transition-colors hover:text-primary" href="mailto:info@vegasproperties.com">
-                    info@vegasproperties.com
+                  sales@thevegasproperties.com
                   </a>
                 </p>
               </li>
@@ -105,7 +105,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 <h3 className="mb-2 font-medium text-lg sm:text-xl">Phone</h3>
                 <p className="text-muted-foreground text-sm sm:text-base">
                   <a className="transition-colors hover:text-primary" href="tel:+97141234567">
-                    +971 4 123 4567
+                    +971 50 569 1218
                   </a>
                 </p>
               </li>
