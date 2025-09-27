@@ -53,6 +53,7 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {google: "uOXksO0tkdqOQWdSUyS8VfLXgiby0039C90S1_286sE"},
   metadataBase: new URL("https://www.vegasproperties.ae/"),
 };
 
