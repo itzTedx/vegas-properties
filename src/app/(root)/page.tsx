@@ -160,7 +160,7 @@ export default async function Home() {
               <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="featured-heading">
                 <span className="text-secondary-900">Handpicked</span> Properties for You
               </h2>
-              <p className="text-balance text-sm leading-relaxed">
+              <p className="text-balance leading-relaxed">
                 Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas.
                 Explore premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
               </p>
@@ -180,7 +180,7 @@ export default async function Home() {
                 Premium Properties in the <br />
                 <span className="text-secondary-900">best locations</span>
               </h2>
-              <p className="text-balance text-sm leading-relaxed">
+              <p className="text-balance leading-relaxed">
                 Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas.
                 Explore premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
               </p>
