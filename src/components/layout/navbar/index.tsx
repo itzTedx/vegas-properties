@@ -11,11 +11,11 @@ import { MobileSearch } from "./mobile-search";
 
 export function Navbar() {
   return (
-    <header className="z-999 border-b bg-card py-2.5 max-md:sticky max-md:top-0">
+    <header className="z-999 mx-2 mt-2 rounded-lg bg-primary py-2.5 max-md:sticky max-md:top-2">
       <nav className="container flex items-center justify-between gap-8">
         <div className="flex items-center gap-8">
           <Link href="/">
-            <Logo className="h-7 w-auto sm:h-12" />
+            <Logo className="h-7 w-auto brightness-[1000%] sm:h-12" />
           </Link>
 
           <DesktopNavbar />
@@ -23,13 +23,8 @@ export function Navbar() {
 
         <ul className="flex items-center gap-2 md:gap-4">
           <li className="hidden md:block">
-            <Button asChild className="hover:text-emerald-800" variant="ghost">
-              <Link
-                className="text-emerald-600"
-                href="https://wa.me/971505691218"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
+            <Button asChild className="text-emerald-500 hover:bg-background/10 hover:text-emerald-400" variant="ghost">
+              <Link href="https://wa.me/971505691218" rel="noopener noreferrer" target="_blank">
                 <IconBrandWhatsapp />
                 Whatsapp
               </Link>
@@ -37,7 +32,7 @@ export function Navbar() {
           </li>
 
           <li>
-            <Button asChild variant="secondary">
+            <Button asChild  variant="default">
               <Link href="/contact">Get in touch</Link>
             </Button>
           </li>

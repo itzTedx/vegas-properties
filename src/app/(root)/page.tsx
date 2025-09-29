@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import Script from "next/script";
 
 import { Cta } from "@/components/layout/cta";
@@ -69,14 +68,8 @@ export default async function Home() {
   const MAX_WIDTH = "max-w-5xl";
   return (
     <>
-      <Link
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-black"
-        href="#main-content"
-      >
-        Skip to main content
-      </Link>
       <main id="main-content">
-        <section aria-labelledby="home-hero-heading" className="md:px-8 md:py-4" id="home-hero">
+        <section aria-labelledby="home-hero-heading" className="md:px-2 md:py-2" id="home-hero">
           <div className="relative flex h-[calc(100svh-3rem)] items-end overflow-hidden p-6 sm:h-96 md:h-[32rem] md:rounded-2xl">
             <div className={cn("relative z-50 mx-auto pb-14 text-white", MAX_WIDTH)}>
               <h1 className="font-serif text-3xl md:text-4xl" id="home-hero-heading">
@@ -108,7 +101,47 @@ export default async function Home() {
             />
           </div>
         </section>
-        {/* <section className="container py-14">
+       
+        <section aria-labelledby="featured-heading" className="container pt-6 pb-14" id="featured">
+          <div className="space-y-4">
+            <Badge>
+              <IconFire aria-hidden="true" focusable="false" />
+              Featured
+            </Badge>
+            <div className="grid gap-3 md:grid-cols-2">
+              <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="featured-heading">
+                <span className="text-secondary-900">Handpicked</span> Properties for You
+              </h2>
+              <p className="text-balance leading-relaxed">
+                Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas.
+                Explore premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
+              </p>
+            </div>
+          </div>
+
+          <FeaturedProperties />
+        </section>
+        <section aria-labelledby="latest-heading" className="container py-14" id="latest">
+          <div className="space-y-4">
+            <Badge>
+              <IconBuilding aria-hidden="true" focusable="false" />
+              Properties
+            </Badge>
+            <div className="grid gap-3 md:grid-cols-2">
+              <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="latest-heading">
+                Premium Properties in the <br />
+                <span className="text-secondary-900">best locations</span>
+              </h2>
+              <p className="text-balance leading-relaxed">
+                Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas.
+                Explore premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
+              </p>
+            </div>
+          </div>
+
+          <LatestProperties />
+        </section>
+        <section className="container py-14">
           <div className="grid grid-cols-2 gap-4 space-y-4">
             <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
               Your dream property in Dubai might be closer than you think.
@@ -149,47 +182,7 @@ export default async function Home() {
               </p>
             </div>
           </div>
-        </section> */}
-        <section aria-labelledby="featured-heading" className="container pt-6 pb-14" id="featured">
-          <div className="space-y-4">
-            <Badge>
-              <IconFire aria-hidden="true" focusable="false" />
-              Featured
-            </Badge>
-            <div className="grid gap-3 md:grid-cols-2">
-              <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="featured-heading">
-                <span className="text-secondary-900">Handpicked</span> Properties for You
-              </h2>
-              <p className="text-balance leading-relaxed">
-                Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas.
-                Explore premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
-              </p>
-            </div>
-          </div>
-
-          <FeaturedProperties />
         </section>
-        <section aria-labelledby="latest-heading" className="container py-14" id="latest">
-          <div className="space-y-4">
-            <Badge>
-              <IconBuilding aria-hidden="true" focusable="false" />
-              Properties
-            </Badge>
-            <div className="grid gap-3 md:grid-cols-2">
-              <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="latest-heading">
-                Premium Properties in the <br />
-                <span className="text-secondary-900">best locations</span>
-              </h2>
-              <p className="text-balance leading-relaxed">
-                Discover handpicked Dubai properties for sale and rent, from stunning apartments to luxury villas.
-                Explore premium listings with Vegas Properties and find your perfect home in the heart of Dubai.
-              </p>
-            </div>
-          </div>
-
-          <LatestProperties />
-        </section>
-
         {/* <FeaturesSection /> */}
         <Features />
         <section aria-labelledby="developers-heading" className="container max-w-7xl py-14" id="developers">
@@ -210,6 +203,7 @@ export default async function Home() {
             </ul>
           </div>
         </section>
+        
         <Testimonials />
         <Cta />
 

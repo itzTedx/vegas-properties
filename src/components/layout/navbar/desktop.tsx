@@ -12,12 +12,12 @@ export function DesktopNavbar() {
   const isActive = (href: string) => pathname.endsWith(href) || (href.includes(pathname) && pathname !== "/");
 
   return (
-    <ul className="hidden items-center gap-3 md:flex">
+    <ul className="hidden items-center gap-3 text-background md:flex">
       {NAV_LINKS.map(({ href, label }) => (
         <li key={href}>
           <Link
             className={cn(
-              "rounded-lg px-3 py-2 font-medium leading-none tracking-tight data-[active=true]:bg-card data-[active=true]:shadow-md"
+              "rounded-lg px-3 py-2 font-medium leading-none tracking-tight hover:bg-background/5 data-[active=true]:bg-card/80 data-[active=true]:text-brand-900 data-[active=true]:shadow-md"
             )}
             data-active={isActive(href)}
             href={href as Route}
