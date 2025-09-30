@@ -4,6 +4,7 @@ import Script from "next/script";
 
 import { Cta } from "@/components/layout/cta";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 import { IconBuilding } from "@/assets/icons";
 import { IconFire } from "@/assets/icons/fire";
@@ -101,7 +102,7 @@ export default async function Home() {
             />
           </div>
         </section>
-       
+
         <section aria-labelledby="featured-heading" className="container pt-6 pb-14" id="featured">
           <div className="space-y-4">
             <Badge>
@@ -141,46 +142,41 @@ export default async function Home() {
 
           <LatestProperties />
         </section>
-        <section className="container py-14">
-          <div className="grid grid-cols-2 gap-4 space-y-4">
+        <section className="container grid grid-cols-2 gap-4 py-14">
+          <div className="space-y-4 py-6">
             <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
               Your dream property in Dubai might be closer than you think.
             </h2>
-            <p className="text-balance text-sm leading-relaxed">
-              Each Vegas Properties listing offers world-class architecture, unmatched quality, and prime locations across
-              Dubai’s most prestigious communities.
+            <p className="text-balance leading-relaxed">
+              Each Vegas Properties listing offers world-class architecture, unmatched quality, and prime locations
+              across Dubai’s most prestigious communities.
             </p>
+            <Button>Find the best for you</Button>
           </div>
-          <div className="grid grid-cols-4 grid-rows-4 gap-3">
-            <div className="col-span-2 row-span-4 bg-card">
-              <h3>Discover a lifestyle upgrade</h3>
+          <div className="grid grid-cols-2   gap-3">
+            <div className="bg-card p-6">
+              <h3 className="text-2xl font-medium mb-2">Discover a lifestyle upgrade</h3>
               <p>
                 From waterfront villas to skyline-view apartments, our properties redefine modern luxury. Designed for
                 elegance, comfort, and long-term value.
               </p>
             </div>
-            <div className="row-span-3 bg-card">
-              <h3>Big opportunities in every space.</h3>
+            <div className="row-span-2 bg-card p-6">
+              <h3 className="text-2xl font-medium mb-2">Big opportunities in every space.</h3>
               <p>
                 With curated layouts and premium finishes, every property maximizes functionality and style—whether for
                 investment or personal living.
               </p>
             </div>
-            <div className="row-span-3 bg-card">
-              <h3>Pricing starts at AED 950K</h3>
+            <div className="bg-card p-6">
+              <h3 className="text-2xl font-medium mb-2">Pricing starts at AED 950K</h3>
               <p>
                 Your entry into Dubai’s property market begins here. Explore handpicked listings with flexible payment
                 options.
               </p>
             </div>
 
-            <div className="col-span-2 row-span-1 bg-card">
-              <h3>Discover a lifestyle upgrade</h3>
-              <p>
-                From waterfront villas to skyline-view apartments, our properties redefine modern luxury. Designed for
-                elegance, comfort, and long-term value.
-              </p>
-            </div>
+            
           </div>
         </section>
         {/* <FeaturesSection /> */}
@@ -203,7 +199,7 @@ export default async function Home() {
             </ul>
           </div>
         </section>
-        
+
         <Testimonials />
         <Cta />
 

@@ -12,7 +12,7 @@ export function DesktopNavbar() {
   const isActive = (href: string) => pathname.endsWith(href) || (href.includes(pathname) && pathname !== "/");
 
   return (
-    <ul className="hidden items-center gap-3 text-background md:flex">
+    <ul className="hidden items-center gap-3 md:flex">
       {NAV_LINKS.map(({ href, label }) => (
         <li key={href}>
           <Link

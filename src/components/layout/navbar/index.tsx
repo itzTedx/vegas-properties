@@ -11,11 +11,11 @@ import { MobileSearch } from "./mobile-search";
 
 export function Navbar() {
   return (
-    <header className="z-999 mx-2 mt-2 rounded-lg bg-primary py-2.5 max-md:sticky max-md:top-2">
+    <header className="sticky top-2 z-999 mx-2 mt-2 rounded-lg bg-card py-2.5">
       <nav className="container flex items-center justify-between gap-8">
         <div className="flex items-center gap-8">
           <Link href="/">
-            <Logo className="h-7 w-auto brightness-[1000%] sm:h-12" />
+            <Logo className="h-7 w-auto brightness-150 sm:h-12" />
           </Link>
 
           <DesktopNavbar />
@@ -32,7 +32,7 @@ export function Navbar() {
           </li>
 
           <li>
-            <Button asChild  variant="default">
+            <Button asChild variant="default">
               <Link href="/contact">Get in touch</Link>
             </Button>
           </li>
