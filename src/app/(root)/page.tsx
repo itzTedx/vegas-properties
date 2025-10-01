@@ -112,7 +112,7 @@ export default async function Home() {
               Featured
             </Badge>
             <div className="grid gap-3 md:grid-cols-2">
-              <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="featured-heading">
+              <h2 className="text-balance font-medium font-serif text-2xl md:text-4xl" id="featured-heading">
                 <span className="text-secondary-900">Handpicked</span> Properties for You
               </h2>
               <p className="text-balance leading-relaxed">
@@ -131,7 +131,7 @@ export default async function Home() {
               Properties
             </Badge>
             <div className="grid gap-3 md:grid-cols-2">
-              <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="latest-heading">
+              <h2 className="text-balance font-medium font-serif text-2xl md:text-4xl" id="latest-heading">
                 Premium Properties in the <br />
                 <span className="text-secondary-900">best locations</span>
               </h2>
@@ -187,7 +187,7 @@ export default async function Home() {
 
             <ul aria-label="Top real estate developers" className="mt-2 grid grid-cols-3 gap-4 sm:grid-cols-6">
               <li className="col-span-full sm:col-span-3">
-                <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl" id="developers-heading">
+                <h2 className="text-balance font-medium font-serif text-2xl md:text-4xl" id="developers-heading">
                   Exclusive projects from <span className="text-secondary-900">world-class developers</span> including:
                 </h2>
               </li>

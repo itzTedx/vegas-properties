@@ -44,7 +44,7 @@ export default async function AgentsPage() {
             Agents
           </Badge>
           <div className="grid gap-3 md:grid-cols-2">
-            <h1 className="text-balance font-medium font-sans text-2xl md:text-4xl">
+            <h1 className="text-balance font-medium font-serif text-2xl md:text-4xl">
               Meet Our <span className="text-brand-600">Expert</span> Property Agents
             </h1>
             <p className="text-balance text-sm leading-relaxed">
