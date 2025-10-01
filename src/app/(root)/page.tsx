@@ -153,30 +153,28 @@ export default async function Home() {
             </p>
             <Button>Find the best for you</Button>
           </div>
-          <div className="grid grid-cols-2   gap-3">
+          <div className="grid grid-cols-2 gap-3">
             <div className="bg-card p-6">
-              <h3 className="text-2xl font-medium mb-2">Discover a lifestyle upgrade</h3>
+              <h3 className="mb-2 font-medium text-2xl">Discover a lifestyle upgrade</h3>
               <p>
                 From waterfront villas to skyline-view apartments, our properties redefine modern luxury. Designed for
                 elegance, comfort, and long-term value.
               </p>
             </div>
             <div className="row-span-2 bg-card p-6">
-              <h3 className="text-2xl font-medium mb-2">Big opportunities in every space.</h3>
+              <h3 className="mb-2 font-medium text-2xl">Big opportunities in every space.</h3>
               <p>
                 With curated layouts and premium finishes, every property maximizes functionality and style—whether for
                 investment or personal living.
               </p>
             </div>
             <div className="bg-card p-6">
-              <h3 className="text-2xl font-medium mb-2">Pricing starts at AED 950K</h3>
+              <h3 className="mb-2 font-medium text-2xl">Pricing starts at AED 950K</h3>
               <p>
                 Your entry into Dubai’s property market begins here. Explore handpicked listings with flexible payment
                 options.
               </p>
             </div>
-
-            
           </div>
         </section>
         {/* <FeaturesSection /> */}
