@@ -1,6 +1,6 @@
 // src/collections/hooks/revalidateServicesCache.ts
 
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 import { CollectionAfterChangeHook, CollectionAfterDeleteHook } from "payload";
 
@@ -11,6 +11,9 @@ export const revalidatePropertiesCache: CollectionAfterChangeHook = async ({ doc
     // Always revalidate general services tag
 
     revalidateTag(PROPERTIES_TAG());
+    revalidatePath("/");
+    revalidatePath("/properties");
+    revalidatePath(`/properties/${doc.slug}`);
 
     // Revalidate specific service cache
     if (doc.id) {
@@ -32,6 +35,10 @@ export const revalidatePropertiesCacheAfterDelete: CollectionAfterDeleteHook = a
   try {
     // Always revalidate collection tag
     revalidateTag(PROPERTIES_TAG());
+
+    revalidatePath("/");
+    revalidatePath("/properties");
+    revalidatePath(`/properties/${doc.slug}`);
 
     // Revalidate specific property cache by id
     if (id) {

@@ -6,6 +6,8 @@ import { Cta } from "@/components/layout/cta";
 import { ContactForm } from "./form";
 import { SectionHeader } from "./section-header";
 
+export const dynamic = "force-static";
+
 type SearchParams = Promise<{ message: string | undefined }>;
 interface Props {
   searchParams: SearchParams;
@@ -97,7 +99,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 <h3 className="mb-2 font-medium text-lg sm:text-xl">Email</h3>
                 <p className="text-muted-foreground text-sm sm:text-base">
                   <a className="transition-colors hover:text-primary" href="mailto:info@vegasproperties.com">
-                  sales@thevegasproperties.com
+                    sales@thevegasproperties.com
                   </a>
                 </p>
               </li>

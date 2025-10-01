@@ -1,6 +1,9 @@
+import { unstable_cache as cache } from "next/cache";
+
 import type { Where } from "payload";
 
 import { payload } from "@/lib/payload";
+import { PROPERTIES_TAG } from "@/lib/payload/cache-keys";
 
 import { SearchFormType } from "./schema";
 
@@ -62,29 +65,33 @@ export async function searchQuery(query: SearchFormType) {
   return docs;
 }
 
-export async function getPropertiesPriceRange() {
-  const { docs } = await payload.find({
-    collection: "properties",
-    draft: false,
-    limit: 10000,
-  });
+export const getPropertiesPriceRange = cache(
+  async () => {
+    const { docs } = await payload.find({
+      collection: "properties",
+      draft: false,
+      limit: 10000,
+    });
 
-  const prices: number[] = [];
+    const prices: number[] = [];
 
-  for (const doc of docs ?? []) {
-    const salePrice = doc?.pricing?.salePrice;
+    for (const doc of docs ?? []) {
+      const salePrice = doc?.pricing?.salePrice;
 
-    if (typeof salePrice === "number" && Number.isFinite(salePrice)) {
-      prices.push(salePrice);
+      if (typeof salePrice === "number" && Number.isFinite(salePrice)) {
+        prices.push(salePrice);
+      }
     }
-  }
 
-  if (prices.length === 0) {
-    return { min: 0, max: 0 } as const;
-  }
+    if (prices.length === 0) {
+      return { min: 0, max: 0 } as const;
+    }
 
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
 
-  return { min, max } as const;
-}
+    return { min, max } as const;
+  },
+  [PROPERTIES_TAG()],
+  { tags: [PROPERTIES_TAG()], revalidate: 3000 }
+);

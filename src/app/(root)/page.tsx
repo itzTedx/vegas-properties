@@ -17,6 +17,9 @@ import { SearchFilter } from "@/modules/search/components/search-filter";
 import Testimonials from "@/modules/sections/home/testimonials";
 import Features from "@/modules/sections/home/why-choose-us";
 
+export const revalidate = 3600; // invalidate every hour
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Dubai Properties for Sale & Rent - Vegas Properties",
   description:

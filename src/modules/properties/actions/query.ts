@@ -25,16 +25,20 @@ export const getFeaturedProperties = cache(
   }
 );
 
-export async function getLatestProperties() {
-  const properties = await payload.find({
-    collection: "properties",
-    draft: false,
-    sort: ["-isFeatured", "-createdAt"],
-    limit: 7,
-  });
+export const getLatestProperties = cache(
+  async () => {
+    const properties = await payload.find({
+      collection: "properties",
+      draft: false,
+      sort: ["-isFeatured", "-createdAt"],
+      limit: 12,
+    });
 
-  return properties.docs;
-}
+    return properties.docs;
+  },
+  [PROPERTIES_TAG()],
+  { tags: [PROPERTIES_TAG()], revalidate: false }
+);
 
 export const getProperties = cache(
   async () => {
