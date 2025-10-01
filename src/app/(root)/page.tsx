@@ -4,7 +4,6 @@ import Script from "next/script";
 
 import { Cta } from "@/components/layout/cta";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 import { IconBuilding } from "@/assets/icons";
 import { IconFire } from "@/assets/icons/fire";
@@ -142,7 +141,7 @@ export default async function Home() {
 
           <LatestProperties />
         </section>
-        <section className="container grid grid-cols-2 gap-4 py-14">
+        {/* <section className="container grid grid-cols-2 gap-4 py-14">
           <div className="space-y-4 py-6">
             <h2 className="text-balance font-medium font-sans text-2xl md:text-4xl">
               Your dream property in Dubai might be closer than you think.
@@ -176,7 +175,7 @@ export default async function Home() {
               </p>
             </div>
           </div>
-        </section>
+        </section> */}
         {/* <FeaturesSection /> */}
         <Features />
         <section aria-labelledby="developers-heading" className="container max-w-7xl py-14" id="developers">

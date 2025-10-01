@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 
 import { IconBookmark } from "@/assets/icons";
 
-import { ensureGuestSession, getBookmarkedPropertiesBySession } from "@/actions/bookmarks";
+import { getBookmarkedPropertiesBySession } from "@/actions/bookmarks";
 import { PropertyCard } from "@/modules/properties/component";
 
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 export default async function SavedProperties() {
-  await ensureGuestSession();
+  // await ensureGuestSession();
   const favorites = await getBookmarkedPropertiesBySession();
 
   if (!favorites.length)

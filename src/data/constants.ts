@@ -24,6 +24,7 @@ export const DEVELOPERS = [
   { src: "/logos/nakheel.png", alt: "Nakheel" },
   { src: "/logos/dubai-properties.png", alt: "Dubai Properties" },
   { src: "/logos/aldar.png", alt: "Aldar" },
+  { src: "/logos/binghatti.png", alt: "Binghatti" },
   { src: "/logos/damac.png", alt: "Damac" },
   { src: "/logos/majid.png", alt: "Majid Al Futtaim" },
   { src: "/logos/sobha.png", alt: "Sobha" },
@@ -31,6 +32,5 @@ export const DEVELOPERS = [
   { src: "/logos/danube.png", alt: "Danube" },
   { src: "/logos/azizi.png", alt: "Azizi" },
   { src: "/logos/samana.png", alt: "Samana" },
-  { src: "/logos/binghatti.png", alt: "Binghatti" },
   { src: "/logos/mag.png", alt: "MAG" },
 ];

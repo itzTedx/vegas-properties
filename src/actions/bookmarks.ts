@@ -11,20 +11,39 @@ import crypto from "node:crypto";
 const COOKIE_NAME = "guest_session_id";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
-export async function ensureGuestSession(): Promise<{ sessionId: string }> {
+// Server Action to create and set a new guest session
+export async function createGuestSession(): Promise<{ sessionId: string }> {
   const jar = await cookies();
-  let sessionId = jar.get(COOKIE_NAME)?.value ?? "";
+  const sessionId = crypto.randomUUID();
+
+  jar.set(COOKIE_NAME, sessionId, {
+    httpOnly: true,
+    sameSite: "lax",
+    maxAge: COOKIE_MAX_AGE,
+    path: "/",
+  });
+
+  // Create the session in the database
+  await payload.create({ collection: "guest-sessions", data: { sessionId } });
+
+  return { sessionId };
+}
+
+// Helper function to get session ID without setting cookies
+export async function getGuestSessionId(): Promise<string | null> {
+  const jar = await cookies();
+  return jar.get(COOKIE_NAME)?.value ?? null;
+}
+
+// Server Action to ensure guest session exists
+export async function ensureGuestSession(): Promise<{ sessionId: string }> {
+  const sessionId = await getGuestSessionId();
 
   if (!sessionId) {
-    sessionId = crypto.randomUUID();
-    jar.set(COOKIE_NAME, sessionId, {
-      httpOnly: true,
-      sameSite: "lax",
-      maxAge: COOKIE_MAX_AGE,
-      path: "/",
-    });
+    return await createGuestSession();
   }
 
+  // Check if session exists in database
   const existing = await payload.find({
     collection: "guest-sessions",
     where: { sessionId: { equals: sessionId } },
