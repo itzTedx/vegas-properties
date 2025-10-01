@@ -73,7 +73,7 @@ export default async function Home() {
     <>
       <main id="main-content">
         <section aria-labelledby="home-hero-heading" className="md:px-2 md:py-2" id="home-hero">
-          <div className="relative flex h-[calc(100svh-3rem)] items-end overflow-hidden p-6 sm:h-96 md:h-[32rem] md:rounded-2xl">
+          <div className="relative flex h-[calc(100svh-3rem)] items-end overflow-hidden p-6 sm:h-96 md:h-[32rem] md:rounded-2xl lg:h-[40rem]">
             <div className={cn("relative z-50 mx-auto pb-14 text-white", MAX_WIDTH)}>
               <h1 className="font-serif text-3xl md:text-4xl" id="home-hero-heading">
                 Find Your Perfect Property in Dubai’s Most Prestigious Communities
@@ -89,7 +89,7 @@ export default async function Home() {
               fill
               priority
               sizes="100vw"
-              src="/images/hero-bg.jpg"
+              src="/images/hero-image.webp"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80" />
           </div>
