@@ -15,7 +15,7 @@ export const getAgents = async () =>
       return doc.docs;
     },
     [AGENTS_TAG()],
-    { tags: [AGENTS_TAG()], revalidate: false }
+    { tags: [AGENTS_TAG()], revalidate: 5200 }
   )();
 
 export const getAgentBySlug = async (slug: string) =>
@@ -36,5 +36,5 @@ export const getAgentBySlug = async (slug: string) =>
       return res;
     },
     [AGENT_BY_SLUG(slug)],
-    { tags: [AGENTS_TAG(), AGENT_BY_SLUG(slug)], revalidate: false }
+    { tags: [AGENTS_TAG(), AGENT_BY_SLUG(slug)], revalidate: 5200 }
   )();
