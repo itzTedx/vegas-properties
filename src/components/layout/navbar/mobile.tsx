@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
+  SheetClose,
   SheetContainer,
   SheetContent,
   SheetDescription,
@@ -39,9 +40,11 @@ export function MobileNavbar() {
           <ul className="flex flex-col gap-2">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>
-                <Link className="font-medium text-lg" href={href as Route}>
-                  {label}
-                </Link>
+                <SheetClose asChild>
+                  <Link className="font-medium text-lg" href={href as Route}>
+                    {label}
+                  </Link>
+                </SheetClose>
               </li>
             ))}
           </ul>
