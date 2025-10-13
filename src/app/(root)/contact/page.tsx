@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
 
@@ -76,7 +77,9 @@ export default function ContactPage() {
           title={`Let's Start\na Conversation`}
         />
         <div className="mt-8 grid grid-cols-1 gap-6 lg:mt-12 lg:grid-cols-3 lg:gap-8">
-          <ContactForm />
+          <Suspense fallback="Loading...">
+            <ContactForm />
+          </Suspense>
           <aside className="lg:col-span-1">
             <h2 className="font-jaguar text-2xl sm:text-3xl">Other Ways to Reach Us</h2>
             <ul className="mt-4 grid grid-cols-1 gap-4 sm:gap-6">
