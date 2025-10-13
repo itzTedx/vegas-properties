@@ -10,8 +10,6 @@ import { SearchFormType } from "./schema";
 export async function searchQuery(query: SearchFormType) {
   const conditions: Where[] = [];
 
-  console.log("query", query);
-
   // type -> propertyDetails.propertyType equals
   if (query.type && query.type.trim() !== "") {
     conditions.push({ "propertyDetails.propertyType": { equals: query.type.trim() } });
@@ -21,7 +19,7 @@ export async function searchQuery(query: SearchFormType) {
   if (query.query && query.query.trim() !== "") {
     const term = query.query.trim();
     conditions.push({
-      title: { like: term },
+      or: [{ title: { like: term } }, { "propertyDetails.location": { like: term } }],
     });
   }
 
@@ -73,6 +71,7 @@ export async function searchQuery(query: SearchFormType) {
     where,
     sort: ["-isFeatured", "-createdAt"],
   });
+
   return docs;
 }
 

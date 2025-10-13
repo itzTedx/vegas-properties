@@ -72,7 +72,7 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
     startTransition(() => {
       const searchParams = new URLSearchParams();
       if (data.query) {
-        searchParams.set("q", data.query?.trim() ?? "");
+        searchParams.set("query", data.query?.trim() ?? "");
       }
       if (data.type) {
         searchParams.set("type", data.type?.trim() ?? "");

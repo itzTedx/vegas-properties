@@ -10,7 +10,7 @@ import { SearchFilter } from "@/modules/search/components/search-filter";
 interface Props {
   searchParams: Promise<{
     type: string;
-    q: string;
+    query: string;
     bedrooms: string;
     priceRange: string;
   }>;
@@ -18,10 +18,10 @@ interface Props {
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const query = await searchParams;
-  const parts: string[] = [];
+  const parts: string[] = ["Search result for"];
   if (query?.type) parts.push(query.type);
   if (query?.bedrooms) parts.push(`${query.bedrooms} bedrooms`);
-  if (query?.q) parts.push(`in ${query.q}`);
+  if (query?.query) parts.push(`${query.query}`);
 
   const titleBase = parts.length > 0 ? parts.join(" ") : "Search Results";
   const title = `${titleBase} | Vegas Properties`;
@@ -69,7 +69,7 @@ export default async function SearchResultPage({ searchParams }: Props) {
   const headingParts: string[] = ["Showing results"];
   if (query?.type) headingParts.push(query.type);
   if (query?.bedrooms) headingParts.push(`${query.bedrooms} bedrooms`);
-  if (query?.q) headingParts.push(`for ${query.q}`);
+  if (query?.query) headingParts.push(`for ${query.query}`);
   const headingText = headingParts.length > 0 ? headingParts.join(" ") : "Search Results";
 
   return (
