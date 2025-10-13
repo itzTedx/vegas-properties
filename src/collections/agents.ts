@@ -81,7 +81,7 @@ export const Agents: CollectionConfig = {
               fields: [
                 { name: "experienceYears", label: "Experience (Years)", type: "number", min: 0 },
                 { name: "awards", label: "Realtor Awards", type: "textarea" },
-                { name: "mlsNumber", label: "MLS Number", type: "text" },
+
                 {
                   name: "languages",
                   label: "Languages Spoken",
