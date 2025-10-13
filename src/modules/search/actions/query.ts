@@ -10,8 +10,11 @@ import { SearchFormType } from "./schema";
 export async function searchQuery(query: SearchFormType) {
   const conditions: Where[] = [];
 
+  // console.log("Query: ", query);
+
   // type -> propertyDetails.propertyType equals
-  if (query.type && query.type.trim() !== "") {
+  if (query.type && query.type !== "any" && query.type.trim() !== "") {
+    console.log("type", query.type);
     conditions.push({ "propertyDetails.propertyType": { equals: query.type.trim() } });
   }
 
@@ -24,7 +27,7 @@ export async function searchQuery(query: SearchFormType) {
   }
 
   // bedrooms -> propertyDetails.bedrooms >= value
-  if (query.bedrooms && query.bedrooms.trim() !== "") {
+  if (query.bedrooms && query.bedrooms !== "any" && query.bedrooms.trim() !== "") {
     const bedroomsNum = Number.parseInt(query.bedrooms.trim(), 10);
 
     if (!Number.isNaN(bedroomsNum)) {

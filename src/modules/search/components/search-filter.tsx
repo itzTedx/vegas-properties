@@ -130,6 +130,9 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
                 >
                   <SelectGroup>
                     <SelectLabel className="ps-2">Property Type</SelectLabel>
+                    <SelectItem value="any">
+                      <span className="truncate">Any</span>
+                    </SelectItem>
                     <SelectItem value="commercial">
                       <IconCommercial />
                       <span className="truncate">Commercial</span>
@@ -172,6 +175,9 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
                 >
                   <SelectGroup>
                     <SelectLabel className="ps-2">Bedrooms</SelectLabel>
+                    <SelectItem value="any">
+                      <span className="truncate">Any</span>
+                    </SelectItem>
                     <SelectItem value="1">
                       <span className="truncate">1 {pluralize("bedroom", 1)}</span>
                     </SelectItem>

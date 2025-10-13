@@ -64,12 +64,10 @@ export default async function SearchResultPage({ searchParams }: Props) {
   const result = await searchQuery(query);
   const { max, min } = await getPropertiesPriceRange();
 
-  // console.log("Result", result);
-
   const headingParts: string[] = ["Showing results"];
-  if (query?.type) headingParts.push(query.type);
-  if (query?.bedrooms) headingParts.push(`${query.bedrooms} bedrooms`);
   if (query?.query) headingParts.push(`for ${query.query}`);
+  if (query?.type) headingParts.push(`in ${query.type}`);
+  if (query?.bedrooms) headingParts.push(`${query.bedrooms} bedrooms`);
   const headingText = headingParts.length > 0 ? headingParts.join(" ") : "Search Results";
 
   return (
