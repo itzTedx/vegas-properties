@@ -74,11 +74,15 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
       if (data.query) {
         searchParams.set("query", data.query?.trim() ?? "");
       }
-      if (data.type) {
+      if (data.type && data.type !== "any") {
         searchParams.set("type", data.type?.trim() ?? "");
+      } else {
+        searchParams.delete("type");
       }
-      if (data.bedrooms) {
+      if (data.bedrooms && data.bedrooms !== "any") {
         searchParams.set("bedrooms", data.bedrooms?.trim() ?? "");
+      } else {
+        searchParams.delete("bedrooms");
       }
       if (data.priceRange) {
         searchParams.set("priceRange", data.priceRange?.trim() ?? "");

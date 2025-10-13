@@ -53,6 +53,11 @@ export const PropertyCard = async ({ property, showBadges = true }: Props) => {
                     <IconSaleBuilding className="text-secondary-600" /> For Sale
                   </Badge>
                 )}
+                {property.pricing.priceType === "lease" && (
+                  <Badge className="border-brand-700/15 shadow-brand-700/10 shadow-xl">
+                    <IconSaleBuilding className="text-brand-700" /> For Lease
+                  </Badge>
+                )}
               </div>
             )}
             <figure>
@@ -122,7 +127,7 @@ export const PropertyCard = async ({ property, showBadges = true }: Props) => {
                 )}
                 {property.pricing.rentalPrice && (
                   <span className="-tracking-[0.24px] text-muted-foreground text-sm [text-box-trim:trim-both]">
-                    {property.pricing.rentalPrice}/month
+                    {property.pricing.rentalPrice}/{property.pricing.priceUnit}
                   </span>
                 )}
               </div>

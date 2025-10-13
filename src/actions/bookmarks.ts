@@ -121,32 +121,35 @@ export async function getBookmarkByPropertyId(propertyId: number): Promise<boole
   return Boolean(existing.docs[0]);
 }
 
-export async function toggleBookmark(propertyId: number): Promise<number[]> {
-  const jar = await cookies();
-  const sessionId = jar.get(COOKIE_NAME)?.value ?? "";
+export async function toggleBookmark(propertyId: number): Promise<number[] | undefined> {
+  const { sessionId } = await ensureGuestSession();
   if (!sessionId) return [];
 
-  const existing = await payload.find({
-    collection: "bookmarks",
-    where: { and: [{ sessionId: { equals: sessionId } }, { property: { equals: propertyId } }] },
-    depth: 0,
-    limit: 1,
-  });
+  try {
+    const existing = await payload.find({
+      collection: "bookmarks",
+      where: { and: [{ sessionId: { equals: sessionId } }, { property: { equals: propertyId } }] },
+      depth: 0,
+      limit: 1,
+    });
 
-  if (existing.docs[0]) {
-    await payload.delete({ collection: "bookmarks", id: existing.docs[0].id as number });
-  } else {
-    await payload.create({ collection: "bookmarks", data: { sessionId, property: propertyId } });
+    if (existing.docs[0]) {
+      await payload.delete({ collection: "bookmarks", id: existing.docs[0].id as number });
+    } else {
+      await payload.create({ collection: "bookmarks", data: { sessionId, property: propertyId } });
+    }
+
+    const all = await payload.find({
+      collection: "bookmarks",
+      where: { sessionId: { equals: sessionId } },
+      depth: 0,
+      limit: 100,
+    });
+
+    return (all.docs as unknown[])
+      .map((d) => (hasPropertyId(d) ? d.property : undefined))
+      .filter((v: unknown): v is number => typeof v === "number");
+  } catch (err) {
+    console.log(err);
   }
-
-  const all = await payload.find({
-    collection: "bookmarks",
-    where: { sessionId: { equals: sessionId } },
-    depth: 0,
-    limit: 100,
-  });
-
-  return (all.docs as unknown[])
-    .map((d) => (hasPropertyId(d) ? d.property : undefined))
-    .filter((v: unknown): v is number => typeof v === "number");
 }

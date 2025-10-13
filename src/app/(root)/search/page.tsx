@@ -46,16 +46,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     alternates: {
       canonical: path,
     },
-    openGraph: {
-      title,
-      description: desc,
-      url: path,
-      type: "website",
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
+
+    robots: { index: false, follow: false },
   };
 }
 

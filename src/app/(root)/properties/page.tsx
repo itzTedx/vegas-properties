@@ -8,6 +8,9 @@ import { IconFire } from "@/assets/icons";
 import { getFeaturedProperties, getProperties } from "@/modules/properties/actions/query";
 import { PropertyCard } from "@/modules/properties/component";
 
+export const revalidate = 3600; // invalidate every hour
+export const dynamic = "force-static";
+
 export const metadata: Metadata = {
   title: "Dubai Properties for Sale & Rent | Featured Listings | Vegas Properties",
   description:
