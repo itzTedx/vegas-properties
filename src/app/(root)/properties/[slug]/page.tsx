@@ -12,6 +12,8 @@ import { Currency } from "@/components/ui/currency";
 import { Separator, SeparatorDashed } from "@/components/ui/separator";
 
 import { IconBuilding, IconFire, IconKey, IconSaleBuilding, IconStar } from "@/assets/icons";
+import { IconCheckmark } from "@/assets/icons/checkmark";
+import { IconPlan } from "@/assets/icons/plan";
 
 import { formatDate } from "@/lib/functions/format-date";
 import { ImageObject } from "@/lib/payload/components/media";
@@ -92,6 +94,7 @@ export default async function PropertyPage({ params }: Props) {
     amenities,
     isFeatured,
     updatedAt,
+    status,
   } = await getPropertyBySlug(slug);
 
   const developerId =
@@ -151,6 +154,12 @@ export default async function PropertyPage({ params }: Props) {
                       <IconSaleBuilding className="text-secondary" /> For Sale
                     </Badge>
                   )}
+                  {pricing.priceType === "lease" && (
+                    <Badge className="border-brand-600/15 shadow-brand-800/10 shadow-lg">
+                      <IconSaleBuilding className="text-brand-600" /> For Lease
+                    </Badge>
+                  )}
+                  {getStatus(status)}
                 </div>
 
                 <CardHeader className="flex-1 space-y-3">
@@ -452,4 +461,62 @@ function getDetailIcon(label: string) {
   }
 
   return <IconBuilding className="size-6" />;
+}
+
+function getStatus(status: "offPlan" | "available" | "sold" | "rented" | "under_contract" | "plot" | "coming_soon") {
+  if (status === "offPlan") {
+    return (
+      <Badge className="border-brand-600/15 shadow-brand-800/10 shadow-lg">
+        <IconPlan /> Off-Plan
+      </Badge>
+    );
+  }
+
+  if (status === "available") {
+    return (
+      <Badge className="border-[#178C4E]/15 text-[#178C4E] shadow-[#178C4E]/10 shadow-lg">
+        <IconCheckmark /> Available
+      </Badge>
+    );
+  }
+
+  if (status === "sold") {
+    return (
+      <Badge className="border-red-600/15 text-destructive shadow-lg shadow-red-800/10">
+        <IconCheckmark /> Sold
+      </Badge>
+    );
+  }
+
+  if (status === "rented") {
+    return (
+      <Badge className="border-brand-700/15 text-brand-600 shadow-brand-700/10 shadow-lg">
+        <IconKey className="text-[#2547D0]" /> Rented
+      </Badge>
+    );
+  }
+
+  if (status === "under_contract") {
+    return (
+      <Badge className="border-brand-700/15 text-brand-600 shadow-brand-700/10 shadow-lg">
+        <IconKey /> Under Contract
+      </Badge>
+    );
+  }
+
+  if (status === "plot") {
+    return (
+      <Badge className="border-brand-700/15 text-brand-600 shadow-brand-700/10 shadow-lg">
+        <IconPlan /> Plot
+      </Badge>
+    );
+  }
+
+  if (status === "coming_soon") {
+    return (
+      <Badge className="border-brand-700/15 text-brand-600 shadow-brand-700/10 shadow-lg">
+        <IconKey /> Coming Soon
+      </Badge>
+    );
+  }
 }
