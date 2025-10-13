@@ -172,7 +172,8 @@ export interface Property {
   pricing: {
     salePrice?: number | null;
     rentalPrice?: number | null;
-    priceType: 'sale' | 'rent' | 'both';
+    priceUnit?: ('month' | 'year') | null;
+    priceType: 'sale' | 'rent' | 'lease' | 'both';
   };
   overview?: {
     root: {
@@ -221,7 +222,7 @@ export interface Property {
     description?: string | null;
     keyword?: string | null;
   };
-  status: 'available' | 'sold' | 'rented' | 'under_contract' | 'coming_soon';
+  status: 'offPlan' | 'available' | 'sold' | 'rented' | 'under_contract' | 'coming_soon';
   /**
    * Feature this property prominently
    */
@@ -588,6 +589,7 @@ export interface PropertiesSelect<T extends boolean = true> {
     | {
         salePrice?: T;
         rentalPrice?: T;
+        priceUnit?: T;
         priceType?: T;
       };
   overview?: T;

@@ -127,6 +127,7 @@ export const Property: CollectionConfig = {
                 },
                 {
                   name: "area",
+                  label: "Property Size",
                   type: "number",
                   admin: {
                     description: "Property area in square feet",
@@ -194,7 +195,22 @@ export const Property: CollectionConfig = {
                   type: "number",
                   index: true,
                 },
-
+                {
+                  name: "priceUnit",
+                  label: "Rental / Lease Unit",
+                  type: "select",
+                  defaultValue: "month",
+                  options: [
+                    {
+                      label: "Monthly",
+                      value: "month",
+                    },
+                    {
+                      label: "Yearly",
+                      value: "year",
+                    },
+                  ],
+                },
                 {
                   name: "priceType",
                   type: "select",
@@ -208,7 +224,11 @@ export const Property: CollectionConfig = {
                       value: "rent",
                     },
                     {
-                      label: "Both",
+                      label: "Lease",
+                      value: "lease",
+                    },
+                    {
+                      label: "For Both Rental & Sale",
                       value: "both",
                     },
                   ],
@@ -335,6 +355,10 @@ export const Property: CollectionConfig = {
       type: "select",
       options: [
         {
+          label: "Off Plan",
+          value: "offPlan",
+        },
+        {
           label: "Available",
           value: "available",
         },
@@ -355,7 +379,7 @@ export const Property: CollectionConfig = {
           value: "coming_soon",
         },
       ],
-      defaultValue: "available",
+      defaultValue: "offPlan",
       required: true,
       admin: {
         position: "sidebar",

@@ -35,7 +35,7 @@ export const Agents: CollectionConfig = {
               name: "contact",
               type: "group",
               fields: [
-                { name: "licenseNumber", label: "License / DRE#", type: "text" },
+                { name: "licenseNumber", label: "License / PRL", type: "text" },
                 { name: "phonePrimary", label: "Primary Phone", type: "text" },
                 { name: "phoneSecondary", label: "Secondary Phone", type: "text" },
                 { name: "email", type: "email" },
