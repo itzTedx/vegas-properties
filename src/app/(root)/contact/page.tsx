@@ -6,13 +6,6 @@ import { Cta } from "@/components/layout/cta";
 import { ContactForm } from "./form";
 import { SectionHeader } from "./section-header";
 
-export const dynamic = "force-static";
-
-type SearchParams = Promise<{ message: string | undefined }>;
-interface Props {
-  searchParams: SearchParams;
-}
-
 export const metadata: Metadata = {
   title: "Contact Us | Vegas Properties",
   description:
@@ -40,9 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function ContactPage({ searchParams }: Props) {
-  const query = await searchParams;
-
+export default function ContactPage() {
   return (
     <main className="pt-4 sm:pt-9 md:pt-12">
       <Script
@@ -85,7 +76,7 @@ export default async function ContactPage({ searchParams }: Props) {
           title={`Let's Start\na Conversation`}
         />
         <div className="mt-8 grid grid-cols-1 gap-6 lg:mt-12 lg:grid-cols-3 lg:gap-8">
-          <ContactForm initialMessage={query?.message} />
+          <ContactForm />
           <aside className="lg:col-span-1">
             <h2 className="font-jaguar text-2xl sm:text-3xl">Other Ways to Reach Us</h2>
             <ul className="mt-4 grid grid-cols-1 gap-4 sm:gap-6">

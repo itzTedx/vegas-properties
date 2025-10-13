@@ -173,8 +173,20 @@ export const ShareButton = ({ data }: Props) => {
         </div>
         <SheetFooter className="pt-0">
           <div className="flex items-center justify-between">
-            <Button>
-              <IconCopy />
+            <Button onClick={handleCopy}>
+              <div className="relative">
+                <div className={cn("transition-all", copied ? "scale-100 opacity-100" : "scale-0 opacity-0")}>
+                  <CheckIcon aria-hidden="true" className="stroke-emerald-600" size={16} />
+                </div>
+                <div
+                  className={cn(
+                    "absolute inset-0 transition-all",
+                    copied ? "scale-0 opacity-0" : "scale-100 opacity-100"
+                  )}
+                >
+                  <IconCopy aria-hidden="true" className="size-4" />
+                </div>
+              </div>
               Copy Link
             </Button>
             <SheetClose asChild>
