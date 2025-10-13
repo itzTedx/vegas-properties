@@ -10,20 +10,25 @@ import { SearchFormType } from "./schema";
 export async function searchQuery(query: SearchFormType) {
   const conditions: Where[] = [];
 
+  console.log("query", query);
+
   // type -> propertyDetails.propertyType equals
   if (query.type && query.type.trim() !== "") {
     conditions.push({ "propertyDetails.propertyType": { equals: query.type.trim() } });
   }
 
-  // location -> propertyDetails.location partial match
-  if (query.location && query.location.trim() !== "") {
-    conditions.push({ "propertyDetails.location": { like: query.location.trim() } });
+  // free-text -> match in location or property title (partial match)
+  if (query.query && query.query.trim() !== "") {
+    const term = query.query.trim();
+    conditions.push({
+      title: { like: term },
+    });
   }
 
   // bedrooms -> propertyDetails.bedrooms >= value
   if (query.bedrooms && query.bedrooms.trim() !== "") {
     const bedroomsNum = Number.parseInt(query.bedrooms.trim(), 10);
-    console.log("bedroomsNum", bedroomsNum);
+
     if (!Number.isNaN(bedroomsNum)) {
       conditions.push({ "propertyDetails.bedrooms": { equals: bedroomsNum } });
     }
@@ -55,7 +60,13 @@ export async function searchQuery(query: SearchFormType) {
     }
   }
 
-  const where: Where = conditions.length > 0 ? { and: conditions } : {};
+  // If no valid conditions were derived from the query, return an empty result set
+  // instead of fetching all properties.
+  if (conditions.length === 0) {
+    return [];
+  }
+
+  const where: Where = { and: conditions };
 
   const { docs } = await payload.find({
     collection: "properties",

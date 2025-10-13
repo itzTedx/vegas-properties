@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { IconApartment, IconChevronUpDown, IconPenthouse, IconVilla } from "@/assets/icons";
+import { IconApartment, IconChevronUpDown, IconCommercial, IconPenthouse, IconVilla } from "@/assets/icons";
 
 import { pluralize } from "@/lib/functions/pluralize";
 import { cn } from "@/lib/utils";
@@ -46,7 +46,7 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
   const form = useForm<SearchFormType>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
-      location: initialValue?.location ?? "",
+      query: initialValue?.query ?? "",
       type: initialValue?.type ?? "",
       priceRange: initialValue?.priceRange ?? "",
       bedrooms: initialValue?.bedrooms ?? "",
@@ -71,8 +71,8 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
   function onSubmit(data: SearchFormType) {
     startTransition(() => {
       const searchParams = new URLSearchParams();
-      if (data.location) {
-        searchParams.set("location", data.location?.trim() ?? "");
+      if (data.query) {
+        searchParams.set("q", data.query?.trim() ?? "");
       }
       if (data.type) {
         searchParams.set("type", data.type?.trim() ?? "");
@@ -100,7 +100,7 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
       >
         <FormField
           control={form.control}
-          name="location"
+          name="query"
           render={({ field }) => (
             <FormItem className="flex-1">
               <FormLabel>Search by City or Project</FormLabel>
@@ -130,6 +130,10 @@ export function SearchFilter({ width, className, prices, initialValue }: Props) 
                 >
                   <SelectGroup>
                     <SelectLabel className="ps-2">Property Type</SelectLabel>
+                    <SelectItem value="commercial">
+                      <IconCommercial />
+                      <span className="truncate">Commercial</span>
+                    </SelectItem>
                     <SelectItem value="apartment">
                       <IconApartment />
                       <span className="truncate">Apartment</span>

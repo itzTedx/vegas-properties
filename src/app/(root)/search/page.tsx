@@ -10,26 +10,18 @@ import { SearchFilter } from "@/modules/search/components/search-filter";
 interface Props {
   searchParams: Promise<{
     type: string;
-    location: string;
+    q: string;
     bedrooms: string;
     priceRange: string;
   }>;
 }
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: {
-    type?: string;
-    location?: string;
-    bedrooms?: string;
-    priceRange?: string;
-  };
-}): Promise<Metadata> {
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const query = await searchParams;
   const parts: string[] = [];
-  if (searchParams?.type) parts.push(searchParams.type);
-  if (searchParams?.bedrooms) parts.push(`${searchParams.bedrooms} bedrooms`);
-  if (searchParams?.location) parts.push(`in ${searchParams.location}`);
+  if (query?.type) parts.push(query.type);
+  if (query?.bedrooms) parts.push(`${query.bedrooms} bedrooms`);
+  if (query?.q) parts.push(`in ${query.q}`);
 
   const titleBase = parts.length > 0 ? parts.join(" ") : "Search Results";
   const title = `${titleBase} | Vegas Properties`;
@@ -40,7 +32,7 @@ export async function generateMetadata({
       : "Browse property search results on Vegas Properties. Explore listings with photos, pricing, and details.";
 
   const queryString = new URLSearchParams(
-    Object.entries(searchParams || {}).reduce<Record<string, string>>((acc, [k, v]) => {
+    Object.entries(query || {}).reduce<Record<string, string>>((acc, [k, v]) => {
       if (typeof v === "string" && v.length > 0) acc[k] = v;
       return acc;
     }, {})
@@ -72,10 +64,12 @@ export default async function SearchResultPage({ searchParams }: Props) {
   const result = await searchQuery(query);
   const { max, min } = await getPropertiesPriceRange();
 
-  const headingParts: string[] = [];
+  // console.log("Result", result);
+
+  const headingParts: string[] = ["Showing results"];
   if (query?.type) headingParts.push(query.type);
   if (query?.bedrooms) headingParts.push(`${query.bedrooms} bedrooms`);
-  if (query?.location) headingParts.push(`in ${query.location}`);
+  if (query?.q) headingParts.push(`for ${query.q}`);
   const headingText = headingParts.length > 0 ? headingParts.join(" ") : "Search Results";
 
   return (
@@ -90,7 +84,7 @@ export default async function SearchResultPage({ searchParams }: Props) {
         />
       </aside>
       <header className="container flex items-center justify-between space-y-2">
-        <h1 className="font-semibold text-2xl tracking-tight">{headingText}</h1>
+        <h1 className="text-sm tracking-tight">{headingText}</h1>
         <p className="text-muted-foreground">
           {result.length} {pluralize("result", result.length)}
         </p>

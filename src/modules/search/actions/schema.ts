@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const searchSchema = z
   .object({
-    location: z.string().optional(),
+    query: z.string().optional(),
     type: z.string().optional(),
     priceRange: z.string().optional(),
     bedrooms: z.string().optional(),

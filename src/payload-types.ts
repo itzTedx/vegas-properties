@@ -160,7 +160,7 @@ export interface Property {
      * Property area in square feet
      */
     area?: number | null;
-    propertyType: 'apartment' | 'house' | 'villa' | 'townhouse';
+    propertyType: 'commercial' | 'apartment' | 'house' | 'villa' | 'townhouse';
     other?:
       | {
           label: string;
@@ -222,7 +222,7 @@ export interface Property {
     description?: string | null;
     keyword?: string | null;
   };
-  status: 'offPlan' | 'available' | 'sold' | 'rented' | 'under_contract' | 'coming_soon';
+  status: 'offPlan' | 'available' | 'sold' | 'rented' | 'under_contract' | 'plot' | 'coming_soon';
   /**
    * Feature this property prominently
    */

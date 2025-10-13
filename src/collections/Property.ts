@@ -139,6 +139,10 @@ export const Property: CollectionConfig = {
                   index: true,
                   options: [
                     {
+                      label: "Commercial",
+                      value: "commercial",
+                    },
+                    {
                       label: "Apartment",
                       value: "apartment",
                     },
@@ -373,6 +377,10 @@ export const Property: CollectionConfig = {
         {
           label: "Under Contract",
           value: "under_contract",
+        },
+        {
+          label: "Plot",
+          value: "plot",
         },
         {
           label: "Coming Soon",
