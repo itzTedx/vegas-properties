@@ -185,8 +185,8 @@ export default async function Home() {
           <div className="space-y-4">
             <Badge variant="outline">Backed by Top Property Developers</Badge>
 
-            <h2 className="max-w-4xl text-balance font-medium font-serif text-2xl md:text-4xl" id="developers-heading">
-              Exclusive projects from <span className="text-secondary-900">world-class developers</span> including:
+            <h2 className="text-balance font-medium font-serif text-2xl md:text-4xl" id="developers-heading">
+              Exclusive projects from <span className="text-secondary-900">world class developers</span> including:
             </h2>
             <ul aria-label="Top real estate developers" className="mt-9 grid grid-cols-3 gap-4 sm:grid-cols-6">
               {DEVELOPERS.map((dev) => (
