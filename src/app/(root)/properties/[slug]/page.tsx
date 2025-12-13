@@ -30,8 +30,15 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const properties = await getProperties();
-  return properties.docs.map((property) => property.slug).map((slug) => ({ slug }));
+  try {
+    const properties = await getProperties();
+    return properties.docs.map((property) => property.slug).map((slug) => ({ slug }));
+  } catch (error) {
+    // If database is unavailable during build, return empty array
+    // Pages will be generated on-demand at runtime
+    console.warn("Failed to fetch properties for static generation:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

@@ -23,8 +23,15 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const agents = await getAgents();
-  return agents.map((agent) => agent.slug).map((slug) => ({ slug }));
+  try {
+    const agents = await getAgents();
+    return agents.map((agent) => agent.slug).map((slug) => ({ slug }));
+  } catch (error) {
+    // If database is unavailable during build, return empty array
+    // Pages will be generated on-demand at runtime
+    console.warn("Failed to fetch agents for static generation:", error);
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -239,12 +246,12 @@ export default async function AgentPage({ params }: Props) {
                     <p className="font-medium text-lg">{agent.professional.awards}</p>
                   </li>
                 )}
-                {agent.professional?.mlsNumber && (
+                {/* {agent.professional?.mlsNumber && (
                   <li>
                     <h3 className="text-muted-foreground text-sm">MLS Number</h3>
                     <p className="font-medium text-lg">{agent.professional.mlsNumber}</p>
                   </li>
-                )}
+                )} */}
                 {agent.professional?.languages && (
                   <li>
                     <h3 className="text-muted-foreground text-sm">Languages Spoken</h3>
