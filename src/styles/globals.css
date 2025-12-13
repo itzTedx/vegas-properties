@@ -115,7 +115,7 @@
   --brand-700: oklch(0.4562 0.227 277.85);
   --brand-800: oklch(0.3876 0.2043 273.82);
   --brand-900: oklch(0.3569 0.1433 279.8);
-  --brand-950: oklch(0.2964 0.112 281.91);  
+  --brand-950: oklch(0.2964 0.112 281.91);
 
   --secondary: oklch(41.736% 0.14916 10.25);
   --secondary-50: oklch(99.585% 0.00248 345.21);
@@ -170,8 +170,6 @@
     0 20px 8px -4px color-mix(in oklab, var(--brand-950) 6%, transparent),
     0 30px 8px -6px color-mix(in oklab, var(--brand-950) 1%, transparent);
 }
-
-
 
 @layer base {
   * {

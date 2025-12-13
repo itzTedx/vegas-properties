@@ -11,7 +11,7 @@ export const contactSchema = z.object({
       message: "Name is required",
     }),
   email: z
-    
+
     .email("Please enter a valid email address")
     .trim()
     .refine((val) => val.length > 0, {

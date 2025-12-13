@@ -9,10 +9,8 @@ import { contactSchema } from "../schema/contact-schema";
 export type ContactActionResult = { success: boolean; error?: string };
 
 export async function sendContactEmail(values: unknown): Promise<ContactActionResult> {
-
-
   // Validate data
-  const {success, data} = contactSchema.safeParse(values);
+  const { success, data } = contactSchema.safeParse(values);
 
   if (!success) {
     return { success: false, error: "Invalid form data" };
@@ -29,14 +27,14 @@ export async function sendContactEmail(values: unknown): Promise<ContactActionRe
     },
   });
 
-  const emailHtml = await render(ContactFormSubmission({data}) );
+  const emailHtml = await render(ContactFormSubmission({ data }));
 
   // Compose email
   const mailOptions = {
     from: `${data.name} <${process.env.EMAIL_USER}>`,
     replyTo: data?.email,
     to: process.env.CONTACT_RECEIVER_EMAIL,
-    subject:  "New Contact Form Submission",
+    subject: "New Contact Form Submission",
     html: emailHtml,
   };
 

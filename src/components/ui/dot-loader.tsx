@@ -40,6 +40,7 @@ export const DotLoader = ({
     [frames]
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: no need to re-run this effect when frames changes
   useEffect(() => {
     currentIndex.current = 0;
     repeats.current = 0;
