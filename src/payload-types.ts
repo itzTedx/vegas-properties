@@ -13,53 +13,53 @@
  * via the `definition` "supportedTimezones".
  */
 export type SupportedTimezones =
-  | "Pacific/Midway"
-  | "Pacific/Niue"
-  | "Pacific/Honolulu"
-  | "Pacific/Rarotonga"
-  | "America/Anchorage"
-  | "Pacific/Gambier"
-  | "America/Los_Angeles"
-  | "America/Tijuana"
-  | "America/Denver"
-  | "America/Phoenix"
-  | "America/Chicago"
-  | "America/Guatemala"
-  | "America/New_York"
-  | "America/Bogota"
-  | "America/Caracas"
-  | "America/Santiago"
-  | "America/Buenos_Aires"
-  | "America/Sao_Paulo"
-  | "Atlantic/South_Georgia"
-  | "Atlantic/Azores"
-  | "Atlantic/Cape_Verde"
-  | "Europe/London"
-  | "Europe/Berlin"
-  | "Africa/Lagos"
-  | "Europe/Athens"
-  | "Africa/Cairo"
-  | "Europe/Moscow"
-  | "Asia/Riyadh"
-  | "Asia/Dubai"
-  | "Asia/Baku"
-  | "Asia/Karachi"
-  | "Asia/Tashkent"
-  | "Asia/Calcutta"
-  | "Asia/Dhaka"
-  | "Asia/Almaty"
-  | "Asia/Jakarta"
-  | "Asia/Bangkok"
-  | "Asia/Shanghai"
-  | "Asia/Singapore"
-  | "Asia/Tokyo"
-  | "Asia/Seoul"
-  | "Australia/Brisbane"
-  | "Australia/Sydney"
-  | "Pacific/Guam"
-  | "Pacific/Noumea"
-  | "Pacific/Auckland"
-  | "Pacific/Fiji";
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Brisbane'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
@@ -72,14 +72,14 @@ export interface Config {
     media: Media;
     developers: Developer;
     users: User;
-    "guest-sessions": GuestSession;
+    'guest-sessions': GuestSession;
     bookmarks: Bookmark;
     specialties: Specialty;
-    "service-areas": ServiceArea;
+    'service-areas': ServiceArea;
     search: Search;
-    "payload-locked-documents": PayloadLockedDocument;
-    "payload-preferences": PayloadPreference;
-    "payload-migrations": PayloadMigration;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
@@ -88,14 +88,14 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     developers: DevelopersSelect<false> | DevelopersSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
-    "guest-sessions": GuestSessionsSelect<false> | GuestSessionsSelect<true>;
+    'guest-sessions': GuestSessionsSelect<false> | GuestSessionsSelect<true>;
     bookmarks: BookmarksSelect<false> | BookmarksSelect<true>;
     specialties: SpecialtiesSelect<false> | SpecialtiesSelect<true>;
-    "service-areas": ServiceAreasSelect<false> | ServiceAreasSelect<true>;
+    'service-areas': ServiceAreasSelect<false> | ServiceAreasSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
-    "payload-locked-documents": PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    "payload-preferences": PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    "payload-migrations": PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
   };
   db: {
     defaultIDType: number;
@@ -104,7 +104,7 @@ export interface Config {
   globalsSelect: {};
   locale: null;
   user: User & {
-    collection: "users";
+    collection: 'users';
   };
   jobs: {
     tasks: unknown;
@@ -160,7 +160,7 @@ export interface Property {
      * Property area in square feet
      */
     area?: number | null;
-    propertyType: "commercial" | "apartment" | "house" | "villa" | "townhouse";
+    propertyType: 'commercial' | 'apartment' | 'house' | 'villa' | 'townhouse';
     other?:
       | {
           label: string;
@@ -172,8 +172,8 @@ export interface Property {
   pricing: {
     salePrice?: number | null;
     rentalPrice?: number | null;
-    priceUnit?: ("month" | "year") | null;
-    priceType: "sale" | "rent" | "lease" | "both";
+    priceUnit?: ('month' | 'year') | null;
+    priceType: 'sale' | 'rent' | 'lease' | 'both';
   };
   overview?: {
     root: {
@@ -183,8 +183,8 @@ export interface Property {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -222,7 +222,7 @@ export interface Property {
     description?: string | null;
     keyword?: string | null;
   };
-  status: "offPlan" | "available" | "sold" | "rented" | "under_contract" | "plot" | "coming_soon";
+  status: 'offPlan' | 'available' | 'sold' | 'rented' | 'under_contract' | 'plot' | 'coming_soon';
   /**
    * Feature this property prominently
    */
@@ -312,16 +312,16 @@ export interface Agent {
     socials?:
       | {
           platform:
-            | "website"
-            | "facebook"
-            | "instagram"
-            | "linkedin"
-            | "twitter"
-            | "youtube"
-            | "tiktok"
-            | "whatsapp"
-            | "snapchat"
-            | "telegram";
+            | 'website'
+            | 'facebook'
+            | 'instagram'
+            | 'linkedin'
+            | 'twitter'
+            | 'youtube'
+            | 'tiktok'
+            | 'whatsapp'
+            | 'snapchat'
+            | 'telegram';
           handle?: string | null;
           url: string;
           id?: string | null;
@@ -348,8 +348,8 @@ export interface Agent {
         version: number;
         [k: string]: unknown;
       }[];
-      direction: ("ltr" | "rtl") | null;
-      format: "left" | "start" | "center" | "right" | "end" | "justify" | "";
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
       indent: number;
       version: number;
     };
@@ -443,12 +443,12 @@ export interface Search {
   title?: string | null;
   priority?: number | null;
   doc: {
-    relationTo: "properties";
+    relationTo: 'properties';
     value: number | Property;
   };
   slug?: string | null;
   target?: {
-    collection?: ("properties" | "developers" | "media") | null;
+    collection?: ('properties' | 'developers' | 'media') | null;
     id?: string | null;
   };
   meta?: {
@@ -476,48 +476,48 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: "properties";
+        relationTo: 'properties';
         value: number | Property;
       } | null)
     | ({
-        relationTo: "agents";
+        relationTo: 'agents';
         value: number | Agent;
       } | null)
     | ({
-        relationTo: "media";
+        relationTo: 'media';
         value: number | Media;
       } | null)
     | ({
-        relationTo: "developers";
+        relationTo: 'developers';
         value: number | Developer;
       } | null)
     | ({
-        relationTo: "users";
+        relationTo: 'users';
         value: number | User;
       } | null)
     | ({
-        relationTo: "guest-sessions";
+        relationTo: 'guest-sessions';
         value: number | GuestSession;
       } | null)
     | ({
-        relationTo: "bookmarks";
+        relationTo: 'bookmarks';
         value: number | Bookmark;
       } | null)
     | ({
-        relationTo: "specialties";
+        relationTo: 'specialties';
         value: number | Specialty;
       } | null)
     | ({
-        relationTo: "service-areas";
+        relationTo: 'service-areas';
         value: number | ServiceArea;
       } | null)
     | ({
-        relationTo: "search";
+        relationTo: 'search';
         value: number | Search;
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: "users";
+    relationTo: 'users';
     value: number | User;
   };
   updatedAt: string;
@@ -530,7 +530,7 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: number;
   user: {
-    relationTo: "users";
+    relationTo: 'users';
     value: number | User;
   };
   key?: string | null;
@@ -858,6 +858,7 @@ export interface Auth {
   [k: string]: unknown;
 }
 
-declare module "payload" {
+
+declare module 'payload' {
   export interface GeneratedTypes extends Config {}
 }
